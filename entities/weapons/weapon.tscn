@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://base_weapon_scene"]
+
+[ext_resource type="Script" path="res://entities/weapons/weapon.gd" id="1_weapon"]
+
+[node name="Weapon" type="Node2D"]
+script = ExtResource("1_weapon")
+
+[node name="Visuals" type="Node2D" parent="."]
+
+[node name="Shape" type="Line2D" parent="Visuals"]
+width = 2.5
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Glow" type="PointLight2D" parent="Visuals"]
+energy = 1.2
+texture_scale = 0.6

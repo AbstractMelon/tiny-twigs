@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3]
+[ext_resource type="PackedScene" path="res://entities/weapons/weapon.tscn" id="1_base"]
+[ext_resource type="Script" path="res://entities/weapons/scripts/flamethrower.gd" id="2_script"]
+[ext_resource type="PackedScene" path="res://entities/projectiles/projectile.tscn" id="3_projectile"]
+
+[node name="Flamethrower" instance=ExtResource("1_base")]
+script = ExtResource("2_script")
+weapon_name = "Flame Thrower"
+weapon_color = Color(1, 0.270588, 0, 1)
+damage = 3
+fire_rate = 0.05
+recoil_force = 20.0
+ammo = 200
+projectile_speed = 400.0
+projectile_scene = ExtResource("3_projectile")
+
+[node name="Shape" parent="Visuals" index="0"]
+points = PackedVector2Array(0, -4, 18, -8, 22, -4, 22, 4, 18, 8, 0, 4, 0, -4)
+width = 2.5
+
+[node name="Tank" type="Line2D" parent="Visuals" index="1"]
+points = PackedVector2Array(-4, -6, 4, -6, 4, 6, -4, 6, -4, -6)
+width = 2.0
+default_color = Color(1, 0.270588, 0, 1)
+
+[node name="Glow" parent="Visuals" index="2"]
+energy = 1.6
+texture_scale = 0.8

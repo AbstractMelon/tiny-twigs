@@ -1,0 +1,68 @@
+[gd_scene load_steps=2 format=3]
+
+[node name="Background" type="Node2D"]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="Sky" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0, 0)
+
+[node name="ColorRect" type="ColorRect" parent="ParallaxBackground/Sky"]
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0.02, 0.02, 0.05, 1)
+
+[node name="Grid" type="Node2D" parent="ParallaxBackground/Sky"]
+modulate = Color(1, 1, 1, 0.1)
+
+[node name="LineH" type="Line2D" parent="ParallaxBackground/Sky/Grid"]
+points = PackedVector2Array(0, 300, 1152, 300)
+width = 1.0
+
+[node name="LineH2" type="Line2D" parent="ParallaxBackground/Sky/Grid"]
+points = PackedVector2Array(0, 400, 1152, 400)
+width = 1.0
+
+[node name="LineH3" type="Line2D" parent="ParallaxBackground/Sky/Grid"]
+points = PackedVector2Array(0, 500, 1152, 500)
+width = 1.0
+
+[node name="DistantBuildings" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.3, 0.3)
+motion_mirroring = Vector2(1152, 0)
+
+[node name="Building1" type="ColorRect" parent="ParallaxBackground/DistantBuildings"]
+offset_left = 100.0
+offset_top = 400.0
+offset_right = 250.0
+offset_bottom = 700.0
+color = Color(0.05, 0.05, 0.1, 1)
+
+[node name="Outline" type="Line2D" parent="ParallaxBackground/DistantBuildings/Building1"]
+points = PackedVector2Array(0, 0, 150, 0, 150, 300, 0, 300, 0, 0)
+width = 2.0
+default_color = Color(0, 0.5, 1, 0.3)
+
+[node name="Building2" type="ColorRect" parent="ParallaxBackground/DistantBuildings"]
+offset_left = 400.0
+offset_top = 350.0
+offset_right = 600.0
+offset_bottom = 700.0
+color = Color(0.05, 0.05, 0.1, 1)
+
+[node name="Outline" type="Line2D" parent="ParallaxBackground/DistantBuildings/Building2"]
+points = PackedVector2Array(0, 0, 200, 0, 200, 350, 0, 350, 0, 0)
+width = 2.0
+default_color = Color(1, 0, 1, 0.3)
+
+[node name="Building3" type="ColorRect" parent="ParallaxBackground/DistantBuildings"]
+offset_left = 800.0
+offset_top = 450.0
+offset_right = 900.0
+offset_bottom = 700.0
+color = Color(0.05, 0.05, 0.1, 1)
+
+[node name="Outline" type="Line2D" parent="ParallaxBackground/DistantBuildings/Building3"]
+points = PackedVector2Array(0, 0, 100, 0, 100, 250, 0, 250, 0, 0)
+width = 2.0
+default_color = Color(1, 1, 0, 0.3)

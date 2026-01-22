@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://c30xdrywrs0kn"]
+
+[ext_resource type="PackedScene" path="res://entities/weapons/weapon.tscn" id="1_base"]
+[ext_resource type="Script" uid="uid://c2i22mjyjy1bt" path="res://entities/weapons/scripts/burst_rifle.gd" id="2_script"]
+[ext_resource type="PackedScene" path="res://entities/projectiles/projectile.tscn" id="3_projectile"]
+
+[node name="BurstRifle" instance=ExtResource("1_base")]
+script = ExtResource("2_script")
+weapon_name = "Burst Rifle"
+weapon_color = Color(1, 1, 0, 1)
+damage = 12
+fire_rate = 0.5
+recoil_force = 80.0
+ammo = 90
+projectile_speed = 1000.0
+projectile_scene = ExtResource("3_projectile")
+
+[node name="Shape" parent="Visuals" index="0"]
+points = PackedVector2Array(0, 0, 26, 0, 26, -4, 22, -4, 22, -2, 8, -2, 8, -6, -2, -6, -2, 4, 0, 4, 0, 0)
+width = 2.0
+
+[node name="Glow" parent="Visuals" index="1"]
+energy = 1.3

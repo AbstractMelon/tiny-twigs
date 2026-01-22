@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3]
+[ext_resource type="PackedScene" path="res://entities/weapons/weapon.tscn" id="1_base"]
+[ext_resource type="Script" path="res://entities/weapons/scripts/pistol.gd" id="2_script"]
+[ext_resource type="PackedScene" path="res://entities/projectiles/projectile.tscn" id="3_projectile"]
+
+[node name="Pistol" instance=ExtResource("1_base")]
+script = ExtResource("2_script")
+weapon_name = "Neon Pistol"
+weapon_color = Color(0, 1, 1, 1)
+damage = 15
+fire_rate = 0.3
+recoil_force = 150.0
+ammo = -1
+projectile_speed = 900.0
+projectile_scene = ExtResource("3_projectile")
+
+[node name="Shape" parent="Visuals" index="0"]
+points = PackedVector2Array(0, 0, 16, 0, 16, -4, 8, -4, 8, -8, -2, -8, -2, 4, 0, 4, 0, 0)
+width = 2.0
+
+[node name="Glow" parent="Visuals" index="1"]
+energy = 1.0
+texture_scale = 0.5
