@@ -55,7 +55,7 @@ script = ExtResource("1_main")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(512, 300)
-zoom = Vector2(1.5, 1.5)
+zoom = Vector2(1.25, 1.25)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_neon")
@@ -82,7 +82,7 @@ energy = 0.5
 texture_scale = 20.0
 
 [node name="Platform1" type="StaticBody2D" parent="Arena"]
-position = Vector2(200, 443)
+position = Vector2(200, 462)
 
 [node name="PlatformShape" type="CollisionShape2D" parent="Arena/Platform1"]
 shape = SubResource("RectangleShape2D_platform1")
@@ -96,7 +96,7 @@ begin_cap_mode = 2
 end_cap_mode = 2
 
 [node name="Platform2" type="StaticBody2D" parent="Arena"]
-position = Vector2(824, 443)
+position = Vector2(824, 462)
 
 [node name="PlatformShape" type="CollisionShape2D" parent="Arena/Platform2"]
 shape = SubResource("RectangleShape2D_platform2")
@@ -110,7 +110,7 @@ begin_cap_mode = 2
 end_cap_mode = 2
 
 [node name="Platform3" type="StaticBody2D" parent="Arena"]
-position = Vector2(512, 293)
+position = Vector2(512, 312)
 
 [node name="PlatformShape" type="CollisionShape2D" parent="Arena/Platform3"]
 shape = SubResource("RectangleShape2D_platform3")
@@ -124,7 +124,7 @@ begin_cap_mode = 2
 end_cap_mode = 2
 
 [node name="Platform4" type="StaticBody2D" parent="Arena"]
-position = Vector2(350, 343)
+position = Vector2(350, 362)
 
 [node name="PlatformShape" type="CollisionShape2D" parent="Arena/Platform4"]
 shape = SubResource("RectangleShape2D_platform4")
@@ -138,7 +138,7 @@ begin_cap_mode = 2
 end_cap_mode = 2
 
 [node name="Platform5" type="StaticBody2D" parent="Arena"]
-position = Vector2(674, 343)
+position = Vector2(674, 362)
 
 [node name="PlatformShape" type="CollisionShape2D" parent="Arena/Platform5"]
 shape = SubResource("RectangleShape2D_platform5")
@@ -152,7 +152,7 @@ begin_cap_mode = 2
 end_cap_mode = 2
 
 [node name="Platform6" type="StaticBody2D" parent="Arena"]
-position = Vector2(150, 243)
+position = Vector2(150, 262)
 
 [node name="PlatformShape" type="CollisionShape2D" parent="Arena/Platform6"]
 shape = SubResource("RectangleShape2D_platform6")
@@ -166,7 +166,7 @@ begin_cap_mode = 2
 end_cap_mode = 2
 
 [node name="Platform7" type="StaticBody2D" parent="Arena"]
-position = Vector2(874, 243)
+position = Vector2(874, 262)
 
 [node name="PlatformShape" type="CollisionShape2D" parent="Arena/Platform7"]
 shape = SubResource("RectangleShape2D_platform7")
@@ -180,7 +180,7 @@ begin_cap_mode = 2
 end_cap_mode = 2
 
 [node name="Platform8" type="StaticBody2D" parent="Arena"]
-position = Vector2(512, 163)
+position = Vector2(512, 182)
 
 [node name="PlatformShape" type="CollisionShape2D" parent="Arena/Platform8"]
 shape = SubResource("RectangleShape2D_platform8")
