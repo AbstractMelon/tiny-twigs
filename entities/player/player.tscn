@@ -1,10 +1,62 @@
-[gd_scene load_steps=14 format=3 uid="uid://player001"]
+[gd_scene load_steps=10 format=3 uid="uid://player001"]
 
-[ext_resource type="Script" path="res://entities/player/player.gd" id="1_player"]
+[ext_resource type="Script" uid="uid://bc3ve3f2wg5vy" path="res://entities/player/player.gd" id="1_player"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_player"]
 radius = 8.0
 height = 48.0
+
+[sub_resource type="Animation" id="Animation_block"]
+resource_name = "block"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visuals/BodyParts/ArmLeft:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -1.5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Visuals/BodyParts/ArmRight:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.5]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Visuals/BodyParts/Head:position")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 4)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Visuals/BodyParts:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_fall"]
 resource_name = "fall"
@@ -44,6 +96,34 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_hurt"]
+resource_name = "hurt"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visuals:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(10, 10, 10, 1), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Visuals/BodyParts:scale")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.3, 0.7), Vector2(1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_idle"]
@@ -228,99 +308,17 @@ tracks/3/keys = {
 "values": [Vector2(1, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_block"]
-resource_name = "block"
-length = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Visuals/BodyParts/ArmLeft:rotation")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, -1.5]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Visuals/BodyParts/ArmRight:rotation")
-tracks/1/interp = 2
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, 1.5]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Visuals/BodyParts/Head:position")
-tracks/2/interp = 2
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(0, 4)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Visuals/BodyParts:scale")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_hurt"]
-resource_name = "hurt"
-length = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Visuals:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(10, 10, 10, 1), Color(1, 1, 1, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Visuals/BodyParts:scale")
-tracks/1/interp = 2
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(1, 1), Vector2(1.3, 0.7), Vector2(1, 1)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_player"]
 _data = {
-"block": SubResource("Animation_block"),
-"fall": SubResource("Animation_fall"),
-"hurt": SubResource("Animation_hurt"),
-"idle": SubResource("Animation_idle"),
-"jump": SubResource("Animation_jump"),
-"walk": SubResource("Animation_walk")
+&"block": SubResource("Animation_block"),
+&"fall": SubResource("Animation_fall"),
+&"hurt": SubResource("Animation_hurt"),
+&"idle": SubResource("Animation_idle"),
+&"jump": SubResource("Animation_jump"),
+&"walk": SubResource("Animation_walk")
 }
 
 [node name="Player" type="CharacterBody2D"]
-collision_layer = 1
-collision_mask = 1
 script = ExtResource("1_player")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -331,6 +329,7 @@ shape = SubResource("CapsuleShape2D_player")
 [node name="BodyParts" type="Node2D" parent="Visuals"]
 
 [node name="Head" type="Line2D" parent="Visuals/BodyParts"]
+position = Vector2(0, 0.120490745)
 points = PackedVector2Array(-8, -20, 8, -20, 8, -12, -8, -12, -8, -20)
 width = 4.0
 default_color = Color(0, 1, 1, 1)
@@ -355,6 +354,7 @@ begin_cap_mode = 2
 end_cap_mode = 2
 
 [node name="Torso" type="Line2D" parent="Visuals/BodyParts"]
+position = Vector2(0, 0.060245372)
 points = PackedVector2Array(0, -12, 0, 8)
 width = 5.0
 default_color = Color(0, 1, 1, 1)
@@ -372,6 +372,7 @@ end_cap_mode = 2
 
 [node name="ArmLeft" type="Line2D" parent="Visuals/BodyParts"]
 position = Vector2(0, -8)
+rotation = -0.012049074
 points = PackedVector2Array(0, 0, -12, 8)
 width = 4.0
 default_color = Color(0, 1, 1, 1)
@@ -381,6 +382,7 @@ end_cap_mode = 2
 
 [node name="ArmRight" type="Line2D" parent="Visuals/BodyParts"]
 position = Vector2(0, -8)
+rotation = 0.012049074
 points = PackedVector2Array(0, 0, 12, 8)
 width = 4.0
 default_color = Color(0, 1, 1, 1)
@@ -416,6 +418,5 @@ texture_scale = 2.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_player")
+&"": SubResource("AnimationLibrary_player")
 }
-
