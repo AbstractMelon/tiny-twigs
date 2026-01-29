@@ -4,7 +4,7 @@ extends Node2D
 @onready var player_selection_list = $MenuUI/PlayerSelectionList
 @onready var control_label = $MenuUI/ControlLabel
 
-@export var scroll_speed = 75.0
+@export var scroll_speed = 125.0
 
 func _ready():
 	_update_ui()
