@@ -52,14 +52,18 @@ func _start_game():
 func _spawn_players():
 	var player_scene = preload("res://entities/player/player.tscn")
 	
+	# Randomize spawn points
+	var available_spawns = spawn_points.duplicate()
+	available_spawns.shuffle()
+	
 	for i in range(GameState.num_players):
 		var player = player_scene.instantiate()
 		player.player_id = i + 1
 		player.player_color = GameState.PLAYER_COLORS[i]
 		
 		# Spawn at designated point
-		if i < spawn_points.size():
-			player.global_position = spawn_points[i]
+		if i < available_spawns.size():
+			player.global_position = available_spawns[i]
 		else:
 			# Random position if not enough spawn points
 			player.global_position = Vector2(

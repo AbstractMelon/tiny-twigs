@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://de8532p3mru0m" path="res://scenes/main/main.gd" id="1_main"]
 [ext_resource type="PackedScene" uid="uid://cf8endj7vruag" path="res://ui/game_ui.tscn" id="2_ui"]
 [ext_resource type="PackedScene" uid="uid://csyqiiv65hdqp" path="res://scenes/main/background.tscn" id="3_bg"]
-[ext_resource type="AudioStream" path="res://assets/audio/LEMMiNO - Nocturnal (BGM).mp3" id="4_bgm"]
+[ext_resource type="AudioStream" uid="uid://nwinja6c4xdq" path="res://assets/audio/LEMMiNO - Nocturnal (BGM).mp3" id="4_bgm"]
 
 [sub_resource type="Environment" id="Environment_neon"]
 background_mode = 3
@@ -18,26 +18,26 @@ glow_blend_mode = 0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_floor"]
 size = Vector2(1000, 6)
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_add"]
+blend_mode = 1
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_platform1"]
 size = Vector2(160, 10)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_platform2"]
 size = Vector2(160, 10)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_platform3"]
-size = Vector2(200, 10)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_platform9"]
+size = Vector2(300, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_platformV"]
+size = Vector2(10, 120)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_platform4"]
 size = Vector2(120, 10)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_platform5"]
 size = Vector2(120, 10)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_platform6"]
-size = Vector2(180, 10)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_platform7"]
-size = Vector2(180, 10)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_platform8"]
 size = Vector2(140, 10)
@@ -57,7 +57,6 @@ script = ExtResource("1_main")
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_bgm")
 autoplay = true
-bus = &"Music"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(512, 300)
@@ -68,136 +67,160 @@ environment = SubResource("Environment_neon")
 
 [node name="Arena" type="Node2D" parent="."]
 
+[node name="Decorations" type="Node2D" parent="Arena"]
+visible = false
+modulate = Color(1, 1, 1, 0.3)
+
+[node name="BeamL" type="Line2D" parent="Arena/Decorations"]
+points = PackedVector2Array(200, 0, 200, 648)
+width = 1.0
+default_color = Color(0, 1, 1, 0.2)
+
+[node name="BeamR" type="Line2D" parent="Arena/Decorations"]
+points = PackedVector2Array(824, 0, 824, 648)
+width = 1.0
+default_color = Color(0, 1, 1, 0.2)
+
 [node name="Floor" type="StaticBody2D" parent="Arena"]
-position = Vector2(512, 550)
+position = Vector2(512, 570)
 
 [node name="FloorShape" type="CollisionShape2D" parent="Arena/Floor"]
 shape = SubResource("RectangleShape2D_floor")
 
-[node name="FloorLine" type="Line2D" parent="Arena/Floor"]
+[node name="FloorGlow" type="Line2D" parent="Arena/Floor"]
+material = SubResource("CanvasItemMaterial_add")
 points = PackedVector2Array(-500, 0, 500, 0)
-width = 5.0
-default_color = Color(0, 1, 1, 1)
+width = 15.0
+default_color = Color(0, 1, 1, 0.15)
 joint_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2
 
-[node name="FloorGlow" type="PointLight2D" parent="Arena/Floor"]
-color = Color(0, 1, 1, 1)
-energy = 0.5
-texture_scale = 20.0
+[node name="FloorLine" type="Line2D" parent="Arena/Floor"]
+points = PackedVector2Array(-500, 0, 500, 0)
+width = 3.0
+default_color = Color(0.4, 1, 1, 1)
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
 
 [node name="Platform1" type="StaticBody2D" parent="Arena"]
-position = Vector2(200, 462)
+position = Vector2(170, 480)
 
 [node name="PlatformShape" type="CollisionShape2D" parent="Arena/Platform1"]
 shape = SubResource("RectangleShape2D_platform1")
 
+[node name="Glow" type="Line2D" parent="Arena/Platform1"]
+material = SubResource("CanvasItemMaterial_add")
+points = PackedVector2Array(-80, 0, 80, 0)
+width = 12.0
+default_color = Color(1, 0, 1, 0.15)
+
 [node name="PlatformLine" type="Line2D" parent="Arena/Platform1"]
 points = PackedVector2Array(-80, 0, 80, 0)
-width = 5.0
-default_color = Color(1, 0, 1, 1)
-joint_mode = 2
-begin_cap_mode = 2
-end_cap_mode = 2
+width = 3.0
+default_color = Color(1, 0.4, 1, 1)
 
 [node name="Platform2" type="StaticBody2D" parent="Arena"]
-position = Vector2(824, 462)
+position = Vector2(854, 480)
 
 [node name="PlatformShape" type="CollisionShape2D" parent="Arena/Platform2"]
 shape = SubResource("RectangleShape2D_platform2")
 
+[node name="Glow" type="Line2D" parent="Arena/Platform2"]
+material = SubResource("CanvasItemMaterial_add")
+points = PackedVector2Array(-80, 0, 80, 0)
+width = 12.0
+default_color = Color(1, 0, 1, 0.15)
+
 [node name="PlatformLine" type="Line2D" parent="Arena/Platform2"]
 points = PackedVector2Array(-80, 0, 80, 0)
-width = 5.0
-default_color = Color(1, 0, 1, 1)
-joint_mode = 2
-begin_cap_mode = 2
-end_cap_mode = 2
+width = 3.0
+default_color = Color(1, 0.4, 1, 1)
 
-[node name="Platform3" type="StaticBody2D" parent="Arena"]
-position = Vector2(512, 312)
+[node name="PlatformCenter" type="StaticBody2D" parent="Arena"]
+position = Vector2(512, 380)
 
-[node name="PlatformShape" type="CollisionShape2D" parent="Arena/Platform3"]
-shape = SubResource("RectangleShape2D_platform3")
+[node name="PlatformShape" type="CollisionShape2D" parent="Arena/PlatformCenter"]
+shape = SubResource("RectangleShape2D_platform9")
 
-[node name="PlatformLine" type="Line2D" parent="Arena/Platform3"]
-points = PackedVector2Array(-100, 0, 100, 0)
-width = 5.0
-default_color = Color(1, 1, 0, 1)
-joint_mode = 2
-begin_cap_mode = 2
-end_cap_mode = 2
+[node name="Glow" type="Line2D" parent="Arena/PlatformCenter"]
+material = SubResource("CanvasItemMaterial_add")
+points = PackedVector2Array(-150, 0, 150, 0)
+width = 18.0
+default_color = Color(1, 1, 0, 0.1)
+
+[node name="PlatformLine" type="Line2D" parent="Arena/PlatformCenter"]
+points = PackedVector2Array(-150, 0, 150, 0)
+width = 4.0
+default_color = Color(1, 1, 0.5, 1)
+
+[node name="VerticalWall" type="StaticBody2D" parent="Arena"]
+position = Vector2(512, 280)
+
+[node name="WallShape" type="CollisionShape2D" parent="Arena/VerticalWall"]
+shape = SubResource("RectangleShape2D_platformV")
+
+[node name="Glow" type="Line2D" parent="Arena/VerticalWall"]
+material = SubResource("CanvasItemMaterial_add")
+points = PackedVector2Array(0, -60, 0, 60)
+default_color = Color(0.5, 1, 0.5, 0.15)
+
+[node name="WallLine" type="Line2D" parent="Arena/VerticalWall"]
+points = PackedVector2Array(0, -60, 0, 60)
+width = 2.0
+default_color = Color(0.7, 1, 0.7, 1)
 
 [node name="Platform4" type="StaticBody2D" parent="Arena"]
-position = Vector2(350, 362)
+position = Vector2(300, 250)
 
 [node name="PlatformShape" type="CollisionShape2D" parent="Arena/Platform4"]
 shape = SubResource("RectangleShape2D_platform4")
 
+[node name="Glow" type="Line2D" parent="Arena/Platform4"]
+material = SubResource("CanvasItemMaterial_add")
+points = PackedVector2Array(-60, 0, 60, 0)
+width = 12.0
+default_color = Color(0, 1, 0.5, 0.15)
+
 [node name="PlatformLine" type="Line2D" parent="Arena/Platform4"]
 points = PackedVector2Array(-60, 0, 60, 0)
-width = 5.0
-default_color = Color(0, 1, 0.5, 1)
-joint_mode = 2
-begin_cap_mode = 2
-end_cap_mode = 2
+width = 3.0
+default_color = Color(0.4, 1, 0.7, 1)
 
 [node name="Platform5" type="StaticBody2D" parent="Arena"]
-position = Vector2(674, 362)
+position = Vector2(724, 250)
 
 [node name="PlatformShape" type="CollisionShape2D" parent="Arena/Platform5"]
 shape = SubResource("RectangleShape2D_platform5")
 
+[node name="Glow" type="Line2D" parent="Arena/Platform5"]
+material = SubResource("CanvasItemMaterial_add")
+points = PackedVector2Array(-60, 0, 60, 0)
+width = 12.0
+default_color = Color(0, 1, 0.5, 0.15)
+
 [node name="PlatformLine" type="Line2D" parent="Arena/Platform5"]
 points = PackedVector2Array(-60, 0, 60, 0)
-width = 5.0
-default_color = Color(0, 1, 0.5, 1)
-joint_mode = 2
-begin_cap_mode = 2
-end_cap_mode = 2
+width = 3.0
+default_color = Color(0.4, 1, 0.7, 1)
 
-[node name="Platform6" type="StaticBody2D" parent="Arena"]
-position = Vector2(150, 262)
+[node name="PlatformTop" type="StaticBody2D" parent="Arena"]
+position = Vector2(512, 120)
 
-[node name="PlatformShape" type="CollisionShape2D" parent="Arena/Platform6"]
-shape = SubResource("RectangleShape2D_platform6")
-
-[node name="PlatformLine" type="Line2D" parent="Arena/Platform6"]
-points = PackedVector2Array(-90, 0, 90, 0)
-width = 5.0
-default_color = Color(1, 0.5, 0, 1)
-joint_mode = 2
-begin_cap_mode = 2
-end_cap_mode = 2
-
-[node name="Platform7" type="StaticBody2D" parent="Arena"]
-position = Vector2(874, 262)
-
-[node name="PlatformShape" type="CollisionShape2D" parent="Arena/Platform7"]
-shape = SubResource("RectangleShape2D_platform7")
-
-[node name="PlatformLine" type="Line2D" parent="Arena/Platform7"]
-points = PackedVector2Array(-90, 0, 90, 0)
-width = 5.0
-default_color = Color(1, 0.5, 0, 1)
-joint_mode = 2
-begin_cap_mode = 2
-end_cap_mode = 2
-
-[node name="Platform8" type="StaticBody2D" parent="Arena"]
-position = Vector2(512, 182)
-
-[node name="PlatformShape" type="CollisionShape2D" parent="Arena/Platform8"]
+[node name="PlatformShape" type="CollisionShape2D" parent="Arena/PlatformTop"]
 shape = SubResource("RectangleShape2D_platform8")
 
-[node name="PlatformLine" type="Line2D" parent="Arena/Platform8"]
+[node name="Glow" type="Line2D" parent="Arena/PlatformTop"]
+material = SubResource("CanvasItemMaterial_add")
 points = PackedVector2Array(-70, 0, 70, 0)
-width = 5.0
-default_color = Color(1, 0, 0.5, 1)
-joint_mode = 2
-begin_cap_mode = 2
-end_cap_mode = 2
+width = 15.0
+default_color = Color(1, 0, 0.5, 0.15)
+
+[node name="PlatformLine" type="Line2D" parent="Arena/PlatformTop"]
+points = PackedVector2Array(-70, 0, 70, 0)
+width = 4.0
+default_color = Color(1, 0.4, 0.7, 1)
 
 [node name="LeftWall" type="StaticBody2D" parent="Arena"]
 position = Vector2(12, 300)
@@ -211,6 +234,7 @@ position = Vector2(0, -22.5)
 scale = Vector2(1, 0.92622954)
 points = PackedVector2Array(0, -300, 0, 300)
 width = 5.0
+default_color = Color(0, 1, 1, 0.5)
 
 [node name="RightWall" type="StaticBody2D" parent="Arena"]
 position = Vector2(1012, 300)
@@ -221,46 +245,46 @@ shape = SubResource("RectangleShape2D_rightwall")
 [node name="WallLine" type="Line2D" parent="Arena/RightWall"]
 points = PackedVector2Array(0, -300, 0, 300)
 width = 5.0
-default_color = Color(1, 0.5, 0, 1)
-joint_mode = 2
-begin_cap_mode = 2
-end_cap_mode = 2
+default_color = Color(1, 0.5, 0, 0.5)
 
 [node name="SpawnPoints" type="Node2D" parent="Arena"]
 
 [node name="Spawn1" type="Marker2D" parent="Arena/SpawnPoints"]
-position = Vector2(100, 500)
+position = Vector2(100, 520)
 
 [node name="Spawn2" type="Marker2D" parent="Arena/SpawnPoints"]
-position = Vector2(924, 500)
+position = Vector2(924, 520)
 
 [node name="Spawn3" type="Marker2D" parent="Arena/SpawnPoints"]
-position = Vector2(300, 350)
+position = Vector2(300, 200)
 
 [node name="Spawn4" type="Marker2D" parent="Arena/SpawnPoints"]
-position = Vector2(724, 350)
+position = Vector2(724, 200)
 
 [node name="Spawn5" type="Marker2D" parent="Arena/SpawnPoints"]
-position = Vector2(412, 200)
+position = Vector2(512, 330)
 
 [node name="Spawn6" type="Marker2D" parent="Arena/SpawnPoints"]
-position = Vector2(612, 200)
+position = Vector2(512, 70)
 
 [node name="WeaponSpawns" type="Node2D" parent="Arena"]
 
 [node name="WeaponSpawn1" type="Marker2D" parent="Arena/WeaponSpawns"]
-position = Vector2(512, 424)
+position = Vector2(512, 340)
 
 [node name="WeaponSpawn2" type="Marker2D" parent="Arena/WeaponSpawns"]
-position = Vector2(200, 411)
+position = Vector2(170, 440)
 
 [node name="WeaponSpawn3" type="Marker2D" parent="Arena/WeaponSpawns"]
-position = Vector2(828, 405)
+position = Vector2(854, 440)
 
 [node name="WeaponSpawn4" type="Marker2D" parent="Arena/WeaponSpawns"]
-position = Vector2(350, 516)
+position = Vector2(300, 210)
 
 [node name="WeaponSpawn5" type="Marker2D" parent="Arena/WeaponSpawns"]
-position = Vector2(671, 515)
+position = Vector2(724, 210)
+
+[node name="WeaponSpawn6" type="Marker2D" parent="Arena/WeaponSpawns"]
+position = Vector2(512, 80)
 
 [node name="UI" parent="." instance=ExtResource("2_ui")]
