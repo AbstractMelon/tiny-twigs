@@ -9,6 +9,7 @@ extends CanvasLayer
 @onready var restart_button = $WinScreen/Panel/VBox/Buttons/RestartButton
 @onready var menu_button = $WinScreen/Panel/VBox/Buttons/MenuButton
 
+var body_font = preload("res://assets/fonts/Hey Comic.ttf")
 var player_labels: Array = []
 
 func _ready():
@@ -42,6 +43,7 @@ func show_game_ui(players: Array):
 		
 		var label = Label.new()
 		label.text = " P%d" % (i + 1)
+		label.add_theme_font_override("font", body_font)
 		label.add_theme_font_size_override("font_size", 18)
 		label.add_theme_color_override("font_color", players[i].player_color)
 		top_row.add_child(label)

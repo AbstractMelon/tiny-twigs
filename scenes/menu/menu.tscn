@@ -1,9 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://cekp6r4cpx3c3"]
+[gd_scene load_steps=8 format=3 uid="uid://cekp6r4cpx3c3"]
 
 [ext_resource type="Script" uid="uid://iolqx6pgv7tm" path="res://scenes/menu/menu.gd" id="1_menu"]
 [ext_resource type="PackedScene" uid="uid://csyqiiv65hdqp" path="res://scenes/main/background.tscn" id="2_bg"]
 [ext_resource type="PackedScene" uid="uid://cf8endj7vruag" path="res://ui/game_ui.tscn" id="3_ui"]
 [ext_resource type="AudioStream" uid="uid://nwinja6c4xdq" path="res://assets/audio/LEMMiNO - Nocturnal (BGM).mp3" id="4_bgm"]
+[ext_resource type="FontFile" uid="uid://bn5bnb1h36csv" path="res://assets/fonts/Vaseline Extra.ttf" id="5_title_font"]
+[ext_resource type="FontFile" uid="uid://cjf7nq1tjoqkv" path="res://assets/fonts/Hey Comic.ttf" id="6_body_font"]
 
 [sub_resource type="Environment" id="Environment_menu"]
 background_mode = 3
@@ -24,7 +26,8 @@ offset_top = 10.0
 offset_right = 308.0
 offset_bottom = 77.0
 theme_override_colors/font_color = Color(0, 1, 1, 1)
-theme_override_font_sizes/font_size = 48
+theme_override_fonts/font = ExtResource("5_title_font")
+theme_override_font_sizes/font_size = 60
 text = "TINY TWIGS"
 
 [node name="ControlLabel" type="Label" parent="MenuUI"]
@@ -32,6 +35,7 @@ offset_left = 20.0
 offset_top = 80.0
 offset_right = 413.0
 offset_bottom = 142.0
+theme_override_fonts/font = ExtResource("6_body_font")
 theme_override_font_sizes/font_size = 20
 text = "Press 2-6 to select number of players
 Press F1-F6 to swap keybinds for each player
@@ -57,6 +61,7 @@ grow_horizontal = 0
 grow_vertical = 0
 theme_override_colors/font_color = Color(1, 1, 1, 0.4)
 theme_override_constants/line_spacing = -8
+theme_override_fonts/font = ExtResource("6_body_font")
 theme_override_font_sizes/font_size = 14
 text = "v0.1.0-alpha
 Created by Abstractmelon"

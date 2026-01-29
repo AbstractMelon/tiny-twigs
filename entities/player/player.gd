@@ -45,14 +45,15 @@ var input_block: String
 var input_drop: String
 
 # References to child nodes
-@onready var body_parts = $BodyParts
-@onready var head = $BodyParts/Head
-@onready var torso = $BodyParts/Torso
-@onready var arm_left = $BodyParts/ArmLeft
-@onready var arm_right = $BodyParts/ArmRight
-@onready var leg_left = $BodyParts/LegLeft
-@onready var leg_right = $BodyParts/LegRight
-@onready var weapon_holder = $WeaponHolder
+@onready var visuals = $Visuals
+@onready var body_parts = $Visuals/BodyParts
+@onready var head = $Visuals/BodyParts/Head
+@onready var torso = $Visuals/BodyParts/Torso
+@onready var arm_left = $Visuals/BodyParts/ArmLeft
+@onready var arm_right = $Visuals/BodyParts/ArmRight
+@onready var leg_left = $Visuals/BodyParts/LegLeft
+@onready var leg_right = $Visuals/BodyParts/LegRight
+@onready var weapon_holder = $Visuals/WeaponHolder
 @onready var collision_shape = $CollisionShape2D
 @onready var glow_effect = $GlowEffect
 @onready var animation_player = $AnimationPlayer
@@ -142,6 +143,7 @@ func _handle_combat():
 	if Input.is_action_just_pressed(input_block):
 		is_blocking = true
 		block_timer = BLOCK_DURATION
+		animation_player.play("block")
 	
 	# Shoot
 	if Input.is_action_pressed(input_shoot) and current_weapon:
@@ -156,6 +158,10 @@ func _shoot_weapon() -> bool:
 		return false
 	
 	var direction = Vector2.RIGHT.rotated(weapon_holder.rotation)
+	# If facing left, flip the direction appropriately
+	if visuals.scale.x < 0:
+		direction = Vector2.LEFT.rotated(-weapon_holder.rotation)
+		
 	if await current_weapon.fire(global_position, direction):
 		# Recoil - apply in opposite direction of shot
 		velocity -= direction * current_weapon.recoil_force
@@ -185,6 +191,7 @@ func take_damage(amount: int, knockback: Vector2):
 		knockback *= 0.3
 	else:
 		health -= amount
+		animation_player.play("hurt")
 	
 	health_changed.emit(health, max_health)
 	
@@ -202,21 +209,16 @@ func die():
 	died.emit()
 	is_ragdoll = true
 	ragdoll_timer = 9999.0 # Effectively stay ragdolled
-	# Signal or handle respawn/game over
-	print("Player ", player_id, " has died!")
-	
 	# Visual feedback
 	var tween = create_tween()
-	tween.tween_property(body_parts, "modulate:a", 0.0, 2.0)
+	tween.tween_property(visuals, "modulate:a", 0.0, 1.0)
 	tween.finished.connect(func(): queue_free())
 
 func _enter_ragdoll():
 	is_ragdoll = true
 	ragdoll_timer = RAGDOLL_RECOVERY_TIME
 	# Visual effect: make body parts limp
-	for part in body_parts.get_children():
-		if part is Line2D:
-			part.modulate.a = 0.7
+	visuals.modulate.a = 0.7
 
 func _handle_ragdoll(delta):
 	velocity.y += gravity * delta
@@ -229,12 +231,10 @@ func _handle_ragdoll(delta):
 
 func _exit_ragdoll():
 	is_ragdoll = false
-	for part in body_parts.get_children():
-		if part is Line2D:
-			part.modulate.a = 1.0
+	visuals.modulate.a = 1.0
 
 func _animate_body_parts():
-	if is_ragdoll:
+	if is_ragdoll or is_blocking or animation_player.current_animation == "hurt":
 		return
 
 	if not is_on_floor():
@@ -255,32 +255,22 @@ func _update_weapon_orientation(delta: float):
 	if not weapon_holder:
 		return
 		
-	var facing_left = body_parts.scale.x < 0
-	
 	# All players aim where they move (keyboard-style)
 	var h_dir = 0.0
 	if Input.is_action_pressed(input_left): h_dir -= 1.0
 	if Input.is_action_pressed(input_right): h_dir += 1.0
 	
 	if h_dir != 0:
-		facing_left = h_dir < 0
+		visuals.scale.x = -1 if h_dir < 0 else 1
 	
-	var target_rot = PI if facing_left else 0.0
+	var target_rot = 0.0
 	weapon_holder.rotation = lerp_angle(weapon_holder.rotation, target_rot, 15.0 * delta)
-
-	body_parts.scale.x = -1 if facing_left else 1
-	
-	# Adjust weapon holder position so it's always in front of the player
-	var holder_offset_x = 12.0 # Based on original position in TSCN
-	weapon_holder.position.x = -holder_offset_x if facing_left else holder_offset_x
-	
-	# Correct weapon vertical flip so it's not upside down when pointing left
-	weapon_holder.scale.y = -1 if facing_left else 1
+	weapon_holder.scale.y = 1 # Keep weapon scale normal relative to flipped visuals
 
 func _play_shoot_animation():
 	# Recoil animation with arm kickback
 	var tween = create_tween()
-	var shooting_arm = arm_right if body_parts.scale.x > 0 else arm_left
+	var shooting_arm = arm_right if visuals.scale.x > 0 else arm_left
 	var current_rot = shooting_arm.rotation
 	tween.tween_property(shooting_arm, "rotation", current_rot - deg_to_rad(30), 0.05)
 	tween.chain().tween_property(shooting_arm, "rotation", current_rot, 0.15)

@@ -1,6 +1,8 @@
 [gd_scene load_steps=2 format=3 uid="uid://cf8endj7vruag"]
 
 [ext_resource type="Script" uid="uid://cdraeedita4ce" path="res://ui/game_ui.gd" id="1_script"]
+[ext_resource type="FontFile" uid="uid://vaseline" path="res://assets/fonts/Vaseline Extra.ttf" id="2_title_font"]
+[ext_resource type="FontFile" uid="uid://heycomic" path="res://assets/fonts/Hey Comic.ttf" id="3_body_font"]
 
 [node name="UI" type="CanvasLayer"]
 script = ExtResource("1_script")
@@ -40,6 +42,7 @@ alignment = 1
 
 [node name="WinnerText" type="Label" parent="WinScreen/Panel/VBox"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_title_font")
 theme_override_font_sizes/font_size = 48
 text = "PLAYER 1 WINS!"
 horizontal_alignment = 1
@@ -52,11 +55,13 @@ alignment = 1
 [node name="RestartButton" type="Button" parent="WinScreen/Panel/VBox/Buttons"]
 custom_minimum_size = Vector2(150, 50)
 layout_mode = 2
+theme_override_fonts/font = ExtResource("3_body_font")
 theme_override_font_sizes/font_size = 24
 text = "New Round"
 
 [node name="MenuButton" type="Button" parent="WinScreen/Panel/VBox/Buttons"]
 custom_minimum_size = Vector2(150, 50)
 layout_mode = 2
+theme_override_fonts/font = ExtResource("3_body_font")
 theme_override_font_sizes/font_size = 24
 text = "Main Menu"

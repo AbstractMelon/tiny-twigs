@@ -4,6 +4,7 @@ extends Node2D
 @onready var player_selection_list = $MenuUI/PlayerSelectionList
 @onready var control_label = $MenuUI/ControlLabel
 
+var body_font = preload("res://assets/fonts/Hey Comic.ttf")
 @export var scroll_speed = 125.0
 
 func _ready():
@@ -53,6 +54,7 @@ func _update_ui():
 		
 		var label = Label.new()
 		label.text = " Player %d: [%s] Keys: %s" % [pid, InputManager.get_scheme_name(sid), InputManager.get_control_scheme_text(sid)]
+		label.add_theme_font_override("font", body_font)
 		label.add_theme_font_size_override("font_size", 22)
 		label.add_theme_color_override("font_color", GameState.PLAYER_COLORS[i])
 		row.add_child(label)
