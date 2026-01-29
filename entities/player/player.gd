@@ -166,6 +166,11 @@ func _shoot_weapon() -> bool:
 		# Recoil - apply in opposite direction of shot
 		velocity -= direction * current_weapon.recoil_force
 		_play_shoot_animation()
+		
+		# Auto-drop if empty
+		if current_weapon.ammo == 0:
+			_drop_weapon()
+			
 		return true
 	return false
 

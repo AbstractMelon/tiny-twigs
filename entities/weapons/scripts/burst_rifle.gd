@@ -12,7 +12,7 @@ func fire(from_position: Vector2, direction: Vector2) -> bool:
 		return false
 	
 	can_fire = false
-	_handle_burst(from_position, direction)
+	await _handle_burst(from_position, direction)
 	return true
 
 func _handle_burst(from_position: Vector2, direction: Vector2):
