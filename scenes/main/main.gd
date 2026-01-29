@@ -69,6 +69,25 @@ func _spawn_players():
 		
 		add_child(player)
 		active_players.append(player)
+		player.died.connect(_on_player_died.bind(player))
+
+func _on_player_died(player):
+	if player in active_players:
+		active_players.erase(player)
+	
+	_check_win_condition()
+
+func _check_win_condition():
+	if not game_started:
+		return
+		
+	if active_players.size() <= 1:
+		game_started = false
+		var winner = active_players[0] if active_players.size() == 1 else null
+		
+		# Show win UI
+		if ui and ui.has_method("show_win_screen"):
+			ui.show_win_screen(winner)
 
 func _spawn_initial_weapons():
 	# Spawn a few weapons at the start
@@ -83,6 +102,9 @@ func _start_weapon_spawn_timer():
 	add_child(timer)
 
 func _spawn_weapon_at_random_location():
+	if not game_started:
+		return
+		
 	if weapon_spawn_points.size() > 0:
 		var spawn_pos = weapon_spawn_points[randi() % weapon_spawn_points.size()]
 		_spawn_random_weapon(spawn_pos)

@@ -20,3 +20,43 @@ offset_top = 20.0
 offset_right = 220.0
 offset_bottom = 600.0
 theme_override_constants/separation = 10
+
+[node name="WinScreen" type="CenterContainer" parent="."]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="PanelContainer" parent="WinScreen"]
+custom_minimum_size = Vector2(400, 250)
+layout_mode = 2
+
+[node name="VBox" type="VBoxContainer" parent="WinScreen/Panel"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="WinnerText" type="Label" parent="WinScreen/Panel/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "PLAYER 1 WINS!"
+horizontal_alignment = 1
+
+[node name="Buttons" type="HBoxContainer" parent="WinScreen/Panel/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 30
+alignment = 1
+
+[node name="RestartButton" type="Button" parent="WinScreen/Panel/VBox/Buttons"]
+custom_minimum_size = Vector2(150, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "New Round"
+
+[node name="MenuButton" type="Button" parent="WinScreen/Panel/VBox/Buttons"]
+custom_minimum_size = Vector2(150, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Main Menu"

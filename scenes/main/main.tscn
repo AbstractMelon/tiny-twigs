@@ -1,8 +1,8 @@
 [gd_scene load_steps=16 format=3 uid="uid://main001"]
 
 [ext_resource type="Script" uid="uid://de8532p3mru0m" path="res://scenes/main/main.gd" id="1_main"]
-[ext_resource type="PackedScene" path="res://ui/game_ui.tscn" id="2_ui"]
-[ext_resource type="PackedScene" path="res://scenes/main/background.tscn" id="3_bg"]
+[ext_resource type="PackedScene" uid="uid://cf8endj7vruag" path="res://ui/game_ui.tscn" id="2_ui"]
+[ext_resource type="PackedScene" uid="uid://csyqiiv65hdqp" path="res://scenes/main/background.tscn" id="3_bg"]
 
 [sub_resource type="Environment" id="Environment_neon"]
 background_mode = 3

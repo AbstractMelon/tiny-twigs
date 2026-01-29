@@ -55,6 +55,7 @@ var input_drop: String
 @onready var weapon_holder = $WeaponHolder
 @onready var collision_shape = $CollisionShape2D
 @onready var glow_effect = $GlowEffect
+@onready var animation_player = $AnimationPlayer
 
 func _ready():
 	_setup_input_actions()
@@ -121,7 +122,6 @@ func _handle_jump():
 		velocity.y = JUMP_VELOCITY
 		jump_buffer_timer = 0
 		coyote_timer = 0
-		_play_jump_animation()
 
 func _handle_movement():
 	var direction = 0.0
@@ -234,56 +234,22 @@ func _exit_ragdoll():
 			part.modulate.a = 1.0
 
 func _animate_body_parts():
-	var time = Time.get_ticks_msec() / 1000.0
-	
+	if is_ragdoll:
+		return
+
 	if not is_on_floor():
-		# In air animation - spread legs
-		leg_left.rotation = lerp_angle(leg_left.rotation, deg_to_rad(-35), 0.15)
-		leg_right.rotation = lerp_angle(leg_right.rotation, deg_to_rad(35), 0.15)
-		# Arms flail slightly
-		if not is_blocking:
-			arm_left.rotation = lerp_angle(arm_left.rotation, deg_to_rad(-20), 0.1)
-			arm_right.rotation = lerp_angle(arm_right.rotation, deg_to_rad(20), 0.1)
-	else:
-		# Walking animation
-		var walk_speed = abs(velocity.x) / SPEED
-		
-		if walk_speed > 0.1:
-			# Active walking with exaggerated leg motion
-			var leg_swing = sin(time * 8.0) * 0.8
-			leg_left.rotation = leg_swing * walk_speed
-			leg_right.rotation = -leg_swing * walk_speed
-			
-			# Arms swing opposite to legs
-			if not is_blocking:
-				arm_left.rotation = lerp_angle(arm_left.rotation, -leg_swing * 0.6 * walk_speed, 0.2)
-				arm_right.rotation = lerp_angle(arm_right.rotation, leg_swing * 0.6 * walk_speed, 0.2)
-			
-			# Head bob
-			head.position.y = sin(time * 16.0) * 2.0 * walk_speed
+		if velocity.y < 0:
+			animation_player.play("jump")
 		else:
-			# Idle animation - subtle breathing
-			leg_left.rotation = lerp_angle(leg_left.rotation, 0, 0.1)
-			leg_right.rotation = lerp_angle(leg_right.rotation, 0, 0.1)
-			
-			if not is_blocking:
-				# Gentle arm sway
-				arm_left.rotation = sin(time * 2.0) * 0.1
-				arm_right.rotation = -sin(time * 2.0) * 0.1
-			
-			# Breathing motion for torso and head
-			var breath = sin(time * 3.0) * 1.5
-			head.position.y = breath
-			torso.position.y = breath * 0.3
-	
-	# Blocking animation
-	if is_blocking:
-		arm_left.rotation = lerp_angle(arm_left.rotation, deg_to_rad(-110), 0.3)
-		arm_right.rotation = lerp_angle(arm_right.rotation, deg_to_rad(110), 0.3)
-		# Defensive stance - legs slightly bent
-		if is_on_floor():
-			leg_left.rotation = lerp_angle(leg_left.rotation, deg_to_rad(10), 0.2)
-			leg_right.rotation = lerp_angle(leg_right.rotation, deg_to_rad(-10), 0.2)
+			animation_player.play("fall")
+	else:
+		if abs(velocity.x) > 10.0:
+			animation_player.play("walk")
+			# Dynamic speed for walk animation
+			animation_player.speed_scale = abs(velocity.x) / SPEED * 1.5
+		else:
+			animation_player.play("idle")
+			animation_player.speed_scale = 1.0
 
 func _update_weapon_orientation(delta: float):
 	if not weapon_holder:
@@ -310,17 +276,6 @@ func _update_weapon_orientation(delta: float):
 	
 	# Correct weapon vertical flip so it's not upside down when pointing left
 	weapon_holder.scale.y = -1 if facing_left else 1
-
-func _play_jump_animation():
-	# Quick upward motion on body parts with squash and stretch
-	var tween = create_tween()
-	tween.set_parallel(true)
-	tween.tween_property(body_parts, "scale", Vector2(0.8, 1.2), 0.1)
-	tween.chain().tween_property(body_parts, "scale", Vector2(1.0, 1.0), 0.2)
-	
-	# Legs extend downward
-	leg_left.rotation = deg_to_rad(-45)
-	leg_right.rotation = deg_to_rad(45)
 
 func _play_shoot_animation():
 	# Recoil animation with arm kickback

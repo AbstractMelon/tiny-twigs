@@ -4,14 +4,23 @@ extends CanvasLayer
 
 @onready var game_hud = $GameHUD
 @onready var player_status_list = $GameHUD/PlayerStatusList
+@onready var win_screen = $WinScreen
+@onready var winner_text = $WinScreen/Panel/VBox/WinnerText
+@onready var restart_button = $WinScreen/Panel/VBox/Buttons/RestartButton
+@onready var menu_button = $WinScreen/Panel/VBox/Buttons/MenuButton
 
 var player_labels: Array = []
 
 func _ready():
 	game_hud.hide()
+	win_screen.hide()
+	
+	restart_button.pressed.connect(_on_restart_pressed)
+	menu_button.pressed.connect(_on_menu_pressed)
 
 func show_game_ui(players: Array):
 	game_hud.show()
+	win_screen.hide()
 	
 	# Clear existing status indicators
 	for child in player_status_list.get_children():
@@ -59,3 +68,20 @@ func show_game_ui(players: Array):
 		)
 		
 		player_labels.append(player_info)
+
+func show_win_screen(winner):
+	game_hud.hide()
+	win_screen.show()
+	
+	if winner:
+		winner_text.text = "PLAYER %d WINS!" % winner.player_id
+		winner_text.add_theme_color_override("font_color", winner.player_color)
+	else:
+		winner_text.text = "IT'S A TIE!"
+		winner_text.add_theme_color_override("font_color", Color.WHITE)
+
+func _on_restart_pressed():
+	get_tree().reload_current_scene()
+
+func _on_menu_pressed():
+	get_tree().change_scene_to_file("res://scenes/menu/menu.tscn")

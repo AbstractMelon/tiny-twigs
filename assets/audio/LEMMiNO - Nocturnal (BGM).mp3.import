@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://nwinja6c4xdq"
+path="res://.godot/imported/LEMMiNO - Nocturnal (BGM).mp3-79a5b988bad926909311153b8b4f2191.mp3str"
+
+[deps]
+
+source_file="res://assets/audio/LEMMiNO - Nocturnal (BGM).mp3"
+dest_files=["res://.godot/imported/LEMMiNO - Nocturnal (BGM).mp3-79a5b988bad926909311153b8b4f2191.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -8,10 +8,10 @@
 script = ExtResource("2_script")
 weapon_name = "Plasma Laser"
 weapon_color = Color(1, 0, 1, 1)
-damage = 5
-fire_rate = 0.05
+damage = 1
+fire_rate = 0.001
 recoil_force = 50.0
-ammo = 100
+ammo = 75
 projectile_speed = 1200.0
 projectile_scene = ExtResource("3_projectile")
 
