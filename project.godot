@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="Tiny Twigs"
-run/main_scene="uid://main001"
+run/main_scene="res://scenes/menu/menu.tscn"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[autoload]
+
+GameState="*res://systems/game_state.gd"
 
 [rendering]
 

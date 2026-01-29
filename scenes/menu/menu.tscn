@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scenes/menu/menu.gd" id="1_menu"]
+[ext_resource type="PackedScene" path="res://scenes/main/background.tscn" id="2_bg"]
+[ext_resource type="PackedScene" path="res://ui/game_ui.tscn" id="3_ui"]
+
+[sub_resource type="Environment" id="Environment_menu"]
+background_mode = 3
+glow_enabled = true
+glow_intensity = 1.0
+glow_strength = 1.0
+glow_bloom = 0.2
+
+[node name="Menu" type="Node2D"]
+script = ExtResource("1_menu")
+
+[node name="Background" parent="." instance=ExtResource("2_bg")]
+
+[node name="UI" parent="." instance=ExtResource("3_ui")]
+
+[node name="Env" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_menu")

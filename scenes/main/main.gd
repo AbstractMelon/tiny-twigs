@@ -2,18 +2,7 @@ extends Node2D
 
 # Main game controller
 
-@export var num_players: int = 4
 @export var round_time: int = 180  # 3 minutes
-
-# Player colors for neon aesthetic
-const PLAYER_COLORS = [
-	Color.CYAN,      # Player 1
-	Color.MAGENTA,   # Player 2
-	Color.YELLOW,    # Player 3
-	Color.LIME,      # Player 4
-	Color.ORANGE,    # Player 5
-	Color.HOT_PINK   # Player 6
-]
 
 # Spawn points
 var spawn_points: Array = []
@@ -30,18 +19,11 @@ var game_started: bool = false
 @onready var camera = $Camera2D
 
 func _ready():
-	# Setup input for all players
-	InputManager.setup_input_maps()
-	
 	# Collect spawn points
 	_collect_spawn_points()
 	
-	# Setup UI
-	if ui and ui.has_method("_ready"):
-		pass  # UI will setup itself
-	
-	# Show start menu
-	_show_start_menu()
+	# Start game immediately using GameState settings
+	_start_game()
 
 func _collect_spawn_points():
 	var spawn_container = $Arena/SpawnPoints
@@ -56,23 +38,9 @@ func _collect_spawn_points():
 			if child is Marker2D:
 				weapon_spawn_points.append(child.global_position)
 
-func _show_start_menu():
-	# Simple text display for player count selection
-	print("Tiny Twigs - Press 2-6 to select number of players, then SPACE to start")
-
-func _input(event):
-	if not game_started:
-		if event is InputEventKey and event.pressed:
-			if event.keycode >= KEY_2 and event.keycode <= KEY_6:
-				num_players = event.keycode - KEY_0
-				print("Selected %d players" % num_players)
-				if ui and ui.has_method("update_player_count"):
-					ui.update_player_count(num_players)
-			elif event.keycode == KEY_SPACE:
-				_start_game()
-
 func _start_game():
 	game_started = true
+	
 	_spawn_players()
 	_spawn_initial_weapons()
 	_start_weapon_spawn_timer()
@@ -84,10 +52,10 @@ func _start_game():
 func _spawn_players():
 	var player_scene = preload("res://entities/player/player.tscn")
 	
-	for i in range(num_players):
+	for i in range(GameState.num_players):
 		var player = player_scene.instantiate()
 		player.player_id = i + 1
-		player.player_color = PLAYER_COLORS[i]
+		player.player_color = GameState.PLAYER_COLORS[i]
 		
 		# Spawn at designated point
 		if i < spawn_points.size():
