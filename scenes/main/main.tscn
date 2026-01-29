@@ -1,8 +1,9 @@
-[gd_scene load_steps=16 format=3 uid="uid://main001"]
+[gd_scene load_steps=17 format=3 uid="uid://main001"]
 
 [ext_resource type="Script" uid="uid://de8532p3mru0m" path="res://scenes/main/main.gd" id="1_main"]
 [ext_resource type="PackedScene" uid="uid://cf8endj7vruag" path="res://ui/game_ui.tscn" id="2_ui"]
 [ext_resource type="PackedScene" uid="uid://csyqiiv65hdqp" path="res://scenes/main/background.tscn" id="3_bg"]
+[ext_resource type="AudioStream" path="res://assets/audio/LEMMiNO - Nocturnal (BGM).mp3" id="4_bgm"]
 
 [sub_resource type="Environment" id="Environment_neon"]
 background_mode = 3
@@ -52,6 +53,11 @@ position = Vector2(1, 0)
 script = ExtResource("1_main")
 
 [node name="Background" parent="." instance=ExtResource("3_bg")]
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_bgm")
+autoplay = true
+bus = &"Music"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(512, 300)

@@ -1,14 +1,14 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3 uid="uid://cekp6r4cpx3c3"]
 
-[ext_resource type="Script" path="res://scenes/menu/menu.gd" id="1_menu"]
-[ext_resource type="PackedScene" path="res://scenes/main/background.tscn" id="2_bg"]
-[ext_resource type="PackedScene" path="res://ui/game_ui.tscn" id="3_ui"]
+[ext_resource type="Script" uid="uid://iolqx6pgv7tm" path="res://scenes/menu/menu.gd" id="1_menu"]
+[ext_resource type="PackedScene" uid="uid://csyqiiv65hdqp" path="res://scenes/main/background.tscn" id="2_bg"]
+[ext_resource type="PackedScene" uid="uid://cf8endj7vruag" path="res://ui/game_ui.tscn" id="3_ui"]
+[ext_resource type="AudioStream" uid="uid://nwinja6c4xdq" path="res://assets/audio/LEMMiNO - Nocturnal (BGM).mp3" id="4_bgm"]
 
 [sub_resource type="Environment" id="Environment_menu"]
 background_mode = 3
 glow_enabled = true
 glow_intensity = 1.0
-glow_strength = 1.0
 glow_bloom = 0.2
 
 [node name="Menu" type="Node2D"]
@@ -42,6 +42,30 @@ offset_left = 20.0
 offset_top = 180.0
 offset_right = 420.0
 offset_bottom = 600.0
+
+[node name="VersionLabel" type="Label" parent="MenuUI"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -200.0
+offset_top = -60.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_colors/font_color = Color(1, 1, 1, 0.4)
+theme_override_constants/line_spacing = -8
+theme_override_font_sizes/font_size = 14
+text = "v0.1.0-alpha
+Created by Abstractmelon"
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_bgm")
+autoplay = true
 
 [node name="UI" parent="." instance=ExtResource("3_ui")]
 
