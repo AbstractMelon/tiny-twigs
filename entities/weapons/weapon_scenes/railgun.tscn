@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=5 format=3]
 [ext_resource type="PackedScene" path="res://entities/weapons/weapon.tscn" id="1_base"]
 [ext_resource type="Script" path="res://entities/weapons/scripts/railgun.gd" id="2_script"]
 [ext_resource type="PackedScene" path="res://entities/projectiles/projectile.tscn" id="3_projectile"]
+[ext_resource type="Texture2D" path="res://assets/railgun.svg" id="4_tex"]
 
 [node name="RailGun" instance=ExtResource("1_base")]
 script = ExtResource("2_script")
@@ -12,17 +13,24 @@ fire_rate = 1.2
 recoil_force = 300.0
 ammo = 8
 projectile_speed = 1500.0
+projectile_lifetime = 1.0
+projectile_knockback = 400.0
 projectile_scene = ExtResource("3_projectile")
 
-[node name="Shape" parent="Visuals" index="0"]
+[node name="Sprite" parent="Visuals" index="0"]
+texture = ExtResource("4_tex")
+position = Vector2(10, 2)
+
+[node name="Shape" parent="Visuals" index="1"]
 points = PackedVector2Array(0, 0, 30, 0, 26, -3, 26, 3, 30, 0)
 width = 2.0
 
-[node name="Capacitor" type="Line2D" parent="Visuals" index="1"]
+[node name="Capacitor" type="Line2D" parent="Visuals" index="2"]
+visible = false
 points = PackedVector2Array(5, -6, 5, 6, 10, 6, 10, -6, 5, -6)
 width = 1.5
 default_color = Color(0, 1, 0.498039, 1)
 
-[node name="Glow" parent="Visuals" index="2"]
+[node name="Glow" parent="Visuals" index="3"]
 energy = 2.5
 texture_scale = 1.0

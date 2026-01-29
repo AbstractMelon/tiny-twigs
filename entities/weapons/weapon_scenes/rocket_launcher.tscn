@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=5 format=3]
 [ext_resource type="PackedScene" path="res://entities/weapons/weapon.tscn" id="1_base"]
 [ext_resource type="Script" path="res://entities/weapons/scripts/rocket_launcher.gd" id="2_script"]
 [ext_resource type="PackedScene" path="res://entities/projectiles/projectile.tscn" id="3_projectile"]
+[ext_resource type="Texture2D" path="res://assets/rocket_launcher.svg" id="4_tex"]
 
 [node name="RocketLauncher" instance=ExtResource("1_base")]
 script = ExtResource("2_script")
@@ -12,12 +13,18 @@ fire_rate = 1.5
 recoil_force = 600.0
 ammo = 6
 projectile_speed = 400.0
+projectile_lifetime = 1.5
+projectile_knockback = 1000.0
 projectile_scene = ExtResource("3_projectile")
 
-[node name="Shape" parent="Visuals" index="0"]
+[node name="Sprite" parent="Visuals" index="0"]
+texture = ExtResource("4_tex")
+position = Vector2(10, 0)
+
+[node name="Shape" parent="Visuals" index="1"]
 points = PackedVector2Array(0, -6, 28, -6, 28, 6, 0, 6, 0, 10, -4, 10, -4, -10, 0, -10, 0, -6)
 width = 3.0
 
-[node name="Glow" parent="Visuals" index="1"]
+[node name="Glow" parent="Visuals" index="2"]
 energy = 1.5
-texture_scale = 0.8
+texture_scale = 1.2

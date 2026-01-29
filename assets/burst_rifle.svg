@@ -1,0 +1,8 @@
+<svg width="70" height="30" viewBox="0 0 70 30" xmlns="http://www.w3.org/2000/svg">
+  <!-- Burst Rifle Design -->
+  <path d="M5 8h45v14h-45z" fill="#333" stroke="white" stroke-width="2"/>
+  <path d="M12 22h10v10h-10z" fill="#222" stroke="white" stroke-width="2"/>
+  <rect x="50" y="10" width="15" height="4" fill="#555" stroke="white" stroke-width="1.5"/>
+  <rect x="50" y="15" width="15" height="4" fill="#555" stroke="white" stroke-width="1.5"/>
+  <path d="M25 8h10v14h-10z" fill="#444" stroke="white" stroke-width="1"/>
+</svg>

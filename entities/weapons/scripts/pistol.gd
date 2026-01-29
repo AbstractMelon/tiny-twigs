@@ -9,3 +9,5 @@ func _spawn_projectile(from_position: Vector2, direction: Vector2):
 	var spawn_offset = direction * 20  # Spawn in front of player
 	projectile.initialize(from_position + spawn_offset, direction, projectile_speed, owner_player)
 	projectile.projectile_color = weapon_color
+	projectile.lifetime = projectile_lifetime
+	projectile.knockback_force = projectile_knockback

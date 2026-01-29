@@ -1,0 +1,8 @@
+<svg width="80" height="40" viewBox="0 0 80 40" xmlns="http://www.w3.org/2000/svg">
+  <!-- Rocket Launcher Design -->
+  <path d="M10 10h50v20h-50z" fill="#444" stroke="white" stroke-width="2"/>
+  <path d="M15 30h15v8h-15z" fill="#222" stroke="white" stroke-width="2"/>
+  <circle cx="60" cy="20" r="10" fill="#333" stroke="white" stroke-width="2"/>
+  <path d="M60 10l15 10l-15 10z" fill="#555" stroke="white" stroke-width="2"/>
+  <rect x="25" y="15" width="20" height="10" fill="red" opacity="0.3"/>
+</svg>

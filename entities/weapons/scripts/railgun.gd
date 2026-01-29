@@ -12,6 +12,8 @@ func _spawn_projectile(from_position: Vector2, direction: Vector2):
 	rail_shot.initialize(from_position + spawn_offset, direction, projectile_speed, owner_player)
 	rail_shot.projectile_color = weapon_color
 	rail_shot.damage = damage
+	rail_shot.lifetime = projectile_lifetime
+	rail_shot.knockback_force = projectile_knockback
 	
 	# Make it thinner and longer
 	rail_shot.scale = Vector2(4, 0.5)

@@ -7,7 +7,11 @@ script = ExtResource("1_weapon")
 
 [node name="Visuals" type="Node2D" parent="."]
 
+[node name="Sprite" type="Sprite2D" parent="Visuals"]
+scale = Vector2(0.5, 0.5)
+
 [node name="Shape" type="Line2D" parent="Visuals"]
+visible = false
 width = 2.5
 joint_mode = 2
 begin_cap_mode = 2

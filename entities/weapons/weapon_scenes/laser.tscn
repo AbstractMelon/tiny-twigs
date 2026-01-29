@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://34gl2wsqj274"]
+[gd_scene load_steps=5 format=3 uid="uid://34gl2wsqj274"]
 
 [ext_resource type="PackedScene" path="res://entities/weapons/weapon.tscn" id="1_base"]
 [ext_resource type="Script" uid="uid://sa18nltjehss" path="res://entities/weapons/scripts/laser.gd" id="2_script"]
 [ext_resource type="PackedScene" uid="uid://b11035icliyy" path="res://entities/projectiles/projectile.tscn" id="3_projectile"]
+[ext_resource type="Texture2D" path="res://assets/laser.svg" id="4_tex"]
 
 [node name="Laser" instance=ExtResource("1_base")]
 script = ExtResource("2_script")
@@ -13,12 +14,18 @@ fire_rate = 0.001
 recoil_force = 50.0
 ammo = 75
 projectile_speed = 1200.0
+projectile_lifetime = 1.0
+projectile_knockback = 10.0
 projectile_scene = ExtResource("3_projectile")
 
-[node name="Shape" parent="Visuals" index="0"]
+[node name="Sprite" parent="Visuals" index="0"]
+texture = ExtResource("4_tex")
+position = Vector2(10, 0)
+
+[node name="Shape" parent="Visuals" index="1"]
 points = PackedVector2Array(0, -2, 20, -2, 24, 0, 20, 2, 0, 2, 0, -2)
 width = 2.0
 
-[node name="Glow" parent="Visuals" index="1"]
+[node name="Glow" parent="Visuals" index="2"]
 energy = 2.0
 texture_scale = 0.7

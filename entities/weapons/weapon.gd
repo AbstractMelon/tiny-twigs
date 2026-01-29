@@ -9,6 +9,8 @@ class_name Weapon
 @export var recoil_force: float = 100.0
 @export var ammo: int = -1  # -1 for unlimited
 @export var projectile_speed: float = 800.0
+@export var projectile_lifetime: float = 2.0
+@export var projectile_knockback: float = 300.0
 
 # State
 var owner_player: Player = null
@@ -18,6 +20,7 @@ var can_fire: bool = true
 @export var projectile_scene: PackedScene
 
 @onready var shape: Line2D = $Visuals/Shape
+@onready var sprite: Sprite2D = $Visuals/Sprite
 @onready var glow: PointLight2D = $Visuals/Glow
 
 func _ready():
@@ -26,6 +29,10 @@ func _ready():
 		shape.default_color = weapon_color
 	if glow:
 		glow.color = weapon_color
+	
+	# Apply color to sprite if it's modular
+	if sprite and sprite.texture:
+		sprite.modulate = Color(1.2, 1.2, 1.2) # Slight brightness boost
 
 func _setup_visual():
 	# Override in specific weapon classes

@@ -20,5 +20,13 @@ func _spawn_projectile(from_position: Vector2, direction: Vector2):
 		flame.initialize(from_position + spawn_offset, flame_direction, projectile_speed, owner_player)
 		flame.projectile_color = weapon_color
 		flame.damage = damage
-		flame.lifetime = 0.4  # Short-lived flames
+		flame.lifetime = projectile_lifetime
+		flame.knockback_force = projectile_knockback
 		flame.scale = Vector2(0.7, 0.7)
+		
+		# Visual flare for flames: Grow and fade
+		var tween = flame.create_tween()
+		tween.set_parallel(true)
+		tween.tween_property(flame, "scale", Vector2(2.5, 2.5), projectile_lifetime)
+		tween.tween_property(flame, "modulate:a", 0.0, projectile_lifetime)
+		tween.finished.connect(flame.queue_free)

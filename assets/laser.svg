@@ -1,0 +1,7 @@
+<svg width="70" height="30" viewBox="0 0 70 30" xmlns="http://www.w3.org/2000/svg">
+  <!-- Laser Design -->
+  <path d="M5 10h40v10h-40z" fill="#222" stroke="white" stroke-width="2"/>
+  <path d="M10 20h10v8h-10z" fill="#111" stroke="white" stroke-width="2"/>
+  <rect x="45" y="12" width="20" height="6" rx="3" fill="#333" stroke="magenta" stroke-width="2"/>
+  <path d="M25 10v10" stroke="magenta" stroke-width="3" opacity="0.6"/>
+</svg>

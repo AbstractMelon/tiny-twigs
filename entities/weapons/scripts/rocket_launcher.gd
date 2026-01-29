@@ -10,7 +10,8 @@ func _spawn_projectile(from_position: Vector2, direction: Vector2):
 	rocket.initialize(from_position + spawn_offset, direction, projectile_speed, owner_player)
 	rocket.projectile_color = weapon_color
 	rocket.damage = damage
-	rocket.knockback_force = 1000.0  # Much stronger knockback
+	rocket.lifetime = projectile_lifetime
+	rocket.knockback_force = projectile_knockback
 	
 	# Make rocket larger
 	rocket.scale = Vector2(2, 2)

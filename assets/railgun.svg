@@ -1,0 +1,8 @@
+<svg width="90" height="30" viewBox="0 0 90 30" xmlns="http://www.w3.org/2000/svg">
+  <!-- Railgun Design -->
+  <path d="M5 12h70v6h-70z" fill="#111" stroke="white" stroke-width="2"/>
+  <path d="M10 18h12v10l-5 5h-7z" fill="#222" stroke="white" stroke-width="2"/>
+  <rect x="20" y="5" width="40" height="4" fill="#444" stroke="white" stroke-width="1"/>
+  <rect x="25" y="10" width="30" height="10" fill="#333" stroke="cyan" stroke-width="1" opacity="0.4"/>
+  <path d="M75 10l10 5l-10 5z" fill="#444" stroke="white" stroke-width="1.5"/>
+</svg>

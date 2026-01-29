@@ -1,0 +1,7 @@
+<svg width="60" height="30" viewBox="0 0 60 30" xmlns="http://www.w3.org/2000/svg">
+  <!-- Pistol Design -->
+  <path d="M10 5h25v15h-25z" fill="#333" stroke="white" stroke-width="2"/>
+  <path d="M15 20h10v10h-10z" fill="#222" stroke="white" stroke-width="2"/>
+  <rect x="35" y="8" width="15" height="4" fill="#555" stroke="white" stroke-width="1"/>
+  <circle cx="15" cy="10" r="2" fill="cyan"/>
+</svg>
