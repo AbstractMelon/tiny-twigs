@@ -2,52 +2,15 @@ extends CanvasLayer
 
 # UI overlay for player info and game state
 
-@onready var dimmer = $Dimmer
-@onready var start_menu = $StartMenu
-@onready var player_selection_list = $StartMenu/PlayerSelectionList
-@onready var control_label = $StartMenu/ControlLabel
 @onready var game_hud = $GameHUD
 @onready var player_status_list = $GameHUD/PlayerStatusList
 
 var player_labels: Array = []
 
 func _ready():
-	# Default state: hide everything, let scenes decide what to show
-	start_menu.hide()
-	dimmer.hide()
 	game_hud.hide()
 
-func update_selection_ui(num_players: int, player_schemes: Dictionary, player_colors: Array):
-	# Clear existing
-	for child in player_selection_list.get_children():
-		child.queue_free()
-	
-	# Update title
-	control_label.text = "PLAYERS SELECTED: %d\n1-6: Change Player Count | F1-F6: Swap Keybinds | SPACE: Start" % num_players
-
-	# List players
-	for i in range(num_players):
-		var pid = i + 1
-		var sid = player_schemes[pid]
-		
-		var row = HBoxContainer.new()
-		player_selection_list.add_child(row)
-		
-		var color_rect = ColorRect.new()
-		color_rect.custom_minimum_size = Vector2(24, 24)
-		color_rect.color = player_colors[i]
-		row.add_child(color_rect)
-		
-		var label = Label.new()
-		label.text = " Player %d: [%s] Keys: %s" % [pid, InputManager.get_scheme_name(sid), InputManager.get_control_scheme_text(sid)]
-		label.add_theme_font_size_override("font_size", 22)
-		label.add_theme_color_override("font_color", player_colors[i])
-		row.add_child(label)
-
 func show_game_ui(players: Array):
-	# Hide menu and dim background
-	start_menu.hide()
-	dimmer.hide()
 	game_hud.show()
 	
 	# Clear existing status indicators

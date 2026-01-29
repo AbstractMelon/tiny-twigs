@@ -16,6 +16,33 @@ script = ExtResource("1_menu")
 
 [node name="Background" parent="." instance=ExtResource("2_bg")]
 
+[node name="MenuUI" type="CanvasLayer" parent="."]
+
+[node name="TitleLabel" type="Label" parent="MenuUI"]
+offset_left = 20.0
+offset_top = 10.0
+offset_right = 308.0
+offset_bottom = 77.0
+theme_override_colors/font_color = Color(0, 1, 1, 1)
+theme_override_font_sizes/font_size = 48
+text = "TINY TWIGS"
+
+[node name="ControlLabel" type="Label" parent="MenuUI"]
+offset_left = 20.0
+offset_top = 80.0
+offset_right = 413.0
+offset_bottom = 142.0
+theme_override_font_sizes/font_size = 20
+text = "Press 2-6 to select number of players
+Press F1-F6 to swap keybinds for each player
+SPACE to start"
+
+[node name="PlayerSelectionList" type="VBoxContainer" parent="MenuUI"]
+offset_left = 20.0
+offset_top = 180.0
+offset_right = 420.0
+offset_bottom = 600.0
+
 [node name="UI" parent="." instance=ExtResource("3_ui")]
 
 [node name="Env" type="WorldEnvironment" parent="."]

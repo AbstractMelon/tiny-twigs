@@ -1,13 +1,12 @@
 extends Node2D
 
-@onready var ui = $UI
 @onready var parallax_bg = $Background/ParallaxBackground
+@onready var player_selection_list = $MenuUI/PlayerSelectionList
+@onready var control_label = $MenuUI/ControlLabel
 
-var scroll_speed = 50.0
+@export var scroll_speed = 75.0
 
 func _ready():
-	ui.start_menu.show()
-	ui.dimmer.show()
 	_update_ui()
 
 func _process(delta):
@@ -33,11 +32,11 @@ func _input(event):
 
 func _update_ui():
 	# Clear existing
-	for child in ui.player_selection_list.get_children():
+	for child in player_selection_list.get_children():
 		child.queue_free()
 	
 	# Update title
-	ui.control_label.text = "PLAYERS SELECTED: %d\nF1-F6: Swap Keybinds | SPACE: Start" % GameState.num_players
+	control_label.text = "PLAYERS SELECTED: %d\nF1-F6: Swap Keybinds | SPACE: Start" % GameState.num_players
 
 	# List players
 	for i in range(GameState.num_players):
@@ -45,7 +44,7 @@ func _update_ui():
 		var sid = GameState.player_schemes[pid]
 		
 		var row = HBoxContainer.new()
-		ui.player_selection_list.add_child(row)
+		player_selection_list.add_child(row)
 		
 		var color_rect = ColorRect.new()
 		color_rect.custom_minimum_size = Vector2(24, 24)
