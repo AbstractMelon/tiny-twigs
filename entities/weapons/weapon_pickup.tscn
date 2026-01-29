@@ -8,13 +8,35 @@ radius = 30.0
 [node name="WeaponPickup" type="Node2D"]
 script = ExtResource("1_pickup")
 
-[node name="Sprite" type="Line2D" parent="."]
-points = PackedVector2Array(-10, -10, 10, -10, 10, 10, -10, 10, -10, -10)
+[node name="Visuals" type="Node2D" parent="."]
+
+[node name="Sprite" type="Line2D" parent="Visuals"]
+points = PackedVector2Array(0, -12, 12, 0, 0, 12, -12, 0, 0, -12)
 width = 3.0
 default_color = Color(0, 1, 1, 1)
 joint_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2
+
+[node name="InnerSprite" type="Line2D" parent="Visuals"]
+points = PackedVector2Array(0, -6, 6, 0, 0, 6, -6, 0, 0, -6)
+width = 1.5
+default_color = Color(1, 1, 1, 0.7)
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Particles" type="CPUParticles2D" parent="Visuals"]
+amount = 6
+lifetime = 0.8
+emission_shape = 1
+emission_sphere_radius = 8.0
+gravity = Vector2(0, 0)
+radial_accel_min = 20.0
+radial_accel_max = 40.0
+scale_amount_min = 1.0
+scale_amount_max = 2.0
+color = Color(0, 1, 1, 0.392157)
 
 [node name="Glow" type="PointLight2D" parent="."]
 color = Color(0, 1, 1, 1)

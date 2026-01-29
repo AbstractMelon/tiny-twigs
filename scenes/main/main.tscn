@@ -156,7 +156,7 @@ width = 4.0
 default_color = Color(1, 1, 0.5, 1)
 
 [node name="VerticalWall" type="StaticBody2D" parent="Arena"]
-position = Vector2(512, 280)
+position = Vector2(512, 248)
 
 [node name="WallShape" type="CollisionShape2D" parent="Arena/VerticalWall"]
 shape = SubResource("RectangleShape2D_platformV")
