@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cekp6r4cpx3c3"]
+[gd_scene format=3 uid="uid://cekp6r4cpx3c3"]
 
 [ext_resource type="Script" uid="uid://iolqx6pgv7tm" path="res://scenes/menu/menu.gd" id="1_menu"]
 [ext_resource type="PackedScene" uid="uid://csyqiiv65hdqp" path="res://scenes/main/background.tscn" id="2_bg"]
@@ -13,14 +13,14 @@ glow_enabled = true
 glow_intensity = 1.0
 glow_bloom = 0.2
 
-[node name="Menu" type="Node2D"]
+[node name="Menu" type="Node2D" unique_id=1597985952]
 script = ExtResource("1_menu")
 
-[node name="Background" parent="." instance=ExtResource("2_bg")]
+[node name="Background" parent="." unique_id=1387930581 instance=ExtResource("2_bg")]
 
-[node name="MenuUI" type="CanvasLayer" parent="."]
+[node name="MenuUI" type="CanvasLayer" parent="." unique_id=1703549066]
 
-[node name="TitleLabel" type="Label" parent="MenuUI"]
+[node name="TitleLabel" type="Label" parent="MenuUI" unique_id=1943062581]
 offset_left = 20.0
 offset_top = 10.0
 offset_right = 308.0
@@ -30,7 +30,7 @@ theme_override_fonts/font = ExtResource("5_title_font")
 theme_override_font_sizes/font_size = 60
 text = "TINY TWIGS"
 
-[node name="ControlLabel" type="Label" parent="MenuUI"]
+[node name="ControlLabel" type="Label" parent="MenuUI" unique_id=1260691033]
 offset_left = 20.0
 offset_top = 80.0
 offset_right = 413.0
@@ -41,13 +41,13 @@ text = "Press 2-6 to select number of players
 Press F1-F6 to swap keybinds for each player
 SPACE to start"
 
-[node name="PlayerSelectionList" type="VBoxContainer" parent="MenuUI"]
+[node name="PlayerSelectionList" type="VBoxContainer" parent="MenuUI" unique_id=2020682010]
 offset_left = 20.0
 offset_top = 180.0
 offset_right = 420.0
 offset_bottom = 600.0
 
-[node name="VersionLabel" type="Label" parent="MenuUI"]
+[node name="VersionLabel" type="Label" parent="MenuUI" unique_id=1762154877]
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
@@ -68,11 +68,11 @@ Created by Abstractmelon"
 horizontal_alignment = 2
 vertical_alignment = 2
 
-[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="." unique_id=2025076212]
 stream = ExtResource("4_bgm")
 autoplay = true
 
-[node name="UI" parent="." instance=ExtResource("3_ui")]
+[node name="UI" parent="." unique_id=765136868 instance=ExtResource("3_ui")]
 
-[node name="Env" type="WorldEnvironment" parent="."]
+[node name="Env" type="WorldEnvironment" parent="." unique_id=248097989]
 environment = SubResource("Environment_menu")
