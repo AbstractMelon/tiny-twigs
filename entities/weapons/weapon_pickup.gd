@@ -30,7 +30,7 @@ func _setup_weapon_type():
 	elif weapon_type == "burst":
 		scene_path = "res://entities/weapons/weapon_scenes/burst_rifle.tscn"
 	
-	if FileAccess.file_exists(scene_path):
+	if ResourceLoader.exists(scene_path):
 		weapon_scene = load(scene_path)
 		# Update pickup visuals to match weapon color
 		var temp_weapon = weapon_scene.instantiate()

@@ -18,7 +18,7 @@ const SCHEMES = {
 	3: {
 		"name": "Arrows + ,.",
 		"keys": [KEY_LEFT, KEY_RIGHT, KEY_UP, KEY_DOWN, KEY_COMMA, KEY_PERIOD],
-		"display": "←/→, ↑, ↓, , , ."
+		"display": "Left/Right, Up, Down, , , ."
 	},
 	4: {
 		"name": "TFGH + RY",
