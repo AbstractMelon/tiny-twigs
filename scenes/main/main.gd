@@ -14,6 +14,14 @@ var weapon_spawn_points: Array = []
 var active_players: Array = []
 var game_started: bool = false
 
+var weapon_spawn_timer: Timer = null
+
+var round_reset_in_progress: bool = false
+
+@onready var music_player: AudioStreamPlayer = $MusicPlayer
+var gameplay_tracks: Array[AudioStream] = []
+var music_track_index: int = 0
+
 @onready var ui = $UI
 @onready var arena = $Arena
 @onready var camera = $Camera2D
@@ -34,9 +42,61 @@ func _ready():
 	_collect_spawn_points()
 	if camera:
 		camera.make_current()
+
+	_setup_gameplay_music()
+	_setup_ui_signals()
+	_ensure_weapon_spawn_timer()
 	
 	# Start game immediately using GameState settings
 	_start_game()
+
+
+func _setup_ui_signals() -> void:
+	if not ui:
+		return
+	if ui.has_signal("new_round_requested"):
+		ui.new_round_requested.connect(_start_new_round)
+	if ui.has_signal("menu_requested"):
+		ui.menu_requested.connect(_return_to_menu)
+
+
+func _return_to_menu() -> void:
+	get_tree().change_scene_to_file("res://scenes/menu/menu.tscn")
+
+
+func _setup_gameplay_music() -> void:
+	if not music_player:
+		return
+	if gameplay_tracks.is_empty():
+		gameplay_tracks = [
+			preload("res://assets/audio/LEMMiNO - Firecracker (BGM).mp3.ogg"),
+			preload("res://assets/audio/LEMMiNO - Nocturnal (BGM).mp3"),
+		]
+		for track in gameplay_tracks:
+			if track is AudioStreamMP3 or track is AudioStreamOggVorbis:
+				track.loop = false
+	# Ensure we cycle through the playlist.
+	if not music_player.finished.is_connected(_on_music_finished):
+		music_player.finished.connect(_on_music_finished)
+
+	# If the current stream is already one of our gameplay tracks, keep its index.
+	for i in range(gameplay_tracks.size()):
+		if music_player.stream == gameplay_tracks[i]:
+			music_track_index = i
+			break
+
+	# If the scene MusicPlayer wasn't already playing (e.g. autoplay disabled), start it.
+	if not music_player.playing and not gameplay_tracks.is_empty():
+		music_player.stream = gameplay_tracks[music_track_index]
+		music_player.play()
+
+
+func _on_music_finished() -> void:
+	if gameplay_tracks.is_empty() or not music_player:
+		return
+	music_track_index = (music_track_index + 1) % gameplay_tracks.size()
+	music_player.stream = gameplay_tracks[music_track_index]
+	music_player.play()
 
 func _collect_spawn_points():
 	var spawn_container = $Arena/SpawnPoints
@@ -56,7 +116,8 @@ func _start_game():
 	
 	_spawn_players()
 	_spawn_initial_weapons()
-	_start_weapon_spawn_timer()
+	if weapon_spawn_timer:
+		weapon_spawn_timer.start()
 	
 	# Update UI
 	if ui and ui.has_method("show_game_ui"):
@@ -101,6 +162,11 @@ func _check_win_condition():
 	if active_players.size() <= 1:
 		game_started = false
 		var winner = active_players[0] if active_players.size() == 1 else null
+		if weapon_spawn_timer:
+			weapon_spawn_timer.stop()
+
+		if winner:
+			GameState.add_win(int(winner.player_id))
 		
 		# Show win UI
 		if ui and ui.has_method("show_win_screen"):
@@ -111,12 +177,45 @@ func _spawn_initial_weapons():
 	for i in range(min(4, weapon_spawn_points.size())):
 		_spawn_random_weapon(weapon_spawn_points[i])
 
-func _start_weapon_spawn_timer():
-	var timer = Timer.new()
-	timer.wait_time = 5.0  # Spawn weapon every 5 seconds
-	timer.timeout.connect(_spawn_weapon_at_random_location)
-	timer.autostart = true
-	add_child(timer)
+func _ensure_weapon_spawn_timer() -> void:
+	if weapon_spawn_timer:
+		return
+	weapon_spawn_timer = Timer.new()
+	weapon_spawn_timer.wait_time = 5.0  # Spawn weapon every 5 seconds
+	weapon_spawn_timer.timeout.connect(_spawn_weapon_at_random_location)
+	weapon_spawn_timer.one_shot = false
+	add_child(weapon_spawn_timer)
+
+
+func _start_new_round() -> void:
+	# Only allow starting a new round once the previous one ended.
+	if game_started or round_reset_in_progress:
+		return
+	round_reset_in_progress = true
+
+	await _clear_round_entities()
+
+	active_players.clear()
+	game_started = true
+	_spawn_players()
+	_spawn_initial_weapons()
+	if weapon_spawn_timer:
+		weapon_spawn_timer.start()
+	if ui and ui.has_method("show_game_ui"):
+		ui.show_game_ui(active_players)
+	round_reset_in_progress = false
+
+
+func _clear_round_entities() -> void:
+	# Remove players and weapon pickups left from the previous round.
+	for child in get_children():
+		if child is Player:
+			child.queue_free()
+		elif child is WeaponPickup:
+			child.queue_free()
+
+	# Wait one frame so queued frees are applied before respawning.
+	await get_tree().process_frame
 
 func _spawn_weapon_at_random_location():
 	if not game_started:

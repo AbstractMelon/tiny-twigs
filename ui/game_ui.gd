@@ -2,6 +2,9 @@ extends CanvasLayer
 
 # UI overlay for player info and game state
 
+signal new_round_requested
+signal menu_requested
+
 @onready var game_hud = $GameHUD
 @onready var player_status_list = $GameHUD/PlayerStatusList
 @onready var win_screen = $WinScreen
@@ -18,6 +21,14 @@ func _ready():
 	
 	restart_button.pressed.connect(_on_restart_pressed)
 	menu_button.pressed.connect(_on_menu_pressed)
+
+
+func _unhandled_input(event):
+	if not win_screen.visible:
+		return
+	if event is InputEventKey and event.pressed and not event.echo:
+		if event.keycode == KEY_SPACE:
+			_on_restart_pressed()
 
 func show_game_ui(players: Array):
 	game_hud.show()
@@ -42,7 +53,8 @@ func show_game_ui(players: Array):
 		top_row.add_child(color_rect)
 		
 		var label = Label.new()
-		label.text = " P%d" % (i + 1)
+		var pid: int = int(players[i].player_id)
+		label.text = " P%d  W:%d" % [pid, GameState.get_wins(pid)]
 		label.add_theme_font_override("font", body_font)
 		label.add_theme_font_size_override("font_size", 18)
 		label.add_theme_color_override("font_color", players[i].player_color)
@@ -83,7 +95,7 @@ func show_win_screen(winner):
 		winner_text.add_theme_color_override("font_color", Color.WHITE)
 
 func _on_restart_pressed():
-	get_tree().reload_current_scene()
+	new_round_requested.emit()
 
 func _on_menu_pressed():
-	get_tree().change_scene_to_file("res://scenes/menu/menu.tscn")
+	menu_requested.emit()

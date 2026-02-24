@@ -62,5 +62,7 @@ func _update_ui():
 func _start_game():
 	# Setup input based on selected schemes
 	InputManager.setup_input_maps(GameState.player_schemes)
+	# New match: reset win totals
+	GameState.reset_wins()
 	# Load main game scene
 	get_tree().change_scene_to_file("res://scenes/main/main.tscn")

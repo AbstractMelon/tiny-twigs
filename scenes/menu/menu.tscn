@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://iolqx6pgv7tm" path="res://scenes/menu/menu.gd" id="1_menu"]
 [ext_resource type="PackedScene" uid="uid://csyqiiv65hdqp" path="res://scenes/main/background.tscn" id="2_bg"]
 [ext_resource type="PackedScene" uid="uid://cf8endj7vruag" path="res://ui/game_ui.tscn" id="3_ui"]
-[ext_resource type="AudioStream" uid="uid://nwinja6c4xdq" path="res://assets/audio/LEMMiNO - Nocturnal (BGM).mp3" id="4_bgm"]
+[ext_resource type="AudioStream" uid="uid://dq4mu84xfs7yt" path="res://assets/audio/LEMMiNO - Blackout (BGM).ogg" id="4_bgm"]
 [ext_resource type="FontFile" uid="uid://bn5bnb1h36csv" path="res://assets/fonts/Vaseline Extra.ttf" id="5_title_font"]
 [ext_resource type="FontFile" uid="uid://cjf7nq1tjoqkv" path="res://assets/fonts/Hey Comic.ttf" id="6_body_font"]
 
