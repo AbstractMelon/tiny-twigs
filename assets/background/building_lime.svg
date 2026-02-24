@@ -1,0 +1,20 @@
+<svg width="120" height="500" viewBox="0 0 120 500" xmlns="http://www.w3.org/2000/svg">
+  <!-- Base Building -->
+  <rect x="5" y="5" width="110" height="490" fill="#081a08" stroke="#33ff33" stroke-width="2" />
+  
+  <!-- Glow effect -->
+  <rect x="5" y="5" width="110" height="490" fill="none" stroke="#33ff33" stroke-width="6" opacity="0.3" rx="2" />
+  <rect x="5" y="5" width="110" height="490" fill="none" stroke="#33ff33" stroke-width="12" opacity="0.1" rx="4" />
+
+  <!-- Square Windows -->
+  <g fill="#33ff33" opacity="0.6">
+    <rect x="45" y="40" width="30" height="30" />
+    <rect x="45" y="100" width="30" height="30" />
+    <rect x="45" y="160" width="30" height="30" />
+    <rect x="45" y="220" width="30" height="30" />
+    <rect x="45" y="280" width="30" height="30" />
+    <rect x="45" y="340" width="30" height="30" />
+    <rect x="45" y="400" width="30" height="30" />
+    <rect x="45" y="460" width="30" height="30" />
+  </g>
+</svg>

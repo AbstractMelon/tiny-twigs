@@ -1,5 +1,9 @@
 [gd_scene format=3 uid="uid://csyqiiv65hdqp"]
 
+[ext_resource type="Texture2D" path="res://assets/background/building_blue.svg" id="1_blue"]
+[ext_resource type="Texture2D" path="res://assets/background/building_pink.svg" id="2_pink"]
+[ext_resource type="Texture2D" path="res://assets/background/building_lime.svg" id="3_lime"]
+
 [node name="Background" type="Node2D" unique_id=453340154]
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="." unique_id=1252216216]
@@ -83,276 +87,109 @@ width = 1.0
 points = PackedVector2Array(1000, 0, 1000, 648)
 width = 1.0
 
-[node name="DistantBuildings" type="ParallaxLayer" parent="ParallaxBackground" unique_id=1935449955]
+[node name="DistantBuildings" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_scale = Vector2(0.2, 0.2)
 motion_mirroring = Vector2(1152, 0)
 
-[node name="Building1" type="ColorRect" parent="ParallaxBackground/DistantBuildings" unique_id=1748507097]
-offset_left = 50.0
-offset_top = 450.0
-offset_right = 150.0
-offset_bottom = 2000.0
-color = Color(0.0313726, 0.0313726, 0.0784314, 1)
+[node name="B1" type="Sprite2D" parent="ParallaxBackground/DistantBuildings"]
+modulate = Color(0.4, 0.4, 0.6, 0.3)
+position = Vector2(50, 450)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("1_blue")
+centered = false
 
-[node name="Windows" type="Node2D" parent="ParallaxBackground/DistantBuildings/Building1" unique_id=2044331068]
-modulate = Color(1, 1, 1, 0.1)
+[node name="B2" type="Sprite2D" parent="ParallaxBackground/DistantBuildings"]
+modulate = Color(0.6, 0.4, 0.6, 0.3)
+position = Vector2(250, 500)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_pink")
+centered = false
 
-[node name="W1" type="ColorRect" parent="ParallaxBackground/DistantBuildings/Building1/Windows" unique_id=712273125]
-offset_left = 20.0
-offset_top = 20.0
-offset_right = 30.0
-offset_bottom = 30.0
+[node name="B3" type="Sprite2D" parent="ParallaxBackground/DistantBuildings"]
+modulate = Color(0.4, 0.6, 0.4, 0.3)
+position = Vector2(450, 480)
+scale = Vector2(0.5, 0.7)
+texture = ExtResource("3_lime")
+centered = false
 
-[node name="W2" type="ColorRect" parent="ParallaxBackground/DistantBuildings/Building1/Windows" unique_id=2075345734]
-offset_left = 60.0
-offset_top = 50.0
-offset_right = 70.0
-offset_bottom = 60.0
+[node name="B4" type="Sprite2D" parent="ParallaxBackground/DistantBuildings"]
+modulate = Color(0.4, 0.4, 0.6, 0.3)
+position = Vector2(650, 520)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("1_blue")
+centered = false
 
-[node name="Building2" type="ColorRect" parent="ParallaxBackground/DistantBuildings" unique_id=19666655]
-offset_left = 300.0
-offset_top = 400.0
-offset_right = 450.0
-offset_bottom = 2000.0
-color = Color(0.0313726, 0.0313726, 0.0784314, 1)
+[node name="B5" type="Sprite2D" parent="ParallaxBackground/DistantBuildings"]
+modulate = Color(0.6, 0.4, 0.6, 0.3)
+position = Vector2(850, 460)
+scale = Vector2(0.7, 0.5)
+texture = ExtResource("2_pink")
+centered = false
 
-[node name="Windows" type="Node2D" parent="ParallaxBackground/DistantBuildings/Building2" unique_id=932938685]
-modulate = Color(1, 1, 1, 0.1)
+[node name="B6" type="Sprite2D" parent="ParallaxBackground/DistantBuildings"]
+modulate = Color(0.4, 0.6, 0.4, 0.3)
+position = Vector2(1000, 490)
+scale = Vector2(0.5, 0.6)
+texture = ExtResource("3_lime")
+centered = false
 
-[node name="W1" type="ColorRect" parent="ParallaxBackground/DistantBuildings/Building2/Windows" unique_id=1930678875]
-offset_left = 30.0
-offset_top = 30.0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Building3" type="ColorRect" parent="ParallaxBackground/DistantBuildings" unique_id=1764918518]
-offset_left = 600.0
-offset_top = 480.0
-offset_right = 720.0
-offset_bottom = 2000.0
-color = Color(0.0313726, 0.0313726, 0.0784314, 1)
-
-[node name="Windows" type="Node2D" parent="ParallaxBackground/DistantBuildings/Building3" unique_id=2006264750]
-modulate = Color(1, 1, 1, 0.1)
-
-[node name="W1" type="ColorRect" parent="ParallaxBackground/DistantBuildings/Building3/Windows" unique_id=850908985]
-offset_left = 20.0
-offset_top = 20.0
-offset_right = 30.0
-offset_bottom = 30.0
-
-[node name="Building4" type="ColorRect" parent="ParallaxBackground/DistantBuildings" unique_id=1881377990]
-offset_left = 850.0
-offset_top = 420.0
-offset_right = 1000.0
-offset_bottom = 2000.0
-color = Color(0.0313726, 0.0313726, 0.0784314, 1)
-
-[node name="Windows" type="Node2D" parent="ParallaxBackground/DistantBuildings/Building4" unique_id=607801522]
-modulate = Color(1, 1, 1, 0.1)
-
-[node name="W1" type="ColorRect" parent="ParallaxBackground/DistantBuildings/Building4/Windows" unique_id=967524062]
-offset_left = 40.0
-offset_top = 30.0
-offset_right = 50.0
-offset_bottom = 40.0
-
-[node name="MidBuildings" type="ParallaxLayer" parent="ParallaxBackground" unique_id=1177642685]
+[node name="MidBuildings" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_scale = Vector2(0.4, 0.4)
 motion_mirroring = Vector2(1152, 0)
 
-[node name="Building1" type="ColorRect" parent="ParallaxBackground/MidBuildings" unique_id=1537216445]
-offset_left = 180.0
-offset_top = 350.0
-offset_right = 330.0
-offset_bottom = 2000.0
-color = Color(0.0588235, 0.0588235, 0.117647, 1)
+[node name="B1" type="Sprite2D" parent="ParallaxBackground/MidBuildings"]
+modulate = Color(0.6, 0.6, 1, 0.5)
+position = Vector2(100, 350)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("1_blue")
+centered = false
 
-[node name="Outline" type="Line2D" parent="ParallaxBackground/MidBuildings/Building1" unique_id=1028947940]
-points = PackedVector2Array(0, 0, 150, 0, 150, 2000, 0, 2000, 0, 0)
-width = 1.5
-default_color = Color(0, 0.501961, 1, 0.2)
+[node name="B2" type="Sprite2D" parent="ParallaxBackground/MidBuildings"]
+modulate = Color(1, 0.6, 1, 0.5)
+position = Vector2(350, 400)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("2_pink")
+centered = false
 
-[node name="Windows" type="Node2D" parent="ParallaxBackground/MidBuildings/Building1" unique_id=909177744]
-modulate = Color(0, 1, 1, 0.3)
+[node name="B3" type="Sprite2D" parent="ParallaxBackground/MidBuildings"]
+modulate = Color(0.6, 1, 0.6, 0.5)
+position = Vector2(600, 380)
+scale = Vector2(0.7, 0.9)
+texture = ExtResource("3_lime")
+centered = false
 
-[node name="W1" type="ColorRect" parent="ParallaxBackground/MidBuildings/Building1/Windows" unique_id=1157363209]
-offset_left = 20.0
-offset_top = 40.0
-offset_right = 40.0
-offset_bottom = 60.0
+[node name="B4" type="Sprite2D" parent="ParallaxBackground/MidBuildings"]
+modulate = Color(0.6, 0.6, 1, 0.5)
+position = Vector2(850, 420)
+scale = Vector2(0.9, 0.7)
+texture = ExtResource("1_blue")
+centered = false
 
-[node name="W1b" type="ColorRect" parent="ParallaxBackground/MidBuildings/Building1/Windows" unique_id=596620974]
-offset_left = 70.0
-offset_top = 40.0
-offset_right = 90.0
-offset_bottom = 60.0
-
-[node name="W1c" type="ColorRect" parent="ParallaxBackground/MidBuildings/Building1/Windows" unique_id=405657353]
-offset_left = 110.0
-offset_top = 40.0
-offset_right = 130.0
-offset_bottom = 60.0
-
-[node name="W2" type="ColorRect" parent="ParallaxBackground/MidBuildings/Building1/Windows" unique_id=10139700]
-offset_left = 20.0
-offset_top = 90.0
-offset_right = 40.0
-offset_bottom = 110.0
-
-[node name="W2b" type="ColorRect" parent="ParallaxBackground/MidBuildings/Building1/Windows" unique_id=304477317]
-offset_left = 70.0
-offset_top = 90.0
-offset_right = 90.0
-offset_bottom = 110.0
-
-[node name="W2c" type="ColorRect" parent="ParallaxBackground/MidBuildings/Building1/Windows" unique_id=643209973]
-offset_left = 110.0
-offset_top = 90.0
-offset_right = 130.0
-offset_bottom = 110.0
-
-[node name="Building2" type="ColorRect" parent="ParallaxBackground/MidBuildings" unique_id=1717504766]
-offset_left = 700.0
-offset_top = 300.0
-offset_right = 900.0
-offset_bottom = 2000.0
-color = Color(0.0588235, 0.0588235, 0.117647, 1)
-
-[node name="Outline" type="Line2D" parent="ParallaxBackground/MidBuildings/Building2" unique_id=713757728]
-points = PackedVector2Array(0, 0, 200, 0, 200, 400, 0, 400, 0, 0)
-width = 1.5
-default_color = Color(1, 0, 0.501961, 0.2)
-
-[node name="Windows" type="Node2D" parent="ParallaxBackground/MidBuildings/Building2" unique_id=2128186719]
-modulate = Color(1, 0.5, 0.8, 0.3)
-
-[node name="W1" type="ColorRect" parent="ParallaxBackground/MidBuildings/Building2/Windows" unique_id=1431921994]
-offset_left = 30.0
-offset_top = 30.0
-offset_right = 50.0
-offset_bottom = 50.0
-
-[node name="W1b" type="ColorRect" parent="ParallaxBackground/MidBuildings/Building2/Windows" unique_id=1907794940]
-offset_left = 80.0
-offset_top = 30.0
-offset_right = 100.0
-offset_bottom = 50.0
-
-[node name="W1c" type="ColorRect" parent="ParallaxBackground/MidBuildings/Building2/Windows" unique_id=1549703753]
-offset_left = 130.0
-offset_top = 30.0
-offset_right = 150.0
-offset_bottom = 50.0
-
-[node name="W2" type="ColorRect" parent="ParallaxBackground/MidBuildings/Building2/Windows" unique_id=220078191]
-offset_left = 30.0
-offset_top = 80.0
-offset_right = 50.0
-offset_bottom = 100.0
-
-[node name="W2b" type="ColorRect" parent="ParallaxBackground/MidBuildings/Building2/Windows" unique_id=1305038784]
-offset_left = 80.0
-offset_top = 80.0
-offset_right = 100.0
-offset_bottom = 100.0
-
-[node name="W2c" type="ColorRect" parent="ParallaxBackground/MidBuildings/Building2/Windows" unique_id=1229867918]
-offset_left = 130.0
-offset_top = 80.0
-offset_right = 150.0
-offset_bottom = 100.0
-
-[node name="NearBuildings" type="ParallaxLayer" parent="ParallaxBackground" unique_id=1841897089]
+[node name="NearBuildings" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_scale = Vector2(0.6, 0.6)
 motion_mirroring = Vector2(1152, 0)
 
-[node name="Building1" type="ColorRect" parent="ParallaxBackground/NearBuildings" unique_id=666191558]
-offset_left = 480.0
-offset_top = 250.0
-offset_right = 630.0
-offset_bottom = 2000.0
-color = Color(0.0784314, 0.0784314, 0.156863, 1)
+[node name="B1" type="Sprite2D" parent="ParallaxBackground/NearBuildings"]
+modulate = Color(0.8, 0.8, 1, 0.8)
+position = Vector2(150, 250)
+texture = ExtResource("1_blue")
+centered = false
 
-[node name="Outline" type="Line2D" parent="ParallaxBackground/NearBuildings/Building1" unique_id=1502497908]
-points = PackedVector2Array(0, 0, 150, 0, 150, 450, 0, 450, 0, 0)
-width = 2.0
-default_color = Color(0.2, 1, 0.2, 0.15)
+[node name="B2" type="Sprite2D" parent="ParallaxBackground/NearBuildings"]
+modulate = Color(1, 0.8, 1, 0.8)
+position = Vector2(500, 300)
+texture = ExtResource("2_pink")
+centered = false
 
-[node name="Windows" type="Node2D" parent="ParallaxBackground/NearBuildings/Building1" unique_id=1974953720]
-modulate = Color(0.5, 1, 0.5, 0.2)
+[node name="B3" type="Sprite2D" parent="ParallaxBackground/NearBuildings"]
+modulate = Color(0.8, 1, 0.8, 0.8)
+position = Vector2(850, 280)
+texture = ExtResource("3_lime")
+centered = false
 
-[node name="W1" type="ColorRect" parent="ParallaxBackground/NearBuildings/Building1/Windows" unique_id=389108417]
-offset_left = 15.0
-offset_top = 20.0
-offset_right = 35.0
-offset_bottom = 60.0
-
-[node name="W1b" type="ColorRect" parent="ParallaxBackground/NearBuildings/Building1/Windows" unique_id=1980035201]
-offset_left = 65.0
-offset_top = 20.0
-offset_right = 85.0
-offset_bottom = 60.0
-
-[node name="W1c" type="ColorRect" parent="ParallaxBackground/NearBuildings/Building1/Windows" unique_id=589084299]
-offset_left = 115.0
-offset_top = 20.0
-offset_right = 135.0
-offset_bottom = 60.0
-
-[node name="W2" type="ColorRect" parent="ParallaxBackground/NearBuildings/Building1/Windows" unique_id=264664860]
-offset_left = 15.0
-offset_top = 100.0
-offset_right = 35.0
-offset_bottom = 140.0
-
-[node name="W2b" type="ColorRect" parent="ParallaxBackground/NearBuildings/Building1/Windows" unique_id=603452105]
-offset_left = 65.0
-offset_top = 100.0
-offset_right = 85.0
-offset_bottom = 140.0
-
-[node name="W2c" type="ColorRect" parent="ParallaxBackground/NearBuildings/Building1/Windows" unique_id=1393702948]
-offset_left = 115.0
-offset_top = 100.0
-offset_right = 135.0
-offset_bottom = 140.0
-
-[node name="Building2" type="ColorRect" parent="ParallaxBackground/NearBuildings" unique_id=1325654360]
-offset_left = 1000.0
-offset_top = 380.0
-offset_right = 1120.0
-offset_bottom = 2000.0
-color = Color(0.0784314, 0.0784314, 0.156863, 1)
-
-[node name="Outline" type="Line2D" parent="ParallaxBackground/NearBuildings/Building2" unique_id=477468358]
-points = PackedVector2Array(0, 0, 120, 0, 120, 320, 0, 320, 0, 0)
-width = 2.0
-default_color = Color(1, 1, 0, 0.15)
-
-[node name="Windows" type="Node2D" parent="ParallaxBackground/NearBuildings/Building2" unique_id=1704217971]
-modulate = Color(1, 1, 0.5, 0.2)
-
-[node name="W1" type="ColorRect" parent="ParallaxBackground/NearBuildings/Building2/Windows" unique_id=1107308251]
-offset_left = 20.0
-offset_top = 20.0
-offset_right = 40.0
-offset_bottom = 50.0
-
-[node name="W1b" type="ColorRect" parent="ParallaxBackground/NearBuildings/Building2/Windows" unique_id=1306142279]
-offset_left = 70.0
-offset_top = 20.0
-offset_right = 90.0
-offset_bottom = 50.0
-
-[node name="W2" type="ColorRect" parent="ParallaxBackground/NearBuildings/Building2/Windows" unique_id=905527959]
-offset_left = 20.0
-offset_top = 80.0
-offset_right = 40.0
-offset_bottom = 110.0
-
-[node name="W2b" type="ColorRect" parent="ParallaxBackground/NearBuildings/Building2/Windows" unique_id=1163340605]
-offset_left = 70.0
-offset_top = 80.0
-offset_right = 90.0
-offset_bottom = 110.0
+[node name="B4" type="Sprite2D" parent="ParallaxBackground/NearBuildings"]
+modulate = Color(0.8, 0.8, 1, 0.8)
+position = Vector2(1050, 320)
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("1_blue")
+centered = false
