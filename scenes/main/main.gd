@@ -10,6 +10,11 @@ var spawn_points: Array = []
 # Weapon spawn locations
 var weapon_spawn_points: Array = []
 
+# Map system
+@export var map_scenes: Array[PackedScene] = []
+var current_map: Node2D = null
+var last_map_index: int = -1
+
 # Per-spawn occupancy: index matches weapon_spawn_points.
 var weapon_pickups_at_spawns: Array[WeaponPickup] = []
 
@@ -28,6 +33,7 @@ var music_track_index: int = 0
 @onready var ui = $UI
 @onready var arena = $Arena
 @onready var camera = $Camera2D
+@onready var map_root: Node2D = $Arena/MapRoot
 
 # Camera framing
 @export var camera_padding: Vector2 = Vector2(220, 160)
@@ -37,12 +43,11 @@ var music_track_index: int = 0
 @export_range(0.05, 4.0, 0.01) var camera_max_zoom: float = 1.6
 @export var clamp_camera_to_arena_bounds: bool = true
 
-@onready var arena_bounds_top_left: Marker2D = get_node_or_null("Arena/Bounds/TopLeft")
-@onready var arena_bounds_bottom_right: Marker2D = get_node_or_null("Arena/Bounds/BottomRight")
+var arena_bounds_top_left: Marker2D = null
+var arena_bounds_bottom_right: Marker2D = null
 
 func _ready():
-	# Collect spawn points
-	_collect_spawn_points()
+	_ensure_default_maps()
 	if camera:
 		camera.make_current()
 
@@ -52,6 +57,51 @@ func _ready():
 	
 	# Start game immediately using GameState settings
 	_start_game()
+
+
+func _ensure_default_maps() -> void:
+	# Allow running even if the inspector export isn't set.
+	if not map_scenes.is_empty():
+		return
+	map_scenes = [
+		preload("res://scenes/maps/neon_arena.tscn"),
+		preload("res://scenes/maps/land_of_movement.tscn"),
+	]
+
+
+func _load_random_map_for_round() -> void:
+	if map_scenes.is_empty() or not map_root:
+		return
+
+	var idx := randi() % map_scenes.size()
+	if map_scenes.size() > 1 and idx == last_map_index:
+		idx = (idx + 1 + (randi() % (map_scenes.size() - 1))) % map_scenes.size()
+	last_map_index = idx
+	await _set_current_map(map_scenes[idx])
+
+
+func _set_current_map(map_scene: PackedScene) -> void:
+	if not map_scene or not map_root:
+		return
+
+	# Remove previous map.
+	if current_map and is_instance_valid(current_map):
+		current_map.queue_free()
+		await get_tree().process_frame
+		current_map = null
+
+	current_map = map_scene.instantiate()
+	map_root.add_child(current_map)
+	current_map.position = Vector2.ZERO
+	_refresh_bounds_nodes()
+
+
+func _refresh_bounds_nodes() -> void:
+	arena_bounds_top_left = null
+	arena_bounds_bottom_right = null
+	if current_map and is_instance_valid(current_map):
+		arena_bounds_top_left = current_map.get_node_or_null("Bounds/TopLeft")
+		arena_bounds_bottom_right = current_map.get_node_or_null("Bounds/BottomRight")
 
 
 func _setup_ui_signals() -> void:
@@ -102,13 +152,24 @@ func _on_music_finished() -> void:
 	music_player.play()
 
 func _collect_spawn_points():
-	var spawn_container = $Arena/SpawnPoints
+	spawn_points.clear()
+	weapon_spawn_points.clear()
+	_refresh_bounds_nodes()
+
+	var spawn_container: Node = null
+	var weapon_spawn_container: Node = null
+	if current_map and is_instance_valid(current_map):
+		spawn_container = current_map.get_node_or_null("SpawnPoints")
+		weapon_spawn_container = current_map.get_node_or_null("WeaponSpawns")
+	else:
+		spawn_container = $Arena.get_node_or_null("SpawnPoints")
+		weapon_spawn_container = $Arena.get_node_or_null("WeaponSpawns")
+
 	if spawn_container:
 		for child in spawn_container.get_children():
 			if child is Marker2D:
 				spawn_points.append(child.global_position)
-	
-	var weapon_spawn_container = $Arena/WeaponSpawns
+
 	if weapon_spawn_container:
 		for child in weapon_spawn_container.get_children():
 			if child is Marker2D:
@@ -121,7 +182,11 @@ func _collect_spawn_points():
 
 func _start_game():
 	game_started = true
-	
+
+	# Pick a map for the first round.
+	await _load_random_map_for_round()
+	_collect_spawn_points()
+
 	_spawn_players()
 	_spawn_initial_weapons()
 	if weapon_spawn_timer:
@@ -202,6 +267,8 @@ func _start_new_round() -> void:
 	round_reset_in_progress = true
 
 	await _clear_round_entities()
+	await _load_random_map_for_round()
+	_collect_spawn_points()
 
 	active_players.clear()
 	game_started = true

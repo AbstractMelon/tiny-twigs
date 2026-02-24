@@ -12,7 +12,7 @@ signal menu_requested
 @onready var restart_button = $WinScreen/Panel/VBox/Buttons/RestartButton
 @onready var menu_button = $WinScreen/Panel/VBox/Buttons/MenuButton
 
-var body_font = preload("res://assets/fonts/Hey Comic.ttf")
+var body_font = GameState.theme_font
 var player_labels: Array = []
 
 func _ready():

@@ -4,7 +4,7 @@ extends Node2D
 @onready var player_selection_list = $MenuUI/PlayerSelectionList
 @onready var control_label = $MenuUI/ControlLabel
 
-var body_font = preload("res://assets/fonts/Hey Comic.ttf")
+var body_font = GameState.theme_font
 @export var scroll_speed = 125.0
 
 func _ready():

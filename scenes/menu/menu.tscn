@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://cf8endj7vruag" path="res://ui/game_ui.tscn" id="3_ui"]
 [ext_resource type="AudioStream" uid="uid://dq4mu84xfs7yt" path="res://assets/audio/LEMMiNO - Blackout (BGM).ogg" id="4_bgm"]
 [ext_resource type="FontFile" uid="uid://bn5bnb1h36csv" path="res://assets/fonts/Vaseline Extra.ttf" id="5_title_font"]
-[ext_resource type="FontFile" uid="uid://cjf7nq1tjoqkv" path="res://assets/fonts/Hey Comic.ttf" id="6_body_font"]
+[ext_resource type="FontFile" uid="uid://vbeuxh0j6fyt" path="res://assets/fonts/Daily Vibes.otf" id="6_body_font"]
 
 [sub_resource type="Environment" id="Environment_menu"]
 background_mode = 3

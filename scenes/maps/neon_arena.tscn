@@ -1,0 +1,361 @@
+[gd_scene load_steps=15 format=3]
+
+[ext_resource type="PackedScene" path="res://entities/platforms/moving_platform.tscn" id="1_moving_platform"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_floor"]
+size = Vector2(1810, 6)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_add"]
+blend_mode = 1
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_platform1"]
+size = Vector2(160, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_platform2"]
+size = Vector2(160, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_platform9"]
+size = Vector2(300, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_platformV"]
+size = Vector2(10, 120)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_platform4"]
+size = Vector2(120, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_platform5"]
+size = Vector2(120, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_platform8"]
+size = Vector2(140, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_leftwall"]
+size = Vector2(10, 724)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rightwall"]
+size = Vector2(10, 723)
+
+[node name="NeonArena" type="Node2D"]
+
+[node name="Decorations" type="Node2D" parent="."]
+visible = false
+modulate = Color(1, 1, 1, 0.3)
+
+[node name="BeamL" type="Line2D" parent="Decorations"]
+points = PackedVector2Array(200, 0, 200, 648)
+width = 1.0
+default_color = Color(0, 1, 1, 0.2)
+
+[node name="BeamR" type="Line2D" parent="Decorations"]
+points = PackedVector2Array(824, 0, 824, 648)
+width = 1.0
+default_color = Color(0, 1, 1, 0.2)
+
+[node name="Floor" type="StaticBody2D" parent="."]
+position = Vector2(512, 570)
+
+[node name="FloorShape" type="CollisionShape2D" parent="Floor"]
+shape = SubResource("RectangleShape2D_floor")
+
+[node name="FloorGlow" type="Line2D" parent="Floor"]
+material = SubResource("CanvasItemMaterial_add")
+position = Vector2(0.99998474, 0)
+scale = Vector2(0.75061727, 1)
+points = PackedVector2Array(-1200, 0, 1200, 0)
+width = 15.0
+default_color = Color(0, 1, 1, 0.18)
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="FloorLine" type="Line2D" parent="Floor"]
+position = Vector2(-0.50002474, 0)
+scale = Vector2(0.7502078, 1)
+points = PackedVector2Array(-1200, 0, 1200, 0)
+width = 3.0
+default_color = Color(0.4, 1, 1, 1)
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Platform1" type="StaticBody2D" parent="."]
+position = Vector2(-120, 480)
+
+[node name="PlatformShape" type="CollisionShape2D" parent="Platform1"]
+shape = SubResource("RectangleShape2D_platform1")
+
+[node name="Glow" type="Line2D" parent="Platform1"]
+material = SubResource("CanvasItemMaterial_add")
+points = PackedVector2Array(-80, 0, 80, 0)
+width = 12.0
+default_color = Color(0, 1, 1, 0.15)
+
+[node name="PlatformLine" type="Line2D" parent="Platform1"]
+points = PackedVector2Array(-80, 0, 80, 0)
+width = 3.0
+default_color = Color(0.4, 1, 1, 1)
+
+[node name="Platform2" type="StaticBody2D" parent="."]
+position = Vector2(1144, 480)
+
+[node name="PlatformShape" type="CollisionShape2D" parent="Platform2"]
+shape = SubResource("RectangleShape2D_platform2")
+
+[node name="Glow" type="Line2D" parent="Platform2"]
+material = SubResource("CanvasItemMaterial_add")
+points = PackedVector2Array(-80, 0, 80, 0)
+width = 12.0
+default_color = Color(0, 1, 1, 0.15)
+
+[node name="PlatformLine" type="Line2D" parent="Platform2"]
+points = PackedVector2Array(-80, 0, 80, 0)
+width = 3.0
+default_color = Color(0.4, 1, 1, 1)
+
+[node name="PlatformCenter" type="StaticBody2D" parent="."]
+position = Vector2(512, 380)
+
+[node name="PlatformShape" type="CollisionShape2D" parent="PlatformCenter"]
+shape = SubResource("RectangleShape2D_platform9")
+
+[node name="Glow" type="Line2D" parent="PlatformCenter"]
+material = SubResource("CanvasItemMaterial_add")
+points = PackedVector2Array(-150, 0, 150, 0)
+width = 18.0
+default_color = Color(0, 1, 1, 0.14)
+
+[node name="PlatformLine" type="Line2D" parent="PlatformCenter"]
+points = PackedVector2Array(-150, 0, 150, 0)
+width = 4.0
+default_color = Color(0.4, 1, 1, 1)
+
+[node name="VerticalWall" type="StaticBody2D" parent="."]
+position = Vector2(512, 248)
+
+[node name="WallShape" type="CollisionShape2D" parent="VerticalWall"]
+shape = SubResource("RectangleShape2D_platformV")
+
+[node name="Glow" type="Line2D" parent="VerticalWall"]
+material = SubResource("CanvasItemMaterial_add")
+points = PackedVector2Array(0, -60, 0, 60)
+default_color = Color(0, 1, 1, 0.12)
+
+[node name="WallLine" type="Line2D" parent="VerticalWall"]
+points = PackedVector2Array(0, -60, 0, 60)
+width = 2.0
+default_color = Color(0.4, 1, 0.7, 1)
+
+[node name="Platform4" type="StaticBody2D" parent="."]
+position = Vector2(80, 199)
+
+[node name="PlatformShape" type="CollisionShape2D" parent="Platform4"]
+shape = SubResource("RectangleShape2D_platform4")
+
+[node name="Glow" type="Line2D" parent="Platform4"]
+material = SubResource("CanvasItemMaterial_add")
+points = PackedVector2Array(-60, 0, 60, 0)
+width = 12.0
+default_color = Color(0, 1, 1, 0.15)
+
+[node name="PlatformLine" type="Line2D" parent="Platform4"]
+points = PackedVector2Array(-60, 0, 60, 0)
+width = 3.0
+default_color = Color(0.4, 1, 1, 1)
+
+[node name="Platform5" type="StaticBody2D" parent="."]
+position = Vector2(944, 199)
+
+[node name="PlatformShape" type="CollisionShape2D" parent="Platform5"]
+shape = SubResource("RectangleShape2D_platform5")
+
+[node name="Glow" type="Line2D" parent="Platform5"]
+material = SubResource("CanvasItemMaterial_add")
+points = PackedVector2Array(-60, 0, 60, 0)
+width = 12.0
+default_color = Color(0, 1, 1, 0.15)
+
+[node name="PlatformLine" type="Line2D" parent="Platform5"]
+points = PackedVector2Array(-60, 0, 60, 0)
+width = 3.0
+default_color = Color(0.4, 1, 1, 1)
+
+[node name="PlatformTop" type="StaticBody2D" parent="."]
+position = Vector2(512, 183)
+
+[node name="PlatformShape" type="CollisionShape2D" parent="PlatformTop"]
+shape = SubResource("RectangleShape2D_platform8")
+
+[node name="Glow" type="Line2D" parent="PlatformTop"]
+material = SubResource("CanvasItemMaterial_add")
+points = PackedVector2Array(-70, 0, 70, 0)
+width = 15.0
+default_color = Color(0, 1, 1, 0.15)
+
+[node name="PlatformLine" type="Line2D" parent="PlatformTop"]
+points = PackedVector2Array(-70, 0, 70, 0)
+width = 4.0
+default_color = Color(0.4, 1, 1, 1)
+
+[node name="LeftWall" type="StaticBody2D" parent="."]
+position = Vector2(-388, 300)
+
+[node name="WallShape" type="CollisionShape2D" parent="LeftWall"]
+position = Vector2(0, -88)
+shape = SubResource("RectangleShape2D_leftwall")
+
+[node name="WallLine" type="Line2D" parent="LeftWall"]
+position = Vector2(0, -178)
+scale = Vector2(1, 1.0010989)
+points = PackedVector2Array(0, -450, 0, 450)
+width = 5.0
+default_color = Color(0, 1, 1, 0.35)
+
+[node name="RightWall" type="StaticBody2D" parent="."]
+position = Vector2(1412, 300)
+
+[node name="WallShape" type="CollisionShape2D" parent="RightWall"]
+position = Vector2(0, -88.5)
+shape = SubResource("RectangleShape2D_rightwall")
+
+[node name="WallLine" type="Line2D" parent="RightWall"]
+position = Vector2(0, -89.00001)
+scale = Vector2(1, 0.80439556)
+points = PackedVector2Array(0, -450, 0, 450)
+width = 5.0
+default_color = Color(0, 1, 0.7, 0.35)
+
+[node name="Bounds" type="Node2D" parent="."]
+
+[node name="TopLeft" type="Marker2D" parent="Bounds"]
+position = Vector2(-388, -102)
+
+[node name="BottomRight" type="Marker2D" parent="Bounds"]
+position = Vector2(1412, 570)
+
+[node name="SpawnPoints" type="Node2D" parent="."]
+
+[node name="Spawn1" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(-320, 520)
+
+[node name="Spawn2" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(1344, 520)
+
+[node name="Spawn3" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(150, 410)
+
+[node name="Spawn4" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(874, 410)
+
+[node name="Spawn5" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(512, 330)
+
+[node name="MovingPlatformCenter" parent="." instance=ExtResource("1_moving_platform")]
+position = Vector2(512, 72)
+platform_width = 220.0
+movement_offset = Vector2(520, 0)
+period = 4.0
+
+[node name="BridgeL1" type="StaticBody2D" parent="."]
+position = Vector2(150, 440)
+
+[node name="PlatformShape" type="CollisionShape2D" parent="BridgeL1"]
+shape = SubResource("RectangleShape2D_platform1")
+
+[node name="Glow" type="Line2D" parent="BridgeL1"]
+material = SubResource("CanvasItemMaterial_add")
+points = PackedVector2Array(-80, 0, 80, 0)
+width = 12.0
+default_color = Color(0, 1, 1, 0.15)
+
+[node name="PlatformLine" type="Line2D" parent="BridgeL1"]
+points = PackedVector2Array(-80, 0, 80, 0)
+width = 3.0
+default_color = Color(0.4, 1, 1, 1)
+
+[node name="UpperL1" type="StaticBody2D" parent="."]
+position = Vector2(200, 297)
+
+[node name="PlatformShape" type="CollisionShape2D" parent="UpperL1"]
+shape = SubResource("RectangleShape2D_platform4")
+
+[node name="Glow" type="Line2D" parent="UpperL1"]
+material = SubResource("CanvasItemMaterial_add")
+points = PackedVector2Array(-60, 0, 60, 0)
+width = 12.0
+default_color = Color(0, 1, 1, 0.15)
+
+[node name="PlatformLine" type="Line2D" parent="UpperL1"]
+points = PackedVector2Array(-60, 0, 60, 0)
+width = 3.0
+default_color = Color(0.4, 1, 1, 1)
+
+[node name="BridgeR1" type="StaticBody2D" parent="."]
+position = Vector2(874, 440)
+
+[node name="PlatformShape" type="CollisionShape2D" parent="BridgeR1"]
+shape = SubResource("RectangleShape2D_platform1")
+
+[node name="Glow" type="Line2D" parent="BridgeR1"]
+material = SubResource("CanvasItemMaterial_add")
+points = PackedVector2Array(-80, 0, 80, 0)
+width = 12.0
+default_color = Color(0, 1, 1, 0.15)
+
+[node name="PlatformLine" type="Line2D" parent="BridgeR1"]
+points = PackedVector2Array(-80, 0, 80, 0)
+width = 3.0
+default_color = Color(0.4, 1, 1, 1)
+
+[node name="UpperR1" type="StaticBody2D" parent="."]
+position = Vector2(824, 297)
+
+[node name="PlatformShape" type="CollisionShape2D" parent="UpperR1"]
+shape = SubResource("RectangleShape2D_platform4")
+
+[node name="Glow" type="Line2D" parent="UpperR1"]
+material = SubResource("CanvasItemMaterial_add")
+points = PackedVector2Array(-60, 0, 60, 0)
+width = 12.0
+default_color = Color(0, 1, 1, 0.15)
+
+[node name="PlatformLine" type="Line2D" parent="UpperR1"]
+points = PackedVector2Array(-60, 0, 60, 0)
+width = 3.0
+default_color = Color(0.4, 1, 1, 1)
+
+[node name="StepC1" type="StaticBody2D" parent="."]
+position = Vector2(512, 300)
+
+[node name="PlatformShape" type="CollisionShape2D" parent="StepC1"]
+shape = SubResource("RectangleShape2D_platform1")
+
+[node name="Glow" type="Line2D" parent="StepC1"]
+material = SubResource("CanvasItemMaterial_add")
+points = PackedVector2Array(-80, 0, 80, 0)
+width = 12.0
+default_color = Color(0, 1, 1, 0.15)
+
+[node name="PlatformLine" type="Line2D" parent="StepC1"]
+points = PackedVector2Array(-80, 0, 80, 0)
+width = 3.0
+default_color = Color(0.4, 1, 1, 1)
+
+[node name="WeaponSpawns" type="Node2D" parent="."]
+
+[node name="WeaponSpawn1" type="Marker2D" parent="WeaponSpawns"]
+position = Vector2(512, 340)
+
+[node name="WeaponSpawn2" type="Marker2D" parent="WeaponSpawns"]
+position = Vector2(-120, 440)
+
+[node name="WeaponSpawn3" type="Marker2D" parent="WeaponSpawns"]
+position = Vector2(1144, 440)
+
+[node name="WeaponSpawn4" type="Marker2D" parent="WeaponSpawns"]
+position = Vector2(199, 270)
+
+[node name="WeaponSpawn5" type="Marker2D" parent="WeaponSpawns"]
+position = Vector2(823, 270)
+
+[node name="WeaponSpawn6" type="Marker2D" parent="WeaponSpawns"]
+position = Vector2(512, 34)

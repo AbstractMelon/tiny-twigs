@@ -1,0 +1,261 @@
+[gd_scene format=3 uid="uid://bbk1q4caa8i66"]
+
+[ext_resource type="PackedScene" path="res://entities/platforms/moving_platform.tscn" id="1_hyo3v"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_floor"]
+size = Vector2(1810, 6)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_add"]
+blend_mode = 1
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_leftwall"]
+size = Vector2(10, 724)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rightwall"]
+size = Vector2(10, 723)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_platform9"]
+size = Vector2(300, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_platformV"]
+size = Vector2(10, 120)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_platform8"]
+size = Vector2(140, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_platform4"]
+size = Vector2(120, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_platform5"]
+size = Vector2(120, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_platform1"]
+size = Vector2(160, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_platform2"]
+size = Vector2(160, 10)
+
+[node name="NeonArenaAlt" type="Node2D" unique_id=397464551]
+
+[node name="Floor" type="StaticBody2D" parent="." unique_id=1096201574]
+position = Vector2(512, 570)
+
+[node name="FloorShape" type="CollisionShape2D" parent="Floor" unique_id=903410449]
+shape = SubResource("RectangleShape2D_floor")
+
+[node name="FloorGlow" type="Line2D" parent="Floor" unique_id=1809382102]
+material = SubResource("CanvasItemMaterial_add")
+position = Vector2(0.99998474, 0)
+scale = Vector2(0.75061727, 1)
+points = PackedVector2Array(-1200, 0, 1200, 0)
+width = 15.0
+default_color = Color(0, 1, 1, 0.18)
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="FloorLine" type="Line2D" parent="Floor" unique_id=1983249751]
+position = Vector2(-0.50002474, 0)
+scale = Vector2(0.7502078, 1)
+points = PackedVector2Array(-1200, 0, 1200, 0)
+width = 3.0
+default_color = Color(0.4, 1, 1, 1)
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="LeftWall" type="StaticBody2D" parent="." unique_id=2127045914]
+position = Vector2(-388, 300)
+
+[node name="WallShape" type="CollisionShape2D" parent="LeftWall" unique_id=195809279]
+position = Vector2(0, -88)
+shape = SubResource("RectangleShape2D_leftwall")
+
+[node name="WallLine" type="Line2D" parent="LeftWall" unique_id=1104864988]
+position = Vector2(0, -178)
+scale = Vector2(1, 1.0010989)
+points = PackedVector2Array(0, -450, 0, 450)
+width = 5.0
+default_color = Color(0, 1, 1, 0.35)
+
+[node name="RightWall" type="StaticBody2D" parent="." unique_id=1340994862]
+position = Vector2(1412, 300)
+
+[node name="WallShape" type="CollisionShape2D" parent="RightWall" unique_id=2059836818]
+position = Vector2(0, -88.5)
+shape = SubResource("RectangleShape2D_rightwall")
+
+[node name="WallLine" type="Line2D" parent="RightWall" unique_id=1122362670]
+position = Vector2(0, -89.00001)
+scale = Vector2(1, 0.80439556)
+points = PackedVector2Array(0, -450, 0, 450)
+width = 5.0
+default_color = Color(0, 1, 0.7, 0.35)
+
+[node name="PlatformCenter" type="StaticBody2D" parent="." unique_id=617935879]
+position = Vector2(512, 430)
+
+[node name="PlatformShape" type="CollisionShape2D" parent="PlatformCenter" unique_id=1177542936]
+shape = SubResource("RectangleShape2D_platform9")
+
+[node name="Glow" type="Line2D" parent="PlatformCenter" unique_id=17210834]
+material = SubResource("CanvasItemMaterial_add")
+points = PackedVector2Array(-150, 0, 150, 0)
+width = 18.0
+default_color = Color(0, 1, 1, 0.14)
+
+[node name="PlatformLine" type="Line2D" parent="PlatformCenter" unique_id=1633877723]
+points = PackedVector2Array(-150, 0, 150, 0)
+width = 4.0
+default_color = Color(0.4, 1, 1, 1)
+
+[node name="VerticalWall" type="StaticBody2D" parent="." unique_id=483823024]
+position = Vector2(340, 248)
+
+[node name="WallShape" type="CollisionShape2D" parent="VerticalWall" unique_id=1251477252]
+shape = SubResource("RectangleShape2D_platformV")
+
+[node name="Glow" type="Line2D" parent="VerticalWall" unique_id=970453907]
+material = SubResource("CanvasItemMaterial_add")
+points = PackedVector2Array(0, -60, 0, 60)
+default_color = Color(0, 1, 1, 0.12)
+
+[node name="WallLine" type="Line2D" parent="VerticalWall" unique_id=991864447]
+points = PackedVector2Array(0, -60, 0, 60)
+width = 2.0
+default_color = Color(0.4, 1, 0.7, 1)
+
+[node name="PlatformTop" type="StaticBody2D" parent="." unique_id=463237383]
+position = Vector2(680, 165)
+
+[node name="PlatformShape" type="CollisionShape2D" parent="PlatformTop" unique_id=887284846]
+shape = SubResource("RectangleShape2D_platform8")
+
+[node name="Glow" type="Line2D" parent="PlatformTop" unique_id=1958354977]
+material = SubResource("CanvasItemMaterial_add")
+points = PackedVector2Array(-70, 0, 70, 0)
+width = 15.0
+default_color = Color(0, 1, 1, 0.15)
+
+[node name="PlatformLine" type="Line2D" parent="PlatformTop" unique_id=1856655721]
+points = PackedVector2Array(-70, 0, 70, 0)
+width = 4.0
+default_color = Color(0.4, 1, 1, 1)
+
+[node name="Platform4" type="StaticBody2D" parent="." unique_id=425695802]
+position = Vector2(140, 230)
+
+[node name="PlatformShape" type="CollisionShape2D" parent="Platform4" unique_id=857677481]
+shape = SubResource("RectangleShape2D_platform4")
+
+[node name="Glow" type="Line2D" parent="Platform4" unique_id=856558136]
+material = SubResource("CanvasItemMaterial_add")
+points = PackedVector2Array(-60, 0, 60, 0)
+width = 12.0
+default_color = Color(0, 1, 1, 0.15)
+
+[node name="PlatformLine" type="Line2D" parent="Platform4" unique_id=159125013]
+points = PackedVector2Array(-60, 0, 60, 0)
+width = 3.0
+default_color = Color(0.4, 1, 1, 1)
+
+[node name="Platform5" type="StaticBody2D" parent="." unique_id=1941990231]
+position = Vector2(884, 230)
+
+[node name="PlatformShape" type="CollisionShape2D" parent="Platform5" unique_id=1881821190]
+shape = SubResource("RectangleShape2D_platform5")
+
+[node name="Glow" type="Line2D" parent="Platform5" unique_id=1052005391]
+material = SubResource("CanvasItemMaterial_add")
+points = PackedVector2Array(-60, 0, 60, 0)
+width = 12.0
+default_color = Color(0, 1, 1, 0.15)
+
+[node name="PlatformLine" type="Line2D" parent="Platform5" unique_id=700312931]
+points = PackedVector2Array(-60, 0, 60, 0)
+width = 3.0
+default_color = Color(0.4, 1, 1, 1)
+
+[node name="MovingPlatformCenter" parent="." unique_id=2099747613 instance=ExtResource("1_hyo3v")]
+position = Vector2(512, 84)
+movement_offset = Vector2(0, 280)
+period = 3.6
+
+[node name="Platform1" type="StaticBody2D" parent="." unique_id=1539520796]
+position = Vector2(0, 500)
+
+[node name="PlatformShape" type="CollisionShape2D" parent="Platform1" unique_id=24263493]
+shape = SubResource("RectangleShape2D_platform1")
+
+[node name="Glow" type="Line2D" parent="Platform1" unique_id=183907083]
+material = SubResource("CanvasItemMaterial_add")
+points = PackedVector2Array(-80, 0, 80, 0)
+width = 12.0
+default_color = Color(0, 1, 1, 0.15)
+
+[node name="PlatformLine" type="Line2D" parent="Platform1" unique_id=212317328]
+points = PackedVector2Array(-80, 0, 80, 0)
+width = 3.0
+default_color = Color(0.4, 1, 1, 1)
+
+[node name="Platform2" type="StaticBody2D" parent="." unique_id=1164778556]
+position = Vector2(1024, 500)
+
+[node name="PlatformShape" type="CollisionShape2D" parent="Platform2" unique_id=953200082]
+shape = SubResource("RectangleShape2D_platform2")
+
+[node name="Glow" type="Line2D" parent="Platform2" unique_id=384978922]
+material = SubResource("CanvasItemMaterial_add")
+points = PackedVector2Array(-80, 0, 80, 0)
+width = 12.0
+default_color = Color(0, 1, 1, 0.15)
+
+[node name="PlatformLine" type="Line2D" parent="Platform2" unique_id=36375015]
+points = PackedVector2Array(-80, 0, 80, 0)
+width = 3.0
+default_color = Color(0.4, 1, 1, 1)
+
+[node name="Bounds" type="Node2D" parent="." unique_id=1877868449]
+
+[node name="TopLeft" type="Marker2D" parent="Bounds" unique_id=1098890200]
+position = Vector2(-388, -102)
+
+[node name="BottomRight" type="Marker2D" parent="Bounds" unique_id=687642348]
+position = Vector2(1412, 570)
+
+[node name="SpawnPoints" type="Node2D" parent="." unique_id=80218571]
+
+[node name="Spawn1" type="Marker2D" parent="SpawnPoints" unique_id=1641644329]
+position = Vector2(-320, 520)
+
+[node name="Spawn2" type="Marker2D" parent="SpawnPoints" unique_id=307807273]
+position = Vector2(1344, 520)
+
+[node name="Spawn3" type="Marker2D" parent="SpawnPoints" unique_id=1312695567]
+position = Vector2(220, 440)
+
+[node name="Spawn4" type="Marker2D" parent="SpawnPoints" unique_id=759366833]
+position = Vector2(804, 440)
+
+[node name="Spawn5" type="Marker2D" parent="SpawnPoints" unique_id=1645671592]
+position = Vector2(512, 360)
+
+[node name="WeaponSpawns" type="Node2D" parent="." unique_id=861873733]
+
+[node name="WeaponSpawn1" type="Marker2D" parent="WeaponSpawns" unique_id=1263121820]
+position = Vector2(512, 380)
+
+[node name="WeaponSpawn2" type="Marker2D" parent="WeaponSpawns" unique_id=2078435599]
+position = Vector2(0, 470)
+
+[node name="WeaponSpawn3" type="Marker2D" parent="WeaponSpawns" unique_id=414368727]
+position = Vector2(1024, 470)
+
+[node name="WeaponSpawn4" type="Marker2D" parent="WeaponSpawns" unique_id=1207475889]
+position = Vector2(140, 300)
+
+[node name="WeaponSpawn5" type="Marker2D" parent="WeaponSpawns" unique_id=706816014]
+position = Vector2(884, 300)
+
+[node name="WeaponSpawn6" type="Marker2D" parent="WeaponSpawns" unique_id=996762953]
+position = Vector2(512, 90)

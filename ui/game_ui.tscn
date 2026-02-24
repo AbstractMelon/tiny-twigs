@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cdraeedita4ce" path="res://ui/game_ui.gd" id="1_script"]
 [ext_resource type="FontFile" uid="uid://bn5bnb1h36csv" path="res://assets/fonts/Vaseline Extra.ttf" id="2_title_font"]
-[ext_resource type="FontFile" uid="uid://cjf7nq1tjoqkv" path="res://assets/fonts/Hey Comic.ttf" id="3_body_font"]
+[ext_resource type="FontFile" uid="uid://vbeuxh0j6fyt" path="res://assets/fonts/Daily Vibes.otf" id="3_body_font"]
 
 [node name="UI" type="CanvasLayer" unique_id=1258057874]
 script = ExtResource("1_script")

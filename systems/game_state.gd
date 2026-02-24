@@ -18,6 +18,9 @@ const PLAYER_COLORS = [
 	Color.HOT_PINK   # Player 6
 ]
 
+# Theme-able resources
+var theme_font: FontFile = preload("res://assets/fonts/Daily Vibes.otf")
+var title_font: FontFile = preload("res://assets/fonts/Vaseline Extra.ttf")
 
 func reset_wins() -> void:
 	player_wins.clear()
