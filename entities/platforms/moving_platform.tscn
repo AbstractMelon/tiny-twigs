@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://moving_platform_001"]
+
+[ext_resource type="Script" path="res://entities/platforms/moving_platform.gd" id="1_script"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1"]
+size = Vector2(180, 10)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_add"]
+blend_mode = 1
+
+[node name="MovingPlatform" type="AnimatableBody2D"]
+script = ExtResource("1_script")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_1")
+
+[node name="Glow" type="Line2D" parent="."]
+material = SubResource("CanvasItemMaterial_add")
+points = PackedVector2Array(-90, 0, 90, 0)
+width = 12.0
+default_color = Color(0, 1, 1, 0.15)
+
+[node name="Line" type="Line2D" parent="."]
+points = PackedVector2Array(-90, 0, 90, 0)
+width = 3.0
+default_color = Color(0.4, 1, 1, 1)

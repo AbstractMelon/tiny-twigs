@@ -18,9 +18,22 @@ var game_started: bool = false
 @onready var arena = $Arena
 @onready var camera = $Camera2D
 
+# Camera framing
+@export var camera_padding: Vector2 = Vector2(220, 160)
+@export_range(0.0, 20.0, 0.1) var camera_pos_smooth: float = 20.0
+@export_range(0.0, 20.0, 0.1) var camera_zoom_smooth: float = 20.0
+@export_range(0.05, 4.0, 0.01) var camera_min_zoom: float = 0.6
+@export_range(0.05, 4.0, 0.01) var camera_max_zoom: float = 1.6
+@export var clamp_camera_to_arena_bounds: bool = true
+
+@onready var arena_bounds_top_left: Marker2D = get_node_or_null("Arena/Bounds/TopLeft")
+@onready var arena_bounds_bottom_right: Marker2D = get_node_or_null("Arena/Bounds/BottomRight")
+
 func _ready():
 	# Collect spawn points
 	_collect_spawn_points()
+	if camera:
+		camera.make_current()
 	
 	# Start game immediately using GameState settings
 	_start_game()
@@ -123,19 +136,84 @@ func _spawn_random_weapon(spawn_position: Vector2):
 	pickup.global_position = spawn_position
 	add_child(pickup)
 
-func _physics_process(_delta):
+func _physics_process(delta):
 	if game_started and active_players.size() > 0:
-		_update_camera()
+		_update_camera(delta)
 
-func _update_camera():
-	# Center camera on all active players
-	var center = Vector2.ZERO
-	var count = 0
-	
+func _update_camera(delta: float):
+	if not camera:
+		return
+
+	# Compute bounding box of all active players
+	var any_valid: bool = false
+	var min_pos: Vector2 = Vector2(INF, INF)
+	var max_pos: Vector2 = Vector2(-INF, -INF)
 	for player in active_players:
-		if is_instance_valid(player):
-			center += player.global_position
-			count += 1
-	
-	if count > 0:
-		camera.global_position = center / count
+		if not is_instance_valid(player):
+			continue
+		any_valid = true
+		var pos: Vector2 = player.global_position
+		min_pos.x = min(min_pos.x, pos.x)
+		min_pos.y = min(min_pos.y, pos.y)
+		max_pos.x = max(max_pos.x, pos.x)
+		max_pos.y = max(max_pos.y, pos.y)
+
+	if not any_valid:
+		return
+
+	var target_center: Vector2 = (min_pos + max_pos) * 0.5
+	var bbox_size: Vector2 = (max_pos - min_pos).abs()
+	# Prevent division by zero / extreme zoom when players overlap
+	bbox_size.x = max(bbox_size.x, 64.0)
+	bbox_size.y = max(bbox_size.y, 64.0)
+	bbox_size += camera_padding * 2.0
+
+	var viewport_size: Vector2 = get_viewport().get_visible_rect().size
+	viewport_size.x = max(viewport_size.x, 1.0)
+	viewport_size.y = max(viewport_size.y, 1.0)
+
+	# Godot Camera2D: larger zoom => closer (less world visible)
+	var zoom_fit: float = min(viewport_size.x / bbox_size.x, viewport_size.y / bbox_size.y)
+	zoom_fit = clamp(zoom_fit, camera_min_zoom, camera_max_zoom)
+
+	if clamp_camera_to_arena_bounds:
+		var arena_rect := _get_arena_bounds_rect()
+		if arena_rect.size.x > 1.0 and arena_rect.size.y > 1.0:
+			var half_view: Vector2 = (viewport_size * 0.5) / zoom_fit
+			target_center = _clamp_point_to_rect_with_margin(target_center, arena_rect, half_view)
+
+	# Smooth position/zoom (frame-rate independent)
+	var pos_t: float = 1.0 - exp(-camera_pos_smooth * delta)
+	var zoom_t: float = 1.0 - exp(-camera_zoom_smooth * delta)
+	camera.global_position = camera.global_position.lerp(target_center, pos_t)
+	var target_zoom: Vector2 = Vector2(zoom_fit, zoom_fit)
+	camera.zoom = camera.zoom.lerp(target_zoom, zoom_t)
+
+func _get_arena_bounds_rect() -> Rect2:
+	if arena_bounds_top_left and arena_bounds_bottom_right:
+		var tl: Vector2 = arena_bounds_top_left.global_position
+		var br: Vector2 = arena_bounds_bottom_right.global_position
+		var left: float = min(tl.x, br.x)
+		var top: float = min(tl.y, br.y)
+		var right: float = max(tl.x, br.x)
+		var bottom: float = max(tl.y, br.y)
+		return Rect2(Vector2(left, top), Vector2(right - left, bottom - top))
+	return Rect2()
+
+func _clamp_point_to_rect_with_margin(point: Vector2, rect: Rect2, margin: Vector2) -> Vector2:
+	var min_x: float = rect.position.x + margin.x
+	var max_x: float = rect.position.x + rect.size.x - margin.x
+	var min_y: float = rect.position.y + margin.y
+	var max_y: float = rect.position.y + rect.size.y - margin.y
+
+	# If the camera view is bigger than the arena, just center.
+	if min_x > max_x:
+		point.x = rect.position.x + rect.size.x * 0.5
+	else:
+		point.x = clamp(point.x, min_x, max_x)
+	if min_y > max_y:
+		point.y = rect.position.y + rect.size.y * 0.5
+	else:
+		point.y = clamp(point.y, min_y, max_y)
+
+	return point
