@@ -61,6 +61,8 @@ var input_drop: String
 func _ready():
 	_setup_input_actions()
 	_setup_visual_style()
+	motion_mode = CharacterBody2D.MOTION_MODE_GROUNDED
+	safe_margin = 0.1
 	
 func _setup_input_actions():
 	# Set up input action names based on player ID
@@ -92,7 +94,7 @@ func _physics_process(delta):
 	_handle_jump()
 	_handle_movement()
 	_update_weapon_orientation(delta)
-	await _handle_combat()
+	_handle_combat() # Removed await
 	_animate_body_parts()
 	
 	move_and_slide()
@@ -125,18 +127,14 @@ func _handle_jump():
 		coyote_timer = 0
 
 func _handle_movement():
-	var direction = 0.0
-	if Input.is_action_pressed(input_left):
-		direction -= 1.0
-	if Input.is_action_pressed(input_right):
-		direction += 1.0
+	var direction = Input.get_axis(input_left, input_right)
 	
 	var control_factor = AIR_CONTROL if not is_on_floor() else 1.0
 	
 	if direction != 0:
-		velocity.x = move_toward(velocity.x, direction * SPEED, SPEED * control_factor * 0.1)
+		velocity.x = move_toward(velocity.x, direction * SPEED, SPEED * control_factor * 0.2)
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED * 0.15)
+		velocity.x = move_toward(velocity.x, 0, SPEED * 0.25)
 
 func _handle_combat():
 	# Block
@@ -147,7 +145,7 @@ func _handle_combat():
 	
 	# Shoot
 	if Input.is_action_pressed(input_shoot) and current_weapon:
-		await _shoot_weapon()
+		_shoot_weapon() # Removed await
 	
 	# Drop weapon
 	if Input.is_action_just_pressed(input_drop) and current_weapon:
@@ -162,7 +160,7 @@ func _shoot_weapon() -> bool:
 	if visuals.scale.x < 0:
 		direction = Vector2.LEFT.rotated(-weapon_holder.rotation)
 		
-	if await current_weapon.fire(global_position, direction):
+	if current_weapon.fire(global_position, direction): # Removed await
 		# Recoil - apply in opposite direction of shot
 		velocity -= direction * current_weapon.recoil_force
 		_play_shoot_animation()

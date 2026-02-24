@@ -114,6 +114,7 @@ func _setup_ui_signals() -> void:
 
 
 func _return_to_menu() -> void:
+	get_tree().paused = false
 	get_tree().change_scene_to_file("res://scenes/menu/menu.tscn")
 
 

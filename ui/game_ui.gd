@@ -12,27 +12,51 @@ signal menu_requested
 @onready var restart_button = $WinScreen/Panel/VBox/Buttons/RestartButton
 @onready var menu_button = $WinScreen/Panel/VBox/Buttons/MenuButton
 
+@onready var pause_menu = $PauseMenu
+@onready var resume_button = $PauseMenu/Panel/VBox/Buttons/ResumeButton
+@onready var exit_button = $PauseMenu/Panel/VBox/Buttons/ExitButton
+
 var body_font = GameState.theme_font
 var player_labels: Array = []
 
 func _ready():
 	game_hud.hide()
 	win_screen.hide()
+	pause_menu.hide()
 	
 	restart_button.pressed.connect(_on_restart_pressed)
 	menu_button.pressed.connect(_on_menu_pressed)
+	
+	resume_button.pressed.connect(_toggle_pause)
+	exit_button.pressed.connect(_on_menu_pressed)
 
 
 func _unhandled_input(event):
+	if event.is_action_pressed("ui_cancel") or (event is InputEventKey and event.pressed and event.keycode == KEY_ESCAPE):
+		if not win_screen.visible:
+			_toggle_pause()
+		return
+
 	if not win_screen.visible:
 		return
 	if event is InputEventKey and event.pressed and not event.echo:
 		if event.keycode == KEY_SPACE:
 			_on_restart_pressed()
 
+func _toggle_pause():
+	var new_pause_state = not get_tree().paused
+	get_tree().paused = new_pause_state
+	pause_menu.visible = new_pause_state
+	
+	if new_pause_state:
+		# Ensure we can still use the mouse for buttons
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+
 func show_game_ui(players: Array):
 	game_hud.show()
 	win_screen.hide()
+	pause_menu.hide()
+	get_tree().paused = false
 	
 	# Clear existing status indicators
 	for child in player_status_list.get_children():

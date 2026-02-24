@@ -5,6 +5,7 @@
 [ext_resource type="FontFile" uid="uid://vbeuxh0j6fyt" path="res://assets/fonts/Daily Vibes.otf" id="3_body_font"]
 
 [node name="UI" type="CanvasLayer" unique_id=1258057874]
+process_mode = 3
 script = ExtResource("1_script")
 
 [node name="GameHUD" type="Control" parent="." unique_id=1488635023]
@@ -65,3 +66,49 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("3_body_font")
 theme_override_font_sizes/font_size = 24
 text = "Main Menu"
+
+[node name="PauseMenu" type="CenterContainer" parent="." unique_id=113358467]
+process_mode = 2
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="PanelContainer" parent="PauseMenu"]
+custom_minimum_size = Vector2(400, 250)
+layout_mode = 2
+
+[node name="VBox" type="VBoxContainer" parent="PauseMenu/Panel"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Title" type="Label" parent="PauseMenu/Panel/VBox"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_title_font")
+theme_override_font_sizes/font_size = 48
+text = "PAUSED"
+horizontal_alignment = 1
+
+[node name="Buttons" type="VBoxContainer" parent="PauseMenu/Panel/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 15
+alignment = 1
+
+[node name="ResumeButton" type="Button" parent="PauseMenu/Panel/VBox/Buttons" unique_id=1411066731]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("3_body_font")
+theme_override_font_sizes/font_size = 24
+text = "Resume"
+
+[node name="ExitButton" type="Button" parent="PauseMenu/Panel/VBox/Buttons" unique_id=1411066732]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("3_body_font")
+theme_override_font_sizes/font_size = 24
+text = "Exit to Menu"

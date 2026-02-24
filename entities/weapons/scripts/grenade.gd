@@ -49,14 +49,15 @@ func _explode():
 	circle_shape.radius = explosion_radius
 	query.shape = circle_shape
 	query.transform = Transform2D(0, global_position)
-	query.collision_mask = 1  # Players layer
+	query.collision_mask = 1 + 2 # Environment and Players
 	
 	var results = space_state.intersect_shape(query)
 	
 	for result in results:
 		var body = result.collider
-		if body is Player and body != thrower:
+		if body is Player: # Allowed to damage self too
 			var direction_to_player = (body.global_position - global_position).normalized()
+			if direction_to_player == Vector2.ZERO: direction_to_player = Vector2.UP
 			var distance = global_position.distance_to(body.global_position)
 			var falloff = 1.0 - (distance / explosion_radius)
 			var knockback = direction_to_player * explosion_force * falloff
