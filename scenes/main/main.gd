@@ -20,8 +20,8 @@ var game_started: bool = false
 
 # Camera framing
 @export var camera_padding: Vector2 = Vector2(220, 160)
-@export_range(0.0, 20.0, 0.1) var camera_pos_smooth: float = 20.0
-@export_range(0.0, 20.0, 0.1) var camera_zoom_smooth: float = 20.0
+@export_range(0.0, 20.0, 0.1) var camera_pos_smooth: float = 2.0
+@export_range(0.0, 20.0, 0.1) var camera_zoom_smooth: float = 1.8
 @export_range(0.05, 4.0, 0.01) var camera_min_zoom: float = 0.6
 @export_range(0.05, 4.0, 0.01) var camera_max_zoom: float = 1.6
 @export var clamp_camera_to_arena_bounds: bool = true
