@@ -1,0 +1,27 @@
+<svg width="90" height="30" viewBox="0 0 90 30" xmlns="http://www.w3.org/2000/svg">
+  <!-- Prism Blaster (tri-bolt) -->
+  <g fill="none" stroke-linejoin="round" stroke-linecap="round">
+    <!-- Glow silhouette -->
+    <path d="M6 11 H56 L62 8 H78 L86 15 L78 22 H62 L56 19 H30 L26 26 H14 L18 19 H6 Z"
+          stroke="#7a4dff" stroke-width="4" opacity="0.18"/>
+
+    <!-- Body -->
+    <path d="M6 11 H56 L62 8 H78 L86 15 L78 22 H62 L56 19 H30 L26 26 H14 L18 19 H6 Z"
+          fill="#0b0f1a" stroke="#e7dcff" stroke-width="1.6" opacity="0.95"/>
+
+    <!-- Prism core -->
+    <path d="M40 10 L48 15 L40 20 L32 15 Z" fill="#0b0f1a" stroke="#7a4dff" stroke-width="2.2" opacity="0.95"/>
+    <path d="M40 10 L48 15" stroke="#36ffd3" stroke-width="2.0" opacity="0.65"/>
+    <path d="M48 15 L40 20" stroke="#ff4dff" stroke-width="2.0" opacity="0.65"/>
+    <path d="M40 20 L32 15" stroke="#ffd24d" stroke-width="2.0" opacity="0.65"/>
+
+    <!-- Triple rails -->
+    <path d="M10 13 H30" stroke="#7a4dff" stroke-width="2.0" opacity="0.55"/>
+    <path d="M10 15 H30" stroke="#7a4dff" stroke-width="2.0" opacity="0.75"/>
+    <path d="M10 17 H30" stroke="#7a4dff" stroke-width="2.0" opacity="0.55"/>
+
+    <!-- Muzzle ring -->
+    <circle cx="70" cy="15" r="4.2" stroke="#7a4dff" stroke-width="2.4" opacity="0.85"/>
+    <circle cx="70" cy="15" r="7.0" stroke="#7a4dff" stroke-width="3.5" opacity="0.14"/>
+  </g>
+</svg>

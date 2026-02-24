@@ -1,8 +1,25 @@
 <svg width="90" height="30" viewBox="0 0 90 30" xmlns="http://www.w3.org/2000/svg">
-  <!-- Railgun Design -->
-  <path d="M5 12h70v6h-70z" fill="#111" stroke="white" stroke-width="2"/>
-  <path d="M10 18h12v10l-5 5h-7z" fill="#222" stroke="white" stroke-width="2"/>
-  <rect x="20" y="5" width="40" height="4" fill="#444" stroke="white" stroke-width="1"/>
-  <rect x="25" y="10" width="30" height="10" fill="#333" stroke="cyan" stroke-width="1" opacity="0.4"/>
-  <path d="M75 10l10 5l-10 5z" fill="#444" stroke="white" stroke-width="1.5"/>
+  <!-- Rail Gun (Tron aesthetic) -->
+  <g fill="none" stroke-linejoin="round" stroke-linecap="round">
+    <!-- Glow silhouette -->
+    <path d="M6 13 H70 L76 10 H84 L88 15 L84 20 H76 L70 17 H28 L24 28 H12 L16 17 H6 Z"
+          stroke="#36ff8b" stroke-width="4" opacity="0.18"/>
+
+    <!-- Core body -->
+    <path d="M6 13 H70 L76 10 H84 L88 15 L84 20 H76 L70 17 H28 L24 28 H12 L16 17 H6 Z"
+          fill="#0b0f1a" stroke="#d7ffe8" stroke-width="1.6" opacity="0.95"/>
+
+    <!-- Capacitor stack -->
+    <rect x="26" y="7" width="26" height="4" rx="2" fill="#0b0f1a" stroke="#36ff8b" stroke-width="1.8" opacity="0.85"/>
+    <rect x="30" y="10" width="22" height="4" rx="2" fill="#0b0f1a" stroke="#36ff8b" stroke-width="1.8" opacity="0.65"/>
+    <rect x="34" y="13" width="18" height="4" rx="2" fill="#0b0f1a" stroke="#36ff8b" stroke-width="1.8" opacity="0.45"/>
+
+    <!-- Accelerator rail -->
+    <path d="M12 15 H68" stroke="#36ff8b" stroke-width="2.6" opacity="0.85"/>
+    <path d="M12 15 H68" stroke="#36ff8b" stroke-width="6" opacity="0.08"/>
+
+    <!-- Muzzle ring -->
+    <circle cx="78" cy="15" r="3.4" stroke="#36ff8b" stroke-width="2.4" opacity="0.9"/>
+    <circle cx="78" cy="15" r="6.6" stroke="#36ff8b" stroke-width="3.5" opacity="0.12"/>
+  </g>
 </svg>

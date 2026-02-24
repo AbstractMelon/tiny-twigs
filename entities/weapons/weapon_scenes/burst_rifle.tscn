@@ -8,6 +8,7 @@
 [node name="BurstRifle" instance=ExtResource("1_base")]
 script = ExtResource("2_script")
 weapon_name = "Burst Rifle"
+weapon_color = Color(0.211765, 0.65098, 1, 1)
 damage = 12
 fire_rate = 0.5
 recoil_force = 80.0

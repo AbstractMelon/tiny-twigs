@@ -10,6 +10,9 @@ var spawn_points: Array = []
 # Weapon spawn locations
 var weapon_spawn_points: Array = []
 
+# Per-spawn occupancy: index matches weapon_spawn_points.
+var weapon_pickups_at_spawns: Array[WeaponPickup] = []
+
 # Game state
 var active_players: Array = []
 var game_started: bool = false
@@ -111,6 +114,11 @@ func _collect_spawn_points():
 			if child is Marker2D:
 				weapon_spawn_points.append(child.global_position)
 
+	weapon_pickups_at_spawns.clear()
+	weapon_pickups_at_spawns.resize(weapon_spawn_points.size())
+	for i in range(weapon_pickups_at_spawns.size()):
+		weapon_pickups_at_spawns[i] = null
+
 func _start_game():
 	game_started = true
 	
@@ -175,7 +183,7 @@ func _check_win_condition():
 func _spawn_initial_weapons():
 	# Spawn a few weapons at the start
 	for i in range(min(4, weapon_spawn_points.size())):
-		_spawn_random_weapon(weapon_spawn_points[i])
+		_spawn_random_weapon_at_index(i)
 
 func _ensure_weapon_spawn_timer() -> void:
 	if weapon_spawn_timer:
@@ -220,20 +228,61 @@ func _clear_round_entities() -> void:
 func _spawn_weapon_at_random_location():
 	if not game_started:
 		return
-		
-	if weapon_spawn_points.size() > 0:
-		var spawn_pos = weapon_spawn_points[randi() % weapon_spawn_points.size()]
-		_spawn_random_weapon(spawn_pos)
 
-func _spawn_random_weapon(spawn_position: Vector2):
-	var weapon_types = ["pistol", "shotgun", "laser", "burst", "rocket", "railgun", "flamethrower"]
+	if weapon_spawn_points.is_empty():
+		return
+
+	# Only spawn on a point that doesn't currently have an unpicked weapon.
+	var free_indices: Array[int] = []
+	for i in range(weapon_spawn_points.size()):
+		var existing := weapon_pickups_at_spawns[i]
+		if existing == null or not is_instance_valid(existing):
+			free_indices.append(i)
+
+	if free_indices.is_empty():
+		return
+
+	var spawn_index := free_indices[randi() % free_indices.size()]
+	_spawn_random_weapon_at_index(spawn_index)
+
+func _spawn_random_weapon_at_index(spawn_index: int) -> void:
+	if spawn_index < 0 or spawn_index >= weapon_spawn_points.size():
+		return
+
+	var existing := weapon_pickups_at_spawns[spawn_index]
+	if existing != null and is_instance_valid(existing):
+		return
+
+	var weapon_types = [
+		"pistol",
+		"shotgun",
+		"laser",
+		"burst",
+		"rocket",
+		"railgun",
+		"flamethrower",
+		"prism_blaster",
+		"grenade_launcher",
+		"mine_layer",
+	]
 	var weapon_type = weapon_types[randi() % weapon_types.size()]
-	
+
 	var pickup_scene = preload("res://entities/weapons/weapon_pickup.tscn")
-	var pickup = pickup_scene.instantiate()
+	var pickup: WeaponPickup = pickup_scene.instantiate()
 	pickup.weapon_type = weapon_type
-	pickup.global_position = spawn_position
+	pickup.spawn_index = spawn_index
+	pickup.global_position = weapon_spawn_points[spawn_index]
+	weapon_pickups_at_spawns[spawn_index] = pickup
 	add_child(pickup)
+
+	# Clear occupancy no matter why it disappears (picked up, removed on new round, etc.)
+	pickup.tree_exited.connect(_on_weapon_pickup_exited.bind(spawn_index, pickup))
+
+func _on_weapon_pickup_exited(spawn_index: int, pickup: WeaponPickup) -> void:
+	if spawn_index < 0 or spawn_index >= weapon_pickups_at_spawns.size():
+		return
+	if weapon_pickups_at_spawns[spawn_index] == pickup:
+		weapon_pickups_at_spawns[spawn_index] = null
 
 func _physics_process(delta):
 	if game_started and active_players.size() > 0:

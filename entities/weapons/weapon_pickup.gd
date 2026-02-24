@@ -3,8 +3,14 @@ class_name WeaponPickup
 
 # Droppable weapon that can be picked up
 
+signal picked_up(pickup: WeaponPickup, player: Player)
+
 @export var weapon_type: String = "pistol"  # pistol, shotgun, laser
 @export var pickup_radius: float = 30.0
+
+# Set by the spawning system (e.g. Main) so it can avoid spawning a new weapon
+# on the same spawn point until this pickup is gone.
+var spawn_index: int = -1
 
 var weapon_scene: PackedScene
 var is_on_ground: bool = true
@@ -63,4 +69,5 @@ func _on_body_entered(body):
 		if weapon_scene:
 			var weapon = weapon_scene.instantiate()
 			body.pickup_weapon(weapon)
+			picked_up.emit(self, body)
 			queue_free()

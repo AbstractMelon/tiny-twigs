@@ -1,7 +1,25 @@
 <svg width="70" height="30" viewBox="0 0 70 30" xmlns="http://www.w3.org/2000/svg">
-  <!-- Laser Design -->
-  <path d="M5 10h40v10h-40z" fill="#222" stroke="white" stroke-width="2"/>
-  <path d="M10 20h10v8h-10z" fill="#111" stroke="white" stroke-width="2"/>
-  <rect x="45" y="12" width="20" height="6" rx="3" fill="#333" stroke="magenta" stroke-width="2"/>
-  <path d="M25 10v10" stroke="magenta" stroke-width="3" opacity="0.6"/>
+  <!-- Plasma Laser (Tron aesthetic) -->
+  <g fill="none" stroke-linejoin="round" stroke-linecap="round">
+    <!-- Glow silhouette -->
+    <path d="M6 11 H42 L48 9 H62 L66 15 L62 21 H48 L42 19 H22 L20 28 H10 L12 19 H6 Z"
+          stroke="#ff4dff" stroke-width="4" opacity="0.18"/>
+
+    <!-- Core body -->
+    <path d="M6 11 H42 L48 9 H62 L66 15 L62 21 H48 L42 19 H22 L20 28 H10 L12 19 H6 Z"
+          fill="#0b0f1a" stroke="#ffe0ff" stroke-width="1.6" opacity="0.95"/>
+
+    <!-- Focus coil -->
+    <rect x="46" y="12" width="16" height="6" rx="3" fill="#0b0f1a" stroke="#ff4dff" stroke-width="2" opacity="0.95"/>
+    <path d="M50 15 H58" stroke="#ff4dff" stroke-width="2.6" opacity="0.75"/>
+    <path d="M50 15 H58" stroke="#ff4dff" stroke-width="6" opacity="0.08"/>
+
+    <!-- Energy spine -->
+    <path d="M14 15 H40" stroke="#ff4dff" stroke-width="2.4" opacity="0.8"/>
+    <path d="M14 15 H40" stroke="#ff4dff" stroke-width="5" opacity="0.10"/>
+
+    <!-- Vent notches -->
+    <path d="M18 12 V18" stroke="#ffe0ff" stroke-width="1.2" opacity="0.45"/>
+    <path d="M24 12 V18" stroke="#ffe0ff" stroke-width="1.2" opacity="0.35"/>
+  </g>
 </svg>

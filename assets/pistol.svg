@@ -1,14 +1,27 @@
 <svg width="60" height="30" viewBox="0 0 60 30" xmlns="http://www.w3.org/2000/svg">
-  <!-- Redesigned Sleek Pistol -->
-  <!-- Barrel -->
-  <path d="M5 10 L45 10 L48 13 L45 16 L5 16 Z" fill="#222" stroke="white" stroke-width="1.5"/>
-  <!-- Top Slide detail -->
-  <path d="M8 8 L42 8 L44 10 L8 10 Z" fill="#444" stroke="white" stroke-width="1"/>
-  <!-- Grip -->
-  <path d="M12 16 L18 16 L22 28 L14 28 Z" fill="#333" stroke="white" stroke-width="1.5"/>
-  <!-- Iron Sights -->
-  <rect x="42" y="6" width="3" height="2" fill="white"/>
-  <rect x="10" y="6" width="3" height="2" fill="white"/>
-  <!-- Energy Core/Glow line -->
-  <line x1="15" y1="13" x2="40" y2="13" stroke="cyan" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+  <!-- Neon Pistol (Tron aesthetic) -->
+  <g fill="none" stroke-linejoin="round" stroke-linecap="round">
+    <!-- Glow silhouette -->
+    <path d="M6 11 L44 11 L48 14 L44 17 L22 17 L24 28 L14 28 L12 17 L6 17 Z"
+          stroke="#36ffd3" stroke-width="4" opacity="0.20"/>
+
+    <!-- Body core -->
+    <path d="M6 11 L44 11 L48 14 L44 17 L22 17 L24 28 L14 28 L12 17 L6 17 Z"
+          fill="#0b0f1a" stroke="#cffff8" stroke-width="1.6" opacity="0.95"/>
+
+    <!-- Slide rail -->
+    <path d="M10 9 H40" stroke="#cffff8" stroke-width="1.4" opacity="0.65"/>
+
+    <!-- Neon energy channel -->
+    <path d="M14 14 H38" stroke="#36ffd3" stroke-width="2.4" opacity="0.85"/>
+    <path d="M14 14 H38" stroke="#36ffd3" stroke-width="5" opacity="0.10"/>
+
+    <!-- Muzzle ring -->
+    <circle cx="44" cy="14" r="2.6" stroke="#36ffd3" stroke-width="2.0" opacity="0.9"/>
+    <circle cx="44" cy="14" r="5.0" stroke="#36ffd3" stroke-width="3.5" opacity="0.12"/>
+
+    <!-- Grip vents -->
+    <path d="M15 20 H21" stroke="#36ffd3" stroke-width="1.6" opacity="0.65"/>
+    <path d="M15 23 H22" stroke="#36ffd3" stroke-width="1.6" opacity="0.45"/>
+  </g>
 </svg>

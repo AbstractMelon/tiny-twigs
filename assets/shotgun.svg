@@ -1,7 +1,24 @@
 <svg width="80" height="30" viewBox="0 0 80 30" xmlns="http://www.w3.org/2000/svg">
-  <!-- Shotgun Design -->
-  <path d="M5 10h50v10h-50z" fill="#444" stroke="white" stroke-width="2"/>
-  <path d="M10 20h15l-5 10h-15z" fill="#222" stroke="white" stroke-width="2"/>
-  <rect x="55" y="11" width="20" height="8" rx="2" fill="#333" stroke="white" stroke-width="1.5"/>
-  <rect x="25" y="12" width="10" height="6" fill="#666"/>
+  <!-- Neon Shotgun (Tron aesthetic) -->
+  <g fill="none" stroke-linejoin="round" stroke-linecap="round">
+    <!-- Glow silhouette -->
+    <path d="M6 12 H54 L60 10 H74 V20 H60 L54 18 H30 L26 28 H12 L16 18 H6 Z"
+          stroke="#ffd24d" stroke-width="4" opacity="0.18"/>
+
+    <!-- Core body -->
+    <path d="M6 12 H54 L60 10 H74 V20 H60 L54 18 H30 L26 28 H12 L16 18 H6 Z"
+          fill="#0b0f1a" stroke="#fff1c7" stroke-width="1.6" opacity="0.95"/>
+
+    <!-- Dual barrel rails -->
+    <path d="M12 14 H52" stroke="#ffd24d" stroke-width="2.2" opacity="0.75"/>
+    <path d="M12 16 H52" stroke="#ffd24d" stroke-width="2.2" opacity="0.55"/>
+    <path d="M12 15 H52" stroke="#ffd24d" stroke-width="6" opacity="0.08"/>
+
+    <!-- Pump detail -->
+    <rect x="28" y="13" width="10" height="6" rx="2" fill="#0b0f1a" stroke="#ffd24d" stroke-width="1.8" opacity="0.85"/>
+
+    <!-- Muzzle ring -->
+    <circle cx="70" cy="15" r="3.0" stroke="#ffd24d" stroke-width="2.2" opacity="0.9"/>
+    <circle cx="70" cy="15" r="6.0" stroke="#ffd24d" stroke-width="3.5" opacity="0.12"/>
+  </g>
 </svg>

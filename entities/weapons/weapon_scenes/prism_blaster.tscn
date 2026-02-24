@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="PackedScene" path="res://entities/weapons/weapon.tscn" id="1_base"]
+[ext_resource type="Script" path="res://entities/weapons/scripts/prism_blaster.gd" id="2_script"]
+[ext_resource type="PackedScene" path="res://entities/projectiles/projectile.tscn" id="3_projectile"]
+[ext_resource type="Texture2D" path="res://assets/prism_blaster.svg" id="4_tex"]
+
+[node name="PrismBlaster" instance=ExtResource("1_base")]
+script = ExtResource("2_script")
+weapon_name = "Prism Blaster"
+weapon_color = Color(0.478431, 0.301961, 1, 1)
+damage = 6
+fire_rate = 0.25
+recoil_force = 220.0
+ammo = 36
+projectile_speed = 1050.0
+projectile_lifetime = 0.9
+projectile_knockback = 35.0
+projectile_scene = ExtResource("3_projectile")
+
+[node name="Sprite" parent="Visuals" index="0"]
+position = Vector2(10, 0)
+texture = ExtResource("4_tex")
+
+[node name="Glow" parent="Visuals" index="2"]
+energy = 1.9
+texture_scale = 0.85

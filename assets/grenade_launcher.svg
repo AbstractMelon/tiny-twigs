@@ -1,0 +1,24 @@
+<svg width="90" height="30" viewBox="0 0 90 30" xmlns="http://www.w3.org/2000/svg">
+  <!-- Photon Lobber (Tron neon aesthetic) -->
+  <g fill="none" stroke-linejoin="round" stroke-linecap="round">
+    <!-- Outer glow silhouette -->
+    <path d="M6 12 L54 12 L60 9 L76 9 L84 15 L76 21 L60 21 L54 18 L30 18 L26 26 L14 26 L18 18 L6 18 Z"
+          stroke="#36ffd3" stroke-width="4" opacity="0.20"/>
+
+    <!-- Main body -->
+    <path d="M6 12 L54 12 L60 9 L76 9 L84 15 L76 21 L60 21 L54 18 L30 18 L26 26 L14 26 L18 18 L6 18 Z"
+          fill="#0b0f1a" stroke="#b8fff3" stroke-width="1.6" opacity="0.95"/>
+
+    <!-- Neon circuit rails -->
+    <path d="M10 15 H50" stroke="#36ffd3" stroke-width="2.2" opacity="0.75"/>
+    <path d="M60 15 H78" stroke="#36ffd3" stroke-width="2.2" opacity="0.75"/>
+
+    <!-- Chamber ring -->
+    <circle cx="62" cy="15" r="4.2" stroke="#36ffd3" stroke-width="2.4" opacity="0.9"/>
+    <circle cx="62" cy="15" r="7.0" stroke="#36ffd3" stroke-width="3.5" opacity="0.18"/>
+
+    <!-- Grip vents -->
+    <path d="M18 20 L24 20" stroke="#36ffd3" stroke-width="1.6" opacity="0.65"/>
+    <path d="M17 23 L23 23" stroke="#36ffd3" stroke-width="1.6" opacity="0.45"/>
+  </g>
+</svg>

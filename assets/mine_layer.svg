@@ -1,0 +1,21 @@
+<svg width="80" height="30" viewBox="0 0 80 30" xmlns="http://www.w3.org/2000/svg">
+  <!-- Neon Mine Layer -->
+  <g fill="none" stroke-linejoin="round" stroke-linecap="round">
+    <!-- Outer glow -->
+    <path d="M6 12 H52 L58 9 H72 V21 H58 L52 18 H26 L22 27 H12 L16 18 H6 Z"
+          stroke="#ff4dff" stroke-width="4" opacity="0.18"/>
+
+    <!-- Core body -->
+    <path d="M6 12 H52 L58 9 H72 V21 H58 L52 18 H26 L22 27 H12 L16 18 H6 Z"
+          fill="#0b0f1a" stroke="#ffd1ff" stroke-width="1.6" opacity="0.95"/>
+
+    <!-- Magazine / mine canister -->
+    <rect x="30" y="10" width="14" height="10" rx="2" fill="#0b0f1a" stroke="#ff4dff" stroke-width="2" opacity="0.9"/>
+    <path d="M33 15 H41" stroke="#ff4dff" stroke-width="2.4" opacity="0.55"/>
+
+    <!-- Emitter dots -->
+    <circle cx="62" cy="13" r="1.6" fill="#ff4dff" opacity="0.9"/>
+    <circle cx="66" cy="15" r="1.6" fill="#ff4dff" opacity="0.7"/>
+    <circle cx="62" cy="17" r="1.6" fill="#ff4dff" opacity="0.55"/>
+  </g>
+</svg>
