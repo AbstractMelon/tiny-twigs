@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://sy5qav704wf1"
+path="res://.godot/imported/LEMMiNO - Firecracker (BGM).mp3.ogg-350ffcecd047c408013b25bf2fc089bd.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/audio/LEMMiNO - Firecracker (BGM).mp3.ogg"
+dest_files=["res://.godot/imported/LEMMiNO - Firecracker (BGM).mp3.ogg-350ffcecd047c408013b25bf2fc089bd.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

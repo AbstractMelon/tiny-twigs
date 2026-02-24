@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dq4mu84xfs7yt"
+path="res://.godot/imported/LEMMiNO - Blackout (BGM).ogg-e8001a47e400a879858bad60f9cfc4e0.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/audio/LEMMiNO - Blackout (BGM).ogg"
+dest_files=["res://.godot/imported/LEMMiNO - Blackout (BGM).ogg-e8001a47e400a879858bad60f9cfc4e0.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
