@@ -386,16 +386,19 @@ func _keep_players_inside_bounds() -> void:
 	var max_y := arena_rect.position.y + arena_rect.size.y - inset.y
 
 	for player in active_players:
-		if not is_instance_valid(player):
+		if not (player is Player):
 			continue
-		var pos: Vector2 = player.global_position
+		var player_node: Player = player
+		if not is_instance_valid(player_node):
+			continue
+		var pos: Vector2 = player_node.global_position
 		var clamped: Vector2 = Vector2(
 			clamp(pos.x, min_x, max_x),
 			clamp(pos.y, min_y, max_y)
 		)
 		if pos != clamped:
-			player.global_position = clamped
-			player.velocity = Vector2(player.velocity.x * 0.25, min(player.velocity.y, 120.0))
+			player_node.global_position = clamped
+			player_node.velocity = Vector2(player_node.velocity.x * 0.25, min(player_node.velocity.y, 120.0))
 
 func _update_camera(delta: float):
 	if not camera:
@@ -406,10 +409,13 @@ func _update_camera(delta: float):
 	var min_pos: Vector2 = Vector2(INF, INF)
 	var max_pos: Vector2 = Vector2(-INF, -INF)
 	for player in active_players:
-		if not is_instance_valid(player):
+		if not (player is Player):
+			continue
+		var player_node: Player = player
+		if not is_instance_valid(player_node):
 			continue
 		any_valid = true
-		var pos: Vector2 = player.global_position
+		var pos: Vector2 = player_node.global_position
 		min_pos.x = min(min_pos.x, pos.x)
 		min_pos.y = min(min_pos.y, pos.y)
 		max_pos.x = max(max_pos.x, pos.x)
