@@ -1,21 +1,22 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene format=3 uid="uid://bgax56rdsqdop"]
 
-[ext_resource type="Script" path="res://entities/weapons/scripts/grenade.gd" id="1_grenade"]
+[ext_resource type="Script" uid="uid://bctmkau2yo867" path="res://entities/weapons/scripts/grenade.gd" id="1_grenade"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_grenade"]
 radius = 6.0
 
-[node name="Grenade" type="RigidBody2D"]
+[node name="Grenade" type="RigidBody2D" unique_id=565406573]
 collision_layer = 4
 collision_mask = 3
 contact_monitor = true
 max_contacts_reported = 8
 script = ExtResource("1_grenade")
+explosion_damage = 30
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=282673733]
 shape = SubResource("CircleShape2D_grenade")
 
-[node name="Sprite" type="Line2D" parent="."]
+[node name="Sprite" type="Line2D" parent="." unique_id=1472382301]
 points = PackedVector2Array(0, -6, 4, -4, 6, 0, 4, 4, 0, 6, -4, 4, -6, 0, -4, -4, 0, -6)
 width = 3.0
 default_color = Color(1, 0, 0, 1)
@@ -23,10 +24,10 @@ joint_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2
 
-[node name="Glow" type="PointLight2D" parent="."]
+[node name="Glow" type="PointLight2D" parent="." unique_id=37149939]
 color = Color(1, 0, 0, 1)
 energy = 2.0
 texture_scale = 1.2
 
-[node name="FuseTimer" type="Timer" parent="."]
+[node name="FuseTimer" type="Timer" parent="." unique_id=1346987981]
 one_shot = true

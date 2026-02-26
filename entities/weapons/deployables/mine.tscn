@@ -11,6 +11,9 @@ radius = 100.0
 collision_layer = 0
 collision_mask = 0
 script = ExtResource("1_mine")
+chase_explode_delay = 1.8
+idle_hover_radius = 10.0
+accel = 900.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=922729476]
 shape = SubResource("CircleShape2D_mine")
