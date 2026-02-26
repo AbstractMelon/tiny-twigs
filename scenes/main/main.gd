@@ -371,7 +371,31 @@ func _get_current_map_gravity_scale() -> float:
 
 func _physics_process(delta):
 	if game_started and active_players.size() > 0:
+		_keep_players_inside_bounds()
 		_update_camera(delta)
+
+func _keep_players_inside_bounds() -> void:
+	var arena_rect := _get_arena_bounds_rect()
+	if arena_rect.size.x <= 1.0 or arena_rect.size.y <= 1.0:
+		return
+
+	var inset := Vector2(20.0, 20.0)
+	var min_x := arena_rect.position.x + inset.x
+	var max_x := arena_rect.position.x + arena_rect.size.x - inset.x
+	var min_y := arena_rect.position.y + inset.y
+	var max_y := arena_rect.position.y + arena_rect.size.y - inset.y
+
+	for player in active_players:
+		if not is_instance_valid(player):
+			continue
+		var pos: Vector2 = player.global_position
+		var clamped: Vector2 = Vector2(
+			clamp(pos.x, min_x, max_x),
+			clamp(pos.y, min_y, max_y)
+		)
+		if pos != clamped:
+			player.global_position = clamped
+			player.velocity = Vector2(player.velocity.x * 0.25, min(player.velocity.y, 120.0))
 
 func _update_camera(delta: float):
 	if not camera:

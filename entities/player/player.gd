@@ -182,7 +182,9 @@ func apply_stun(duration: float, knockback: Vector2 = Vector2.ZERO):
 		return
 	stun_timer = max(stun_timer, max(duration, MIN_STUN_DURATION))
 	if knockback != Vector2.ZERO:
-		velocity = knockback
+		velocity += knockback
+		velocity.x = clamp(velocity.x, -650.0, 650.0)
+		velocity.y = clamp(velocity.y, -900.0, 900.0)
 	is_blocking = false
 	block_timer = 0.0
 	animation_player.play("hurt")
@@ -235,7 +237,9 @@ func take_damage(amount: int, knockback: Vector2):
 	health_changed.emit(health, max_health)
 	
 	# Apply knockback
-	velocity = knockback
+	velocity += knockback
+	velocity.x = clamp(velocity.x, -700.0, 700.0)
+	velocity.y = clamp(velocity.y, -950.0, 950.0)
 	
 	if health <= 0:
 		health = 0

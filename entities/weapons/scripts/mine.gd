@@ -9,6 +9,7 @@ class_name Mine
 @export var activation_time: float = 3.0
 @export var hunt_speed: float = 220.0
 @export var trigger_distance: float = 18.0
+@export var chase_explode_delay: float = 2.2
 @export var mine_color: Color = Color.DEEP_PINK
 @export var idle_hover_radius: float = 14.0
 @export var idle_wobble_speed: float = 2.2
@@ -22,6 +23,7 @@ var is_exploding: bool = false
 var spawn_position: Vector2 = Vector2.ZERO
 var velocity: Vector2 = Vector2.ZERO
 var state_time: float = 0.0
+var chase_timer: float = 0.0
 
 @onready var sprite = $Sprite
 @onready var glow = $Glow
@@ -52,11 +54,17 @@ func _physics_process(delta):
 		current_target = _find_nearest_target()
 
 	if not _is_valid_target(current_target):
+		chase_timer = 0.0
 		_update_armed_idle_motion(delta)
 		return
 
 	var to_target := current_target.global_position - global_position
 	if to_target.length() <= trigger_distance:
+		_explode()
+		return
+
+	chase_timer += delta
+	if chase_timer >= chase_explode_delay:
 		_explode()
 		return
 
@@ -137,6 +145,8 @@ func _pulse_animation():
 
 func _on_player_detected(body):
 	if body is Player and body != placer and is_armed:
+		if body != current_target:
+			chase_timer = 0.0
 		current_target = body
 
 func _find_nearest_target() -> Player:
