@@ -66,6 +66,7 @@ func _ensure_default_maps() -> void:
 	map_scenes = [
 		preload("res://scenes/maps/neon_arena.tscn"),
 		preload("res://scenes/maps/land_of_movement.tscn"),
+		preload("res://scenes/maps/low_gravity_arena.tscn"),
 	]
 
 
@@ -199,6 +200,7 @@ func _start_game():
 
 func _spawn_players():
 	var player_scene = preload("res://entities/player/player.tscn")
+	var map_gravity_scale := _get_current_map_gravity_scale()
 	
 	# Randomize spawn points
 	var available_spawns = spawn_points.duplicate()
@@ -208,6 +210,7 @@ func _spawn_players():
 		var player = player_scene.instantiate()
 		player.player_id = i + 1
 		player.player_color = GameState.PLAYER_COLORS[i]
+		player.set_gravity_scale(map_gravity_scale)
 		
 		# Spawn at designated point
 		if i < available_spawns.size():
@@ -283,11 +286,19 @@ func _start_new_round() -> void:
 
 
 func _clear_round_entities() -> void:
-	# Remove players and weapon pickups left from the previous round.
+	# Remove players, pickups, and spawned combat entities from the previous round.
 	for child in get_children():
 		if child is Player:
 			child.queue_free()
 		elif child is WeaponPickup:
+			child.queue_free()
+
+	# Some combat entities are added directly to scene root (e.g. mines/grenades/projectiles).
+	var root := get_tree().root
+	for child in root.get_children():
+		if child == self:
+			continue
+		if child is Mine or child is Grenade or child is Projectile:
 			child.queue_free()
 
 	# Wait one frame so queued frees are applied before respawning.
@@ -332,6 +343,7 @@ func _spawn_random_weapon_at_index(spawn_index: int) -> void:
 		"prism_blaster",
 		"grenade_launcher",
 		"mine_layer",
+		"stun_blaster",
 	]
 	var weapon_type = weapon_types[randi() % weapon_types.size()]
 
@@ -351,6 +363,11 @@ func _on_weapon_pickup_exited(spawn_index: int, pickup: WeaponPickup) -> void:
 		return
 	if weapon_pickups_at_spawns[spawn_index] == pickup:
 		weapon_pickups_at_spawns[spawn_index] = null
+
+func _get_current_map_gravity_scale() -> float:
+	if current_map and is_instance_valid(current_map) and current_map.has_method("get_gravity_scale_value"):
+		return current_map.get_gravity_scale_value()
+	return 1.0
 
 func _physics_process(delta):
 	if game_started and active_players.size() > 0:

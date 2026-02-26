@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://b3h1cx21f5nwh"]
+
+[ext_resource type="PackedScene" path="res://entities/weapons/weapon.tscn" id="1_base"]
+[ext_resource type="Script" uid="uid://c6bfnf4arq010" path="res://entities/weapons/scripts/stun_blaster.gd" id="2_script"]
+[ext_resource type="PackedScene" path="res://entities/projectiles/shockwave_projectile.tscn" id="3_projectile"]
+[ext_resource type="Texture2D" uid="uid://mo1mp7vslyac" path="res://assets/laser.svg" id="4_tex"]
+
+[node name="StunBlaster" unique_id=1610811253 instance=ExtResource("1_base")]
+script = ExtResource("2_script")
+weapon_name = "Stun Blaster"
+weapon_color = Color(0.72, 0.38, 1, 1)
+damage = 5
+fire_rate = 0.55
+recoil_force = 190.0
+ammo = 10
+projectile_speed = 760.0
+projectile_lifetime = 1.3
+projectile_knockback = 560.0
+projectile_scene = ExtResource("3_projectile")
+
+[node name="Sprite" parent="Visuals" index="0"]
+modulate = Color(0.9, 0.7, 1, 1)
+position = Vector2(10, 0)
+texture = ExtResource("4_tex")
+
+[node name="Shape" parent="Visuals" index="1"]
+points = PackedVector2Array(0, 0, 18, 0, 18, -4, 10, -4, 10, -8, -2, -8, -2, 4, 0, 4, 0, 0)
+width = 2.0
+
+[node name="Glow" parent="Visuals" index="2"]
+energy = 1.3
+texture_scale = 0.65

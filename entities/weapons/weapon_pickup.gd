@@ -5,7 +5,7 @@ class_name WeaponPickup
 
 signal picked_up(pickup: WeaponPickup, player: Player)
 
-@export var weapon_type: String = "pistol"  # pistol, shotgun, laser
+@export var weapon_type: String = "pistol"  # pistol, shotgun, laser, stun_blaster
 @export var pickup_radius: float = 30.0
 
 # Set by the spawning system (e.g. Main) so it can avoid spawning a new weapon
@@ -35,6 +35,8 @@ func _setup_weapon_type():
 		scene_path = "res://entities/weapons/weapon_scenes/rocket_launcher.tscn"
 	elif weapon_type == "burst":
 		scene_path = "res://entities/weapons/weapon_scenes/burst_rifle.tscn"
+	elif weapon_type == "stun":
+		scene_path = "res://entities/weapons/weapon_scenes/stun_blaster.tscn"
 	
 	if ResourceLoader.exists(scene_path):
 		weapon_scene = load(scene_path)

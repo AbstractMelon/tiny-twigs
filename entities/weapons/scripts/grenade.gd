@@ -12,9 +12,11 @@ class_name Grenade
 @onready var fuse_timer = $FuseTimer
 
 var thrower: Player = null
+var exploded: bool = false
 
 func _ready():
 	_setup_visual()
+	body_entered.connect(_on_body_entered)
 	fuse_timer.wait_time = fuse_time
 	fuse_timer.timeout.connect(_explode)
 	fuse_timer.start()
@@ -41,7 +43,17 @@ func throw_grenade(start_pos: Vector2, direction: Vector2, force: float, source_
 	linear_velocity = direction.normalized() * force
 	thrower = source_player
 
+func _on_body_entered(body: Node) -> void:
+	if body is Player:
+		_explode()
+
 func _explode():
+	if exploded:
+		return
+	exploded = true
+	if fuse_timer and not fuse_timer.is_stopped():
+		fuse_timer.stop()
+
 	# Find all players in explosion radius
 	var space_state = get_world_2d().direct_space_state
 	var query = PhysicsShapeQueryParameters2D.new()

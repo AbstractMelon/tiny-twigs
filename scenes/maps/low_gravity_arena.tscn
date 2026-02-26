@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/maps/land_of_movement.tscn" id="1_base"]
+[ext_resource type="Script" path="res://scenes/maps/map_config.gd" id="2_map_config"]
+
+[node name="LowGravityArena" instance=ExtResource("1_base")]
+script = ExtResource("2_map_config")
+gravity_scale = 0.4

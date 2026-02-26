@@ -54,8 +54,10 @@ func fire(from_position: Vector2, direction: Vector2) -> bool:
 	return true
 
 func _start_cooldown():
-	await get_tree().create_timer(fire_rate).timeout
-	can_fire = true
+	var timer := get_tree().create_timer(fire_rate)
+	timer.timeout.connect(func():
+		can_fire = true
+	)
 
 func _spawn_projectile(_from_position: Vector2, _direction: Vector2):
 	# Override in specific weapon classes
@@ -70,7 +72,7 @@ func pickup(player: Player):
 	$Visuals.position = Vector2.ZERO # Reset any drift from drop animation
 	$Visuals.modulate.a = 1.0
 
-func drop(from_position: Vector2, _initial_velocity: Vector2):
+func drop(_from_position: Vector2, _initial_velocity: Vector2):
 	owner_player = null
 	
 	# Visual dissipation effect

@@ -20,10 +20,12 @@ const JUMP_BUFFER_TIME = 0.1
 # Combat constants
 const BLOCK_DURATION = 0.5
 const SHOOT_COOLDOWN = 0.3
-const RAGDOLL_RECOVERY_TIME = 1.0
+const RAGDOLL_RECOVERY_TIME = 1.02
+const MIN_STUN_DURATION = 0.05
 
 # Physics
-var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+var BASE_GRAVITY: float = ProjectSettings.get_setting("physics/2d/default_gravity")
+var gravity: float = BASE_GRAVITY
 
 # State tracking
 var is_blocking = false
@@ -32,6 +34,7 @@ var coyote_timer = 0.0
 var jump_buffer_timer = 0.0
 var block_timer = 0.0
 var ragdoll_timer = 0.0
+var stun_timer = 0.0
 
 # Current weapon
 var current_weapon: Weapon = null
@@ -91,10 +94,13 @@ func _physics_process(delta):
 	
 	_update_timers(delta)
 	_handle_gravity(delta)
-	_handle_jump()
-	_handle_movement()
-	_update_weapon_orientation(delta)
-	_handle_combat() # Removed await
+	if stun_timer > 0:
+		_handle_stun_movement(delta)
+	else:
+		_handle_jump()
+		_handle_movement()
+		_update_weapon_orientation(delta)
+		_handle_combat()
 	_animate_body_parts()
 	
 	move_and_slide()
@@ -108,6 +114,8 @@ func _update_timers(delta):
 		block_timer -= delta
 	else:
 		is_blocking = false
+	if stun_timer > 0:
+		stun_timer = max(stun_timer - delta, 0.0)
 
 func _handle_gravity(delta):
 	if not is_on_floor():
@@ -136,6 +144,12 @@ func _handle_movement():
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED * 0.25)
 
+func _handle_stun_movement(delta: float):
+	var recovery_drag := 800.0
+	velocity.x = move_toward(velocity.x, 0.0, recovery_drag * delta)
+	if animation_player.current_animation != "hurt":
+		animation_player.play("hurt")
+
 func _handle_combat():
 	# Block
 	if Input.is_action_just_pressed(input_block):
@@ -145,11 +159,24 @@ func _handle_combat():
 	
 	# Shoot
 	if Input.is_action_pressed(input_shoot) and current_weapon:
-		_shoot_weapon() # Removed await
+		_shoot_weapon()
 	
 	# Drop weapon
 	if Input.is_action_just_pressed(input_drop) and current_weapon:
 		_drop_weapon()
+
+func set_gravity_scale(multiplier: float):
+	gravity = BASE_GRAVITY * max(multiplier, 0.05)
+
+func apply_stun(duration: float, knockback: Vector2 = Vector2.ZERO):
+	if is_ragdoll:
+		return
+	stun_timer = max(stun_timer, max(duration, MIN_STUN_DURATION))
+	if knockback != Vector2.ZERO:
+		velocity = knockback
+	is_blocking = false
+	block_timer = 0.0
+	animation_player.play("hurt")
 
 func _shoot_weapon() -> bool:
 	if not current_weapon:
@@ -160,7 +187,7 @@ func _shoot_weapon() -> bool:
 	if visuals.scale.x < 0:
 		direction = Vector2.LEFT.rotated(-weapon_holder.rotation)
 		
-	if current_weapon.fire(global_position, direction): # Removed await
+	if current_weapon.fire(global_position, direction):
 		# Recoil - apply in opposite direction of shot
 		velocity -= direction * current_weapon.recoil_force
 		_play_shoot_animation()

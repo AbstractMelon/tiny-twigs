@@ -6,11 +6,15 @@ class_name Mine
 @export var explosion_radius: float = 120.0
 @export var explosion_damage: int = 40
 @export var explosion_force: float = 700.0
-@export var activation_time: float = 1.0
+@export var activation_time: float = 3.0
+@export var hunt_speed: float = 220.0
+@export var trigger_distance: float = 18.0
 @export var mine_color: Color = Color.DEEP_PINK
 
 var is_armed: bool = false
 var placer: Player = null
+var current_target: Player = null
+var is_exploding: bool = false
 
 @onready var sprite = $Sprite
 @onready var glow = $Glow
@@ -18,10 +22,29 @@ var placer: Player = null
 
 func _ready():
 	_setup_visual()
+	if detection_area:
+		detection_area.body_entered.connect(_on_player_detected)
 	
 	# Arm after delay
 	await get_tree().create_timer(activation_time).timeout
 	_arm_mine()
+
+func _physics_process(delta):
+	if not is_armed or is_exploding:
+		return
+
+	if not _is_valid_target(current_target):
+		current_target = _find_nearest_target()
+
+	if not _is_valid_target(current_target):
+		return
+
+	var to_target := current_target.global_position - global_position
+	if to_target.length() <= trigger_distance:
+		_explode()
+		return
+
+	global_position += to_target.normalized() * hunt_speed * delta
 
 func _setup_visual():
 	if sprite:
@@ -37,9 +60,6 @@ func _arm_mine():
 	
 	# Start scanning pulse animation
 	_pulse_animation()
-	
-	if detection_area:
-		detection_area.body_entered.connect(_on_player_detected)
 
 func _pulse_animation():
 	while is_armed:
@@ -50,16 +70,35 @@ func _pulse_animation():
 
 func _on_player_detected(body):
 	if body is Player and body != placer and is_armed:
-		_explode()
+		current_target = body
+
+func _find_nearest_target() -> Player:
+	if not detection_area:
+		return null
+
+	var nearest: Player = null
+	var nearest_dist := INF
+	for body in detection_area.get_overlapping_bodies():
+		if body is Player and body != placer:
+			var dist := global_position.distance_to(body.global_position)
+			if dist < nearest_dist:
+				nearest_dist = dist
+				nearest = body
+
+	return nearest
+
+func _is_valid_target(target: Player) -> bool:
+	return target != null and is_instance_valid(target)
 
 func place_mine(pos: Vector2, source_player: Player):
 	global_position = pos
 	placer = source_player
 
 func _explode():
-	if not is_armed:
+	if not is_armed or is_exploding:
 		return
 	
+	is_exploding = true
 	is_armed = false
 	
 	# Find all players in explosion radius
