@@ -35,6 +35,7 @@ var jump_buffer_timer = 0.0
 var block_timer = 0.0
 var ragdoll_timer = 0.0
 var stun_timer = 0.0
+var was_on_floor_last_frame = false
 
 # Current weapon
 var current_weapon: Weapon = null
@@ -66,6 +67,7 @@ func _ready():
 	_setup_visual_style()
 	motion_mode = CharacterBody2D.MOTION_MODE_GROUNDED
 	safe_margin = 0.1
+	was_on_floor_last_frame = is_on_floor()
 	
 func _setup_input_actions():
 	# Set up input action names based on player ID
@@ -104,6 +106,7 @@ func _physics_process(delta):
 	_animate_body_parts()
 	
 	move_and_slide()
+	_update_coyote_state()
 
 func _update_timers(delta):
 	if coyote_timer > 0:
@@ -120,8 +123,14 @@ func _update_timers(delta):
 func _handle_gravity(delta):
 	if not is_on_floor():
 		velocity.y += gravity * delta
-	else:
+
+func _update_coyote_state():
+	var on_floor_now := is_on_floor()
+	if on_floor_now:
 		coyote_timer = COYOTE_TIME
+	elif was_on_floor_last_frame and velocity.y >= 0.0:
+		coyote_timer = COYOTE_TIME
+	was_on_floor_last_frame = on_floor_now
 
 func _handle_jump():
 	# Jump buffer
