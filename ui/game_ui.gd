@@ -18,6 +18,7 @@ signal menu_requested
 
 var body_font = GameState.theme_font
 var player_labels: Array = []
+var active_players_ui: Array = []
 
 func _ready():
 	game_hud.hide()
@@ -62,6 +63,7 @@ func show_game_ui(players: Array):
 	for child in player_status_list.get_children():
 		child.queue_free()
 	player_labels = []
+	active_players_ui.clear()
 	
 	# Create player status indicators
 	for i in range(players.size()):
@@ -78,6 +80,20 @@ func show_game_ui(players: Array):
 		label.add_theme_font_size_override("font_size", 18)
 		label.add_theme_color_override("font_color", players[i].player_color)
 		top_row.add_child(label)
+		
+		# Weapon row
+		var weapon_row = HBoxContainer.new()
+		player_info.add_child(weapon_row)
+		var weapon_icon = TextureRect.new()
+		weapon_icon.custom_minimum_size = Vector2(16, 16)
+		weapon_icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		weapon_icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		weapon_row.add_child(weapon_icon)
+		
+		var weapon_label = Label.new()
+		weapon_label.add_theme_font_override("font", body_font)
+		weapon_label.add_theme_font_size_override("font_size", 14)
+		weapon_row.add_child(weapon_label)
 		
 		# Health bar
 		var health_bar = ProgressBar.new()
@@ -96,11 +112,46 @@ func show_game_ui(players: Array):
 		
 		# Connect health signal
 		players[i].health_changed.connect(func(new_val, max_val):
-			health_bar.value = new_val
-			health_bar.max_value = max_val
+			if is_instance_valid(health_bar):
+				health_bar.value = new_val
+				health_bar.max_value = max_val
 		)
 		
 		player_labels.append(player_info)
+		active_players_ui.append({
+			"player": players[i],
+			"weapon_icon": weapon_icon,
+			"weapon_label": weapon_label
+		})
+
+func _process(_delta):
+	for p_info in active_players_ui:
+		var p = p_info["player"]
+		if not is_instance_valid(p):
+			continue
+		
+		var icon: TextureRect = p_info["weapon_icon"]
+		var label: Label = p_info["weapon_label"]
+		if not is_instance_valid(icon) or not is_instance_valid(label):
+			continue
+			
+		if p.current_weapon and is_instance_valid(p.current_weapon):
+			var w = p.current_weapon
+			if w.sprite and w.sprite.texture:
+				icon.texture = w.sprite.texture
+				icon.modulate = w.weapon_color
+				icon.show()
+			else:
+				icon.texture = null
+				icon.hide()
+			var ammo_text = str(w.ammo) if w.ammo >= 0 else "∞"
+			label.text = "%s [%s]" % [w.weapon_name, ammo_text]
+			label.add_theme_color_override("font_color", w.weapon_color)
+		else:
+			icon.texture = null
+			icon.hide()
+			label.text = "Unarmed"
+			label.add_theme_color_override("font_color", Color.GRAY)
 
 func show_win_screen(winner):
 	game_hud.hide()
