@@ -17,6 +17,7 @@ glow_bloom = 0.2
 script = ExtResource("1_menu")
 
 [node name="Background" parent="." unique_id=1387930581 instance=ExtResource("2_bg")]
+metadata/_edit_group_ = true
 
 [node name="MenuUI" type="CanvasLayer" parent="." unique_id=1703549066]
 

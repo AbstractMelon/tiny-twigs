@@ -71,11 +71,6 @@ func show_game_ui(players: Array):
 		var top_row = HBoxContainer.new()
 		player_info.add_child(top_row)
 		
-		var color_rect = ColorRect.new()
-		color_rect.custom_minimum_size = Vector2(20, 20)
-		color_rect.color = players[i].player_color
-		top_row.add_child(color_rect)
-		
 		var label = Label.new()
 		var pid: int = int(players[i].player_id)
 		label.text = " P%d  W:%d" % [pid, GameState.get_wins(pid)]
