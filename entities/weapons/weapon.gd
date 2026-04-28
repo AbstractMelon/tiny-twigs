@@ -54,9 +54,34 @@ func fire(from_position: Vector2, direction: Vector2) -> bool:
 	return true
 
 func _start_cooldown():
+	# Start visual reload effect
+	var mat = ShaderMaterial.new()
+	mat.shader = preload("res://vfx/shaders/reload_indicator.gdshader")
+	mat.set_shader_parameter("reload_progress", 0.0)
+	mat.set_shader_parameter("reload_color", Color(1.0, 1.0, 1.0, 0.3))
+	
+	$Visuals.material = mat
+	for child in $Visuals.get_children():
+		if child is CanvasItem:
+			child.use_parent_material = true
+			
+	if glow:
+		glow.energy = 0.2 # Dim glow
+
+	var tween = create_tween()
+	tween.tween_property(mat, "shader_parameter/reload_progress", 1.0, fire_rate).set_trans(Tween.TRANS_LINEAR)
+	tween.parallel().tween_property(glow, "energy", 1.0, fire_rate).set_trans(Tween.TRANS_LINEAR) if glow else null
+	
+	tween.finished.connect(func():
+		$Visuals.material = null
+		for child in $Visuals.get_children():
+			if child is CanvasItem:
+				child.use_parent_material = false
+	)
+
 	var timer := get_tree().create_timer(fire_rate)
 	timer.timeout.connect(func():
-		can_fire = true
+		can_fire = true 
 	)
 
 func _spawn_projectile(_from_position: Vector2, _direction: Vector2):
