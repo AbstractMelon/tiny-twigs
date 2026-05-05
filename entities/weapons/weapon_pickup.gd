@@ -59,7 +59,8 @@ func _start_animations():
 	var tween = create_tween().set_parallel(true).set_loops()
 	
 	# Floating/Bobbing
-	tween.tween_property($Visuals, "position:y", -5.0, 1.2).from(5.0).set_trans(Tween.TRANS_SINE)
+	tween.tween_property($Visuals, "position:y", -5.0, 1.2).from(5.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	tween.chain().tween_property($Visuals, "position:y", 5.0, 1.2).from(-5.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	
 	# Continuous rotation for the visuals
 	var rot_tween = create_tween().set_loops()

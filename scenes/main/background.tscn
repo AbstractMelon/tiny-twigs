@@ -1,8 +1,17 @@
 [gd_scene format=3 uid="uid://csyqiiv65hdqp"]
 
-[ext_resource type="Texture2D" path="res://assets/background/building_blue.svg" id="1_blue"]
-[ext_resource type="Texture2D" path="res://assets/background/building_pink.svg" id="2_pink"]
-[ext_resource type="Texture2D" path="res://assets/background/building_lime.svg" id="3_lime"]
+[ext_resource type="Texture2D" uid="uid://bfn7p53qrqskx" path="res://assets/background/building_blue.svg" id="1_blue"]
+[ext_resource type="Texture2D" uid="uid://bk71qawc7mgst" path="res://assets/background/building_pink.svg" id="2_pink"]
+[ext_resource type="Texture2D" uid="uid://h4qpwux6bgun" path="res://assets/background/building_lime.svg" id="3_lime"]
+[ext_resource type="Shader" uid="uid://uawxfgf4fu0b" path="res://vfx/shaders/night_sky.gdshader" id="4_sky"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sky"]
+shader = ExtResource("4_sky")
+shader_parameter/sky_color = Color(0.0117647, 0.0117647, 0.0392157, 1)
+shader_parameter/horizon_color = Color(0.05, 0.05, 0.1, 1)
+shader_parameter/grid_color = Color(0, 1, 1, 0.05)
+shader_parameter/grid_size = 100.0
+shader_parameter/grid_thickness = 0.002
 
 [node name="Background" type="Node2D" unique_id=453340154]
 
@@ -13,181 +22,111 @@ motion_scale = Vector2(0, 0)
 motion_mirroring = Vector2(1152, 648)
 
 [node name="ColorRect" type="ColorRect" parent="ParallaxBackground/Sky" unique_id=459650919]
+material = SubResource("ShaderMaterial_sky")
 offset_right = 1152.0
 offset_bottom = 648.0
-color = Color(0.0117647, 0.0117647, 0.0392157, 1)
 
-[node name="Starfield" type="Node2D" parent="ParallaxBackground/Sky" unique_id=1782877692]
-modulate = Color(1, 1, 1, 0.4)
-
-[node name="Star1" type="ColorRect" parent="ParallaxBackground/Sky/Starfield" unique_id=1476367554]
-offset_left = 120.0
-offset_top = 80.0
-offset_right = 122.0
-offset_bottom = 82.0
-
-[node name="Star2" type="ColorRect" parent="ParallaxBackground/Sky/Starfield" unique_id=1144714629]
-offset_left = 450.0
-offset_top = 150.0
-offset_right = 452.0
-offset_bottom = 152.0
-
-[node name="Star3" type="ColorRect" parent="ParallaxBackground/Sky/Starfield" unique_id=1642849904]
-offset_left = 890.0
-offset_top = 60.0
-offset_right = 892.0
-offset_bottom = 62.0
-
-[node name="Star4" type="ColorRect" parent="ParallaxBackground/Sky/Starfield" unique_id=124474757]
-offset_left = 1000.0
-offset_top = 220.0
-offset_right = 1002.0
-offset_bottom = 222.0
-
-[node name="Grid" type="Node2D" parent="ParallaxBackground/Sky" unique_id=1532288741]
-modulate = Color(0, 1, 1, 0.05)
-
-[node name="LineH" type="Line2D" parent="ParallaxBackground/Sky/Grid" unique_id=1664767739]
-points = PackedVector2Array(0, 100, 1152, 100)
-width = 1.0
-
-[node name="LineH2" type="Line2D" parent="ParallaxBackground/Sky/Grid" unique_id=421558072]
-points = PackedVector2Array(0, 200, 1152, 200)
-width = 1.0
-
-[node name="LineH3" type="Line2D" parent="ParallaxBackground/Sky/Grid" unique_id=437907878]
-points = PackedVector2Array(0, 300, 1152, 300)
-width = 1.0
-
-[node name="LineH4" type="Line2D" parent="ParallaxBackground/Sky/Grid" unique_id=1933986183]
-points = PackedVector2Array(0, 400, 1152, 400)
-width = 1.0
-
-[node name="LineH5" type="Line2D" parent="ParallaxBackground/Sky/Grid" unique_id=67143600]
-points = PackedVector2Array(0, 500, 1152, 500)
-width = 1.0
-
-[node name="LineV1" type="Line2D" parent="ParallaxBackground/Sky/Grid" unique_id=1293205284]
-points = PackedVector2Array(200, 0, 200, 648)
-width = 1.0
-
-[node name="LineV2" type="Line2D" parent="ParallaxBackground/Sky/Grid" unique_id=5524594]
-points = PackedVector2Array(400, 0, 400, 648)
-width = 1.0
-
-[node name="LineV3" type="Line2D" parent="ParallaxBackground/Sky/Grid" unique_id=436218674]
-points = PackedVector2Array(600, 0, 600, 648)
-width = 1.0
-
-[node name="LineV4" type="Line2D" parent="ParallaxBackground/Sky/Grid" unique_id=884501938]
-points = PackedVector2Array(800, 0, 800, 648)
-width = 1.0
-
-[node name="LineV5" type="Line2D" parent="ParallaxBackground/Sky/Grid" unique_id=1426948416]
-points = PackedVector2Array(1000, 0, 1000, 648)
-width = 1.0
-
-[node name="DistantBuildings" type="ParallaxLayer" parent="ParallaxBackground"]
+[node name="DistantBuildings" type="ParallaxLayer" parent="ParallaxBackground" unique_id=1993246944]
 motion_scale = Vector2(0.2, 0.2)
 motion_mirroring = Vector2(1152, 0)
 
-[node name="B1" type="Sprite2D" parent="ParallaxBackground/DistantBuildings"]
+[node name="B1" type="Sprite2D" parent="ParallaxBackground/DistantBuildings" unique_id=1548089009]
 modulate = Color(0.4, 0.4, 0.6, 0.3)
 position = Vector2(50, 450)
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("1_blue")
 centered = false
 
-[node name="B2" type="Sprite2D" parent="ParallaxBackground/DistantBuildings"]
+[node name="B2" type="Sprite2D" parent="ParallaxBackground/DistantBuildings" unique_id=347231334]
 modulate = Color(0.6, 0.4, 0.6, 0.3)
 position = Vector2(250, 500)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_pink")
 centered = false
 
-[node name="B3" type="Sprite2D" parent="ParallaxBackground/DistantBuildings"]
+[node name="B3" type="Sprite2D" parent="ParallaxBackground/DistantBuildings" unique_id=1995220498]
 modulate = Color(0.4, 0.6, 0.4, 0.3)
 position = Vector2(450, 480)
 scale = Vector2(0.5, 0.7)
 texture = ExtResource("3_lime")
 centered = false
 
-[node name="B4" type="Sprite2D" parent="ParallaxBackground/DistantBuildings"]
+[node name="B4" type="Sprite2D" parent="ParallaxBackground/DistantBuildings" unique_id=513823697]
 modulate = Color(0.4, 0.4, 0.6, 0.3)
 position = Vector2(650, 520)
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("1_blue")
 centered = false
 
-[node name="B5" type="Sprite2D" parent="ParallaxBackground/DistantBuildings"]
+[node name="B5" type="Sprite2D" parent="ParallaxBackground/DistantBuildings" unique_id=936833251]
 modulate = Color(0.6, 0.4, 0.6, 0.3)
 position = Vector2(850, 460)
 scale = Vector2(0.7, 0.5)
 texture = ExtResource("2_pink")
 centered = false
 
-[node name="B6" type="Sprite2D" parent="ParallaxBackground/DistantBuildings"]
+[node name="B6" type="Sprite2D" parent="ParallaxBackground/DistantBuildings" unique_id=1111248377]
 modulate = Color(0.4, 0.6, 0.4, 0.3)
 position = Vector2(1000, 490)
 scale = Vector2(0.5, 0.6)
 texture = ExtResource("3_lime")
 centered = false
 
-[node name="MidBuildings" type="ParallaxLayer" parent="ParallaxBackground"]
+[node name="MidBuildings" type="ParallaxLayer" parent="ParallaxBackground" unique_id=752450288]
 motion_scale = Vector2(0.4, 0.4)
 motion_mirroring = Vector2(1152, 0)
 
-[node name="B1" type="Sprite2D" parent="ParallaxBackground/MidBuildings"]
+[node name="B1" type="Sprite2D" parent="ParallaxBackground/MidBuildings" unique_id=569534211]
 modulate = Color(0.6, 0.6, 1, 0.5)
 position = Vector2(100, 350)
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("1_blue")
 centered = false
 
-[node name="B2" type="Sprite2D" parent="ParallaxBackground/MidBuildings"]
+[node name="B2" type="Sprite2D" parent="ParallaxBackground/MidBuildings" unique_id=751686904]
 modulate = Color(1, 0.6, 1, 0.5)
 position = Vector2(350, 400)
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("2_pink")
 centered = false
 
-[node name="B3" type="Sprite2D" parent="ParallaxBackground/MidBuildings"]
+[node name="B3" type="Sprite2D" parent="ParallaxBackground/MidBuildings" unique_id=2038612803]
 modulate = Color(0.6, 1, 0.6, 0.5)
 position = Vector2(600, 380)
 scale = Vector2(0.7, 0.9)
 texture = ExtResource("3_lime")
 centered = false
 
-[node name="B4" type="Sprite2D" parent="ParallaxBackground/MidBuildings"]
+[node name="B4" type="Sprite2D" parent="ParallaxBackground/MidBuildings" unique_id=1774528929]
 modulate = Color(0.6, 0.6, 1, 0.5)
 position = Vector2(850, 420)
 scale = Vector2(0.9, 0.7)
 texture = ExtResource("1_blue")
 centered = false
 
-[node name="NearBuildings" type="ParallaxLayer" parent="ParallaxBackground"]
+[node name="NearBuildings" type="ParallaxLayer" parent="ParallaxBackground" unique_id=1605946259]
 motion_scale = Vector2(0.6, 0.6)
 motion_mirroring = Vector2(1152, 0)
 
-[node name="B1" type="Sprite2D" parent="ParallaxBackground/NearBuildings"]
+[node name="B1" type="Sprite2D" parent="ParallaxBackground/NearBuildings" unique_id=527171124]
 modulate = Color(0.8, 0.8, 1, 0.8)
 position = Vector2(150, 250)
 texture = ExtResource("1_blue")
 centered = false
 
-[node name="B2" type="Sprite2D" parent="ParallaxBackground/NearBuildings"]
+[node name="B2" type="Sprite2D" parent="ParallaxBackground/NearBuildings" unique_id=6629259]
 modulate = Color(1, 0.8, 1, 0.8)
 position = Vector2(500, 300)
 texture = ExtResource("2_pink")
 centered = false
 
-[node name="B3" type="Sprite2D" parent="ParallaxBackground/NearBuildings"]
+[node name="B3" type="Sprite2D" parent="ParallaxBackground/NearBuildings" unique_id=589468972]
 modulate = Color(0.8, 1, 0.8, 0.8)
 position = Vector2(850, 280)
 texture = ExtResource("3_lime")
 centered = false
 
-[node name="B4" type="Sprite2D" parent="ParallaxBackground/NearBuildings"]
+[node name="B4" type="Sprite2D" parent="ParallaxBackground/NearBuildings" unique_id=511971939]
 modulate = Color(0.8, 0.8, 1, 0.8)
 position = Vector2(1050, 320)
 scale = Vector2(0.9, 0.9)
