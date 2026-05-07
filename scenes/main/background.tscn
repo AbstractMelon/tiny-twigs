@@ -124,7 +124,7 @@ centered = false
 
 [node name="B3" type="Sprite2D" parent="ParallaxBackground/NearBuildings" unique_id=589468972]
 modulate = Color(0.8, 1, 0.8, 0.8)
-position = Vector2(850, 280)
+position = Vector2(769, 277)
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("3_lime")
 centered = false
