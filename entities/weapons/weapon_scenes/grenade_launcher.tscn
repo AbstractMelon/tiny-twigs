@@ -23,3 +23,6 @@ texture = ExtResource("3_tex")
 [node name="Glow" parent="Visuals" index="2"]
 energy = 1.7
 texture_scale = 0.9
+
+[node name="Muzzle" parent="Visuals" index="3"]
+position = Vector2(20, 0)

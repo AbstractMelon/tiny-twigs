@@ -22,6 +22,7 @@ var can_fire: bool = true
 @onready var shape: Line2D = $Visuals/Shape
 @onready var sprite: Sprite2D = $Visuals/Sprite
 @onready var glow: PointLight2D = $Visuals/Glow
+@onready var muzzle: Marker2D = $Visuals/Muzzle
 
 func _ready():
 	_setup_visual()
@@ -48,7 +49,9 @@ func fire(from_position: Vector2, direction: Vector2) -> bool:
 	if ammo > 0:
 		ammo -= 1
 	
-	_spawn_projectile(from_position, direction)
+	# Use muzzle position if available, otherwise fall back to from_position
+	var fire_position = muzzle.global_position if muzzle else from_position
+	_spawn_projectile(fire_position, direction)
 	can_fire = false
 	_start_cooldown()
 	return true

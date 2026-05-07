@@ -7,7 +7,8 @@ const FLAME_RANGE = 150.0
 const FLAME_WIDTH = 60.0
 
 
-func _spawn_projectile(from_position: Vector2, direction: Vector2):
+func _spawn_projectile(_from_position: Vector2, direction: Vector2):
+	var fire_pos = muzzle.global_position
 	# Spawn multiple flame particles in a cone
 	for i in range(3):
 		var spread = deg_to_rad(randf_range(-15, 15))
@@ -16,8 +17,7 @@ func _spawn_projectile(from_position: Vector2, direction: Vector2):
 		var flame = projectile_scene.instantiate()
 		get_tree().root.add_child(flame)
 		
-		var spawn_offset = direction * 22
-		flame.initialize(from_position + spawn_offset, flame_direction, projectile_speed, owner_player)
+		flame.initialize(fire_pos, flame_direction, projectile_speed, owner_player)
 		flame.projectile_color = weapon_color
 		flame.damage = damage
 		flame.lifetime = projectile_lifetime

@@ -1,10 +1,10 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene format=3 uid="uid://dsjqm3js261hy"]
 
 [ext_resource type="PackedScene" path="res://entities/weapons/weapon.tscn" id="1_base"]
-[ext_resource type="Script" path="res://entities/weapons/scripts/mine_layer_weapon.gd" id="2_script"]
-[ext_resource type="Texture2D" path="res://assets/mine_layer.svg" id="3_tex"]
+[ext_resource type="Script" uid="uid://c72a3akw52mla" path="res://entities/weapons/scripts/mine_layer_weapon.gd" id="2_script"]
+[ext_resource type="Texture2D" uid="uid://d4dhes1g48e77" path="res://assets/mine_layer.svg" id="3_tex"]
 
-[node name="MineLayer" instance=ExtResource("1_base")]
+[node name="MineLayer" unique_id=1664583539 instance=ExtResource("1_base")]
 script = ExtResource("2_script")
 weapon_name = "Mine Layer"
 weapon_color = Color(1, 0.3, 1, 1)
@@ -23,3 +23,6 @@ texture = ExtResource("3_tex")
 [node name="Glow" parent="Visuals" index="2"]
 energy = 1.4
 texture_scale = 0.75
+
+[node name="Muzzle" parent="Visuals" index="3"]
+position = Vector2(23, 0)

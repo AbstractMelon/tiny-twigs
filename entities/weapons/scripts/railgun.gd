@@ -4,12 +4,12 @@ class_name RailGun
 const PIERCE_COUNT = 3  # Number of enemies it can pierce
 
 
-func _spawn_projectile(from_position: Vector2, direction: Vector2):
+func _spawn_projectile(_from_position: Vector2, direction: Vector2):
 	var rail_shot = projectile_scene.instantiate()
 	get_tree().root.add_child(rail_shot)
 	
-	var spawn_offset = direction * 30
-	rail_shot.initialize(from_position + spawn_offset, direction, projectile_speed, owner_player)
+	var fire_pos = muzzle.global_position
+	rail_shot.initialize(fire_pos, direction, projectile_speed, owner_player)
 	rail_shot.projectile_color = weapon_color
 	rail_shot.damage = damage
 	rail_shot.lifetime = projectile_lifetime
@@ -19,7 +19,7 @@ func _spawn_projectile(from_position: Vector2, direction: Vector2):
 	rail_shot.scale = Vector2(4, 0.5)
 	
 	# Create muzzle flash effect
-	_create_muzzle_flash(from_position + spawn_offset, direction)
+	_create_muzzle_flash(fire_pos, direction)
 
 func _create_muzzle_flash(flash_position: Vector2, direction: Vector2):
 	var flash = Line2D.new()

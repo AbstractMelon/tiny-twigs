@@ -1,12 +1,13 @@
-[gd_scene load_steps=5 format=3]
-[ext_resource type="PackedScene" path="res://entities/weapons/weapon.tscn" id="1_base"]
-[ext_resource type="Script" path="res://entities/weapons/scripts/shotgun.gd" id="2_script"]
-[ext_resource type="PackedScene" path="res://entities/projectiles/projectile.tscn" id="3_projectile"]
-[ext_resource type="Texture2D" path="res://assets/shotgun.svg" id="4_tex"]
+[gd_scene format=3 uid="uid://b0x23yjsln551"]
 
-[node name="Shotgun" instance=ExtResource("1_base")]
+[ext_resource type="PackedScene" path="res://entities/weapons/weapon.tscn" id="1_base"]
+[ext_resource type="Script" uid="uid://b2iy5yvemoyn4" path="res://entities/weapons/scripts/shotgun.gd" id="2_script"]
+[ext_resource type="PackedScene" uid="uid://b11035icliyy" path="res://entities/projectiles/projectile.tscn" id="3_projectile"]
+[ext_resource type="Texture2D" uid="uid://cqx522shi7mvt" path="res://assets/shotgun.svg" id="4_tex"]
+
+[node name="Shotgun" unique_id=131103141 instance=ExtResource("1_base")]
 script = ExtResource("2_script")
-weapon_name = "Neon Shotgun"
+weapon_name = "Shotgun"
 weapon_color = Color(1, 0.647059, 0, 1)
 damage = 8
 fire_rate = 0.8
@@ -18,13 +19,11 @@ projectile_knockback = 150.0
 projectile_scene = ExtResource("3_projectile")
 
 [node name="Sprite" parent="Visuals" index="0"]
-texture = ExtResource("4_tex")
 position = Vector2(10, 0)
+texture = ExtResource("4_tex")
 
 [node name="Shape" parent="Visuals" index="1"]
 points = PackedVector2Array(0, 0, 24, 0, 24, -6, 8, -6, 8, -8, -2, -8, -2, 6, 0, 6, 0, 0)
-width = 2.5
 
-[node name="Glow" parent="Visuals" index="1"]
-energy = 1.2
-texture_scale = 0.6
+[node name="Muzzle" parent="Visuals" index="3"]
+position = Vector2(25, 0)

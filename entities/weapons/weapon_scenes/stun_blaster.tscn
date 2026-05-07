@@ -30,3 +30,6 @@ width = 2.0
 [node name="Glow" parent="Visuals" index="2"]
 energy = 1.3
 texture_scale = 0.65
+
+[node name="Muzzle" parent="Visuals" index="3"]
+position = Vector2(20, 0)

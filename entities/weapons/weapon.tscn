@@ -1,22 +1,27 @@
-[gd_scene load_steps=2 format=3 uid="uid://base_weapon_scene"]
+[gd_scene format=3 uid="uid://cramhpfofc2py"]
 
-[ext_resource type="Script" path="res://entities/weapons/weapon.gd" id="1_weapon"]
+[ext_resource type="Script" uid="uid://d2dma5dr0yj0v" path="res://entities/weapons/weapon.gd" id="1_weapon"]
+[ext_resource type="Texture2D" uid="uid://c6ayblqn2mu1w" path="res://assets/prism_blaster.svg" id="2_mky6i"]
 
-[node name="Weapon" type="Node2D"]
+[node name="Weapon" type="Node2D" unique_id=1505858414]
 script = ExtResource("1_weapon")
 
-[node name="Visuals" type="Node2D" parent="."]
+[node name="Visuals" type="Node2D" parent="." unique_id=81780449]
 
-[node name="Sprite" type="Sprite2D" parent="Visuals"]
-scale = Vector2(0.5, 0.5)
+[node name="Sprite" type="Sprite2D" parent="Visuals" unique_id=2141239303]
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("2_mky6i")
 
-[node name="Shape" type="Line2D" parent="Visuals"]
+[node name="Shape" type="Line2D" parent="Visuals" unique_id=61381069]
 visible = false
 width = 2.5
 joint_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2
 
-[node name="Glow" type="PointLight2D" parent="Visuals"]
+[node name="Glow" type="PointLight2D" parent="Visuals" unique_id=1646830087]
 energy = 1.2
 texture_scale = 0.6
+
+[node name="Muzzle" type="Marker2D" parent="Visuals" unique_id=1345024609]
+position = Vector2(30, 0)

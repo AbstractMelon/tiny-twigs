@@ -2,12 +2,12 @@ extends Weapon
 class_name LaserWeapon
 
 
-func _spawn_projectile(from_position: Vector2, direction: Vector2):
+func _spawn_projectile(_from_position: Vector2, direction: Vector2):
 	var projectile = projectile_scene.instantiate()
 	get_tree().root.add_child(projectile)
 	
-	var spawn_offset = direction * 24
-	projectile.initialize(from_position + spawn_offset, direction, projectile_speed, owner_player)
+	var fire_pos = muzzle.global_position
+	projectile.initialize(fire_pos, direction, projectile_speed, owner_player)
 	projectile.projectile_color = weapon_color
 	projectile.damage = damage
 	projectile.knockback_force = projectile_knockback
