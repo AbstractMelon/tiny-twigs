@@ -1,24 +1,102 @@
-<svg width="70" height="30" viewBox="0 0 70 30" xmlns="http://www.w3.org/2000/svg">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="70"
+   height="30"
+   viewBox="0 0 70 30"
+   version="1.1"
+   id="svg5"
+   sodipodi:docname="burst_rifle.svg"
+   inkscape:version="1.4.3 (0d15f75042, 2025-12-25)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs5" />
+  <sodipodi:namedview
+     id="namedview5"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="24.455793"
+     inkscape:cx="24.411394"
+     inkscape:cy="9.0776038"
+     inkscape:window-width="2560"
+     inkscape:window-height="1370"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="g5" />
   <!-- Burst Rifle (Tron aesthetic) -->
-  <g fill="none" stroke-linejoin="round" stroke-linecap="round">
+  <g
+     fill="none"
+     stroke-linejoin="round"
+     stroke-linecap="round"
+     id="g5">
     <!-- Glow silhouette -->
-    <path d="M6 11 H44 L50 9 H62 L66 15 L62 21 H50 L44 19 H24 L22 28 H12 L14 19 H6 Z"
-          stroke="#36a6ff" stroke-width="4" opacity="0.18"/>
-
+    <path
+       d="m 6,11 h 38 l 5.306072,0.226353 11.797604,0.202395 3.508468,3.773648 c -2.470965,1.077144 -1.849692,2.059374 -2.930194,4.35192 L 49.074762,19.785626 44,19 H 24 l -2,9 H 12 l 2,-9 H 6 Z"
+       stroke="#36a6ff"
+       stroke-width="4"
+       opacity="0.18"
+       id="path1"
+       sodipodi:nodetypes="cccccccccccccc" />
     <!-- Core body -->
-    <path d="M6 11 H44 L50 9 H62 L66 15 L62 21 H50 L44 19 H24 L22 28 H12 L14 19 H6 Z"
-          fill="#0b0f1a" stroke="#d6edff" stroke-width="1.6" opacity="0.95"/>
-
+    <path
+       d="m 6,11 h 38 l 3.918216,-1.4217266 14.139611,-0.028914 4.722842,5.3928136 -4.202395,6.028913 -15.007022,0 L 44,19 H 24 l -2,9 H 12 l 2,-9 H 6 Z"
+       fill="#0b0f1a"
+       stroke="#d6edff"
+       stroke-width="1.6"
+       opacity="0.95"
+       id="path2"
+       sodipodi:nodetypes="cccccccccccccc" />
     <!-- Burst ports -->
-    <rect x="50" y="12" width="10" height="2.8" rx="1.4" fill="#0b0f1a" stroke="#36a6ff" stroke-width="1.6" opacity="0.9"/>
-    <rect x="50" y="15.8" width="10" height="2.8" rx="1.4" fill="#0b0f1a" stroke="#36a6ff" stroke-width="1.6" opacity="0.75"/>
-
+    <rect
+       x="47.950119"
+       y="13.246279"
+       width="13.290176"
+       height="3.7212493"
+       rx="1.8606247"
+       fill="#0b0f1a"
+       stroke="#36a6ff"
+       stroke-width="2.12643"
+       opacity="0.9"
+       id="rect2" />
     <!-- Energy spine -->
-    <path d="M12 15 H42" stroke="#36a6ff" stroke-width="2.4" opacity="0.85"/>
-    <path d="M12 15 H42" stroke="#36a6ff" stroke-width="6" opacity="0.08"/>
-
+    <path
+       d="M12 15 H42"
+       stroke="#36a6ff"
+       stroke-width="2.4"
+       opacity="0.85"
+       id="path3" />
+    <path
+       d="M12 15 H42"
+       stroke="#36a6ff"
+       stroke-width="6"
+       opacity="0.08"
+       id="path4" />
     <!-- Pulse indicator -->
-    <circle cx="30" cy="15" r="2.0" fill="#36a6ff" opacity="0.75"/>
-    <circle cx="30" cy="15" r="4.8" fill="none" stroke="#36a6ff" stroke-width="3.2" opacity="0.10"/>
+    <circle
+       cx="28.515182"
+       cy="14.919973"
+       r="0.89463538"
+       fill="#36a6ff"
+       opacity="0.75"
+       id="circle4"
+       style="stroke-width:0.447317;fill:#0069bc;fill-opacity:1" />
+    <circle
+       cx="28.515182"
+       cy="14.919973"
+       r="2.147125"
+       fill="none"
+       stroke="#36a6ff"
+       stroke-width="1.92202"
+       opacity="0.1"
+       id="circle5"
+       style="opacity:1;stroke:#0069bc;stroke-width:1.43536;stroke-dasharray:none;stroke-opacity:1" />
   </g>
 </svg>

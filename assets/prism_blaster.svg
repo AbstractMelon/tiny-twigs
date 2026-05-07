@@ -1,27 +1,102 @@
-<svg width="90" height="30" viewBox="0 0 90 30" xmlns="http://www.w3.org/2000/svg">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="90"
+   height="30"
+   viewBox="0 0 90 30"
+   version="1.1"
+   id="svg10"
+   sodipodi:docname="prism_blaster.svg"
+   inkscape:version="1.4.3 (0d15f75042, 2025-12-25)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs10" />
+  <sodipodi:namedview
+     id="namedview10"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="10.582058"
+     inkscape:cx="44.6038"
+     inkscape:cy="8.9774597"
+     inkscape:window-width="2560"
+     inkscape:window-height="1370"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="g10" />
   <!-- Prism Blaster (tri-bolt) -->
-  <g fill="none" stroke-linejoin="round" stroke-linecap="round">
+  <g
+     fill="none"
+     stroke-linejoin="round"
+     stroke-linecap="round"
+     id="g10">
     <!-- Glow silhouette -->
-    <path d="M6 11 H56 L62 8 H78 L86 15 L78 22 H62 L56 19 H30 L26 26 H14 L18 19 H6 Z"
-          stroke="#7a4dff" stroke-width="4" opacity="0.18"/>
-
+    <path
+       d="M6 11 H56 L62 8 H78 L86 15 L78 22 H62 L56 19 H30 L26 26 H14 L18 19 H6 Z"
+       stroke="#7a4dff"
+       stroke-width="4"
+       opacity="0.18"
+       id="path1" />
     <!-- Body -->
-    <path d="M6 11 H56 L62 8 H78 L86 15 L78 22 H62 L56 19 H30 L26 26 H14 L18 19 H6 Z"
-          fill="#0b0f1a" stroke="#e7dcff" stroke-width="1.6" opacity="0.95"/>
-
+    <path
+       d="M6 11 H56 L62 8 H78 L86 15 L78 22 H62 L56 19 H30 L26 26 H14 L18 19 H6 Z"
+       fill="#0b0f1a"
+       stroke="#e7dcff"
+       stroke-width="1.6"
+       opacity="0.95"
+       id="path2" />
     <!-- Prism core -->
-    <path d="M40 10 L48 15 L40 20 L32 15 Z" fill="#0b0f1a" stroke="#7a4dff" stroke-width="2.2" opacity="0.95"/>
-    <path d="M40 10 L48 15" stroke="#36ffd3" stroke-width="2.0" opacity="0.65"/>
-    <path d="M48 15 L40 20" stroke="#ff4dff" stroke-width="2.0" opacity="0.65"/>
-    <path d="M40 20 L32 15" stroke="#ffd24d" stroke-width="2.0" opacity="0.65"/>
-
+    <path
+       d="m 69.751112,10.207623 7.43061,4.644131 -7.43061,4.64413 -7.43061,-4.64413 z"
+       fill="#0b0f1a"
+       stroke="#7a4dff"
+       stroke-width="2.04341"
+       opacity="0.95"
+       id="path3" />
+    <path
+       d="m 69.751112,10.207623 7.43061,4.644131"
+       stroke="#36ffd3"
+       stroke-width="1.85765"
+       opacity="0.65"
+       id="path4" />
+    <path
+       d="m 77.181722,14.851754 -7.43061,4.64413"
+       stroke="#ff4dff"
+       stroke-width="1.85765"
+       opacity="0.65"
+       id="path5" />
+    <path
+       d="m 69.751112,19.495884 -7.43061,-4.64413"
+       stroke="#ffd24d"
+       stroke-width="1.85765"
+       opacity="0.65"
+       id="path6" />
     <!-- Triple rails -->
-    <path d="M10 13 H30" stroke="#7a4dff" stroke-width="2.0" opacity="0.55"/>
-    <path d="M10 15 H30" stroke="#7a4dff" stroke-width="2.0" opacity="0.75"/>
-    <path d="M10 17 H30" stroke="#7a4dff" stroke-width="2.0" opacity="0.55"/>
-
+    <path
+       d="M 13.10624,12.859069 H 35.749122"
+       stroke="#7a4dff"
+       stroke-width="2.18589"
+       opacity="0.55"
+       id="path7" />
+    <path
+       d="M 13.10624,14.969269 H 35.749122"
+       stroke="#7a4dff"
+       stroke-width="2.18589"
+       opacity="0.75"
+       id="path8" />
+    <path
+       d="M 13.10624,17.079468 H 35.749122"
+       stroke="#7a4dff"
+       stroke-width="2.18589"
+       opacity="0.55"
+       id="path9" />
     <!-- Muzzle ring -->
-    <circle cx="70" cy="15" r="4.2" stroke="#7a4dff" stroke-width="2.4" opacity="0.85"/>
-    <circle cx="70" cy="15" r="7.0" stroke="#7a4dff" stroke-width="3.5" opacity="0.14"/>
   </g>
 </svg>
